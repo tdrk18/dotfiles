@@ -1,4 +1,4 @@
 # dotfiles
 
-my dotfiles for vim, emacs, tmux, and latexmk.
+my dotfiles for zsh, vim, emacs, tmux, and latexmk.
 

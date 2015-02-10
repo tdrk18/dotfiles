@@ -1,0 +1,78 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# 自動補完
+autoload -U compinit; compinit
+# コマンドの途中でもカーソル位置で補完
+setopt complete_in_word
+# カーソル位置を保持してファイル名一覧を補完
+setopt always_last_prompt
+
+# ディレクトリ名を直接入力するとそこに移動する
+setopt auto_cd
+
+# cdした先のディレクトリをディレクトリスタックに保存
+# pushdしたとき、すでにスタックにあれば保存しない
+setopt auto_pushd
+setopt pushd_ignore_dups
+
+# 色を使う
+setopt prompt_subst
+
+# ヒストリを保存するファイル
+HISTFILE=~/.zsh_history
+# メモリ上のヒストリ数
+HISTSIZE=1000000
+SAVEHIST=$HISTSIZE
+# 直前と同じコマンドをヒストリに追加しない
+setopt hist_ignore_dups
+# すぐにヒストリファイルに追記
+setopt inc_append_history
+# zshプロセス間でヒストリを共有
+setopt share_history
+
+# 実行したプロセスが30秒以上かかったらその時間を表示する
+REPORTTIME=30
+
+
+# タブ名を'title hogehoge'でhogehogeに変更する
+function title {
+	 echo -ne "\033]0;"$*"\007"
+}
+
+
+# Alias
+alias inst='sudo apt-get install'
+alias uninst='sudo apt-get autoremove'
+alias update='sudo apt-get update'
+alias upgrade='sudo apt-get upgrade'
+alias zreload='source ~/.zshrc'
+
+alias ls='ls -l --color'
+alias la='ls -al --color'
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias pdf='evince'
+# alias latexmk='sh ~/lib/latex/latexmk.sh'
+alias latexmk='latexmk -pv -pvc'
+alias lmk='latexmk -pv -pvc'
+alias tmux='tmux -2'
+
+# for my project
+alias dic='ruby /home/todoroki/workspace/project/dictionary/dict.rb'
+
+# for lab-server ssh login
+alias nanaco='ssh todoroki@10.32.228.24'
+alias sashico='ssh todoroki@10.32.228.27'
