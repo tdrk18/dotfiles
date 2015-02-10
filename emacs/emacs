@@ -1,0 +1,307 @@
+(setq menu-tree-coding-system 'utf-8)
+;;(require 'menu-tree)
+
+;;背景色変更
+(set-background-color "#000000")
+
+;;文字色変更
+(set-foreground-color "#ffffff")
+
+;;カーソル色変更
+(set-cursor-color "#ffffff")
+
+;;スクロールバー位置を右に
+(set-scroll-bar-mode 'right)
+
+;; 編集行を目立たせる（現在行をハイライト表示する）
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "#2D344C"))
+    (((class color)
+      (background light))
+     (:background "ForestGreen"))
+    (t
+     ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+;; (setq hl-line-face 'underline) ; 下線
+(global-hl-line-mode)
+
+;;オープニングメッセージを隠す
+(setq inhibit-startup-message t)
+
+;;フォント変更
+(set-default-font "Ricty")
+
+;;行番号を表示
+(global-linum-mode t)
+
+;; 初期フレームの設定
+(setq default-frame-alist
+     (append (list '(width . 75)
+                   '(height . 27))
+             default-frame-alist))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;オートコンプリート設定
+;
+; - 参考ページ
+; -- Auto Complete Modeユーザーマニュアル
+;      http://cx4a.org/software/auto-complete/manual.ja.html#.E3.81.AF.E3.81.98.E3.82.81.E3.81.AB
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(ac-config-default)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; tabbar-mode: バッファ上部にタブを表示する
+;   
+; - 参考ページ 
+; -- ChangeLogメモの抜粋 - Emacs をタブブラウザ化する
+;      http://d.hatena.ne.jp/katsu_w/20080319/1205923300
+;; scratch buffer 以外をまとめてタブに表示する
+(require 'cl) ; for emacs-22.0.50 on Vine Linux 4.2
+ (when (require 'tabbar nil t)
+    (setq tabbar-buffer-groups-function
+	  (lambda (b) (list "All Buffers")))
+    (setq tabbar-buffer-list-function
+          (lambda ()
+            (remove-if
+             (lambda(buffer)
+               (find (aref (buffer-name buffer) 0) " *"))
+             (buffer-list))))
+    (tabbar-mode))
+;; Ctrl-Tab, Ctrl-Shift-Tab でタブを切り替える
+  (dolist (func '(tabbar-mode tabbar-forward-tab tabbar-forward-group tabbar-backward-tab tabbar-backward-group))
+    (autoload func "tabbar" "Tabs at the top of buffers and easy control-tab navigation"))
+  (defmacro defun-prefix-alt (name on-no-prefix on-prefix &optional do-always)
+    `(defun ,name (arg)
+       (interactive "P")
+       ,do-always
+       (if (equal nil arg)
+  	 ,on-no-prefix
+         ,on-prefix)))
+  (defun-prefix-alt shk-tabbar-next (tabbar-forward-tab) (tabbar-forward-group) (tabbar-mode 1))
+  (defun-prefix-alt shk-tabbar-prev (tabbar-backward-tab) (tabbar-backward-group) (tabbar-mode 1))
+  (global-set-key [(control tab)] 'shk-tabbar-next)
+  (global-set-key [(control shift tab)] 'shk-tabbar-prev)
+
+;; 外観変更
+; (set-face-attribute
+ ;  'tabbar-default-face nil
+  ; :background "gray60")
+  (set-face-attribute
+   'tabbar-unselected-face nil
+   :background "gray85"
+   :foreground "gray30"
+   :box nil)
+  (set-face-attribute
+   'tabbar-selected-face nil
+   :background "#f2f2f6"
+   :foreground "black"
+   :box nil)
+  (set-face-attribute
+   'tabbar-button-face nil
+   :box '(:line-width 1 :color "gray72" :style released-button))
+  (set-face-attribute
+   'tabbar-separator-face nil
+   :height 0.7)
+;; F4 で tabbar-mode
+(global-set-key [f4] 'tabbar-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;; YaTeX
+;;
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yatex")
+(autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
+(setq auto-mode-alist
+      (append '(("\\.tex$" . yatex-mode)
+                ("\\.ltx$" . yatex-mode)
+                ("\\.cls$" . yatex-mode)
+                ("\\.sty$" . yatex-mode)
+                ("\\.clo$" . yatex-mode)
+                ("\\.bbl$" . yatex-mode)) auto-mode-alist))
+(setq YaTeX-inhibit-prefix-letter t)
+(setq YaTeX-kanji-code nil)
+(setq YaTeX-use-LaTeX2e t)
+(setq YaTeX-use-AMS-LaTeX t)
+(setq YaTeX-dvi2-command-ext-alist
+      '(("texworks\\|evince\\|okular\\|zathura\\|qpdfview\\|pdfviewer\\|mupdf\\|xpdf\\|firefox\\|chromium\\|acroread\\|pdfopen" . ".pdf")))
+;(setq tex-command "ptex2pdf -l -ot '-synctex=1'")
+;(setq tex-command "ptex2pdf -l -u -ot '-synctex=1'")
+;(setq tex-command "pdflatex -synctex=1")
+;(setq tex-command "lualatex -synctex=1")
+;(setq tex-command "luajitlatex -synctex=1")
+;(setq tex-command "xelatex -synctex=1")
+(setq tex-command "latexmk")
+;(setq tex-command "latexmk -e '$latex=q/platex %O -synctex=1 %S/' -e '$bibtex=q/pbibtex %O %B/' -e '$makeindex=q/mendex %O -o %D %S/' -e '$dvipdf=q/dvipdfmx %O -o %D %S/' -norc -gg -pdfdvi")
+;(setq tex-command "latexmk -e '$latex=q/platex %O -synctex=1 %S/' -e '$bibtex=q/pbibtex %O %B/' -e '$makeindex=q/mendex %O -o %D %S/' -e '$dvips=q/dvips %O -z -f %S | convbkmk -g > %D/' -e '$ps2pdf=q/ps2pdf %O %S %D/' -norc -gg -pdfps")
+;(setq tex-command "latexmk -e '$latex=q/uplatex %O -synctex=1 %S/' -e '$bibtex=q/upbibtex %O %B/' -e '$makeindex=q/mendex %O -o %D %S/' -e '$dvipdf=q/dvipdfmx %O -o %D %S/' -norc -gg -pdfdvi")
+;(setq tex-command "latexmk -e '$latex=q/uplatex %O -synctex=1 %S/' -e '$bibtex=q/upbibtex %O %B/' -e '$makeindex=q/mendex %O -o %D %S/' -e '$dvips=q/dvips %O -z -f %S | convbkmk -u > %D/' -e '$ps2pdf=q/ps2pdf %O %S %D/' -norc -gg -pdfps")
+;(setq tex-command "latexmk -e '$pdflatex=q/pdflatex %O -synctex=1 %S/' -e '$bibtex=q/bibtex %O %B/' -e '$makeindex=q/makeindex %O -o %D %S/' -norc -gg -pdf")
+;(setq tex-command "latexmk -e '$pdflatex=q/lualatex %O -synctex=1 %S/' -e '$bibtex=q/bibtexu %O %B/' -e '$makeindex=q/texindy %O -o %D %S/' -norc -gg -lualatex")
+;(setq tex-command "latexmk -e '$pdflatex=q/luajitlatex %O -synctex=1 %S/' -e '$bibtex=q/bibtexu %O %B/' -e '$makeindex=q/texindy %O -o %D %S/' -norc -gg -lualatex")
+;(setq tex-command "latexmk -e '$pdflatex=q/xelatex %O -synctex=1 %S/' -e '$bibtex=q/bibtexu %O %B/' -e '$makeindex=q/texindy %O -o %D %S/' -norc -gg -xelatex")
+(setq bibtex-command (cond ((string-match "uplatex\\|-u" tex-command) "upbibtex")
+                           ((string-match "platex" tex-command) "pbibtex")
+                           ((string-match "lualatex\\|luajitlatex\\|xelatex" tex-command) "bibtexu")
+                           ((string-match "pdflatex\\|latex" tex-command) "bibtex")
+                           (t "pbibtex")))
+(setq makeindex-command (cond ((string-match "uplatex\\|-u" tex-command) "mendex")
+                              ((string-match "platex" tex-command) "mendex")
+                              ((string-match "lualatex\\|luajitlatex\\|xelatex" tex-command) "texindy")
+                              ((string-match "pdflatex\\|latex" tex-command) "makeindex")
+                              (t "mendex")))
+(setq dvi2-command "evince")
+;(setq dvi2-command "okular --unique")
+;(setq dvi2-command "zathura -s -x \"emacsclient --no-wait +%{line} %{input}\"")
+;(setq dvi2-command "qpdfview --unique")
+;(setq dvi2-command "pdfviewer")
+;(setq dvi2-command "texworks")
+;(setq dvi2-command "mupdf")
+;(setq dvi2-command "firefox -new-window")
+;(setq dvi2-command "chromium --new-window")
+(setq dviprint-command-format "acroread `echo %s | sed -e \"s/\\.[^.]*$/\\.pdf/\"`")
+
+(defun evince-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process
+      "fwdevince"
+      nil
+      "fwdevince"
+      (expand-file-name
+       (concat (file-name-sans-extension (or YaTeX-parent-file
+                                             (save-excursion
+                                               (YaTeX-visit-main t)
+                                               buffer-file-name)))
+               ".pdf"))
+      (number-to-string (save-restriction
+                          (widen)
+                          (count-lines (point-min) (point))))
+      (buffer-name)))))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c e") 'evince-forward-search)))
+
+(require 'dbus)
+
+(defun un-urlify (fname-or-url)
+  "A trivial function that replaces a prefix of file:/// with just /."
+  (if (string= (substring fname-or-url 0 8) "file:///")
+      (substring fname-or-url 7)
+    fname-or-url))
+
+(defun evince-inverse-search (file linecol &rest ignored)
+  (let* ((fname (un-urlify file))
+         (buf (find-file fname))
+         (line (car linecol))
+         (col (cadr linecol)))
+    (if (null buf)
+        (message "[Synctex]: %s is not opened..." fname)
+      (switch-to-buffer buf)
+      (goto-line (car linecol))
+      (unless (= col -1)
+        (move-to-column col)))))
+
+(dbus-register-signal
+ :session nil "/org/gnome/evince/Window/0"
+ "org.gnome.evince.Window" "SyncSource"
+ 'evince-inverse-search)
+
+(defun okular-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process
+      "okular"
+      nil
+      "okular"
+      "--unique"
+      (concat (expand-file-name
+               (concat (file-name-sans-extension (or YaTeX-parent-file
+                                                     (save-excursion
+                                                       (YaTeX-visit-main t)
+                                                       buffer-file-name)))
+                       ".pdf"))
+              "#src:"
+              (number-to-string (save-restriction
+                                  (widen)
+                                  (count-lines (point-min) (point))))
+              (buffer-file-name))))))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c o") 'okular-forward-search)))
+
+(defun qpdfview-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process
+      "qpdfview"
+      nil
+      "qpdfview"
+      "--unique"
+      (concat (expand-file-name
+               (concat (file-name-sans-extension (or YaTeX-parent-file
+                                                     (save-excursion
+                                                       (YaTeX-visit-main t)
+                                                       buffer-file-name)))
+                       ".pdf"))
+              "#src:"
+              (buffer-name)
+              ":"
+              (number-to-string (save-restriction
+                                  (widen)
+                                  (count-lines (point-min) (point))))
+              ":0")))))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c q") 'qpdfview-forward-search)))
+
+(defun pdfviewer-forward-search ()
+  (interactive)
+  (progn
+    (process-kill-without-query
+     (start-process
+      "pdfviewer"
+      nil
+      "pdfviewer"
+      (concat "file:"
+              (expand-file-name
+               (concat (file-name-sans-extension (or YaTeX-parent-file
+                                                     (save-excursion
+                                                       (YaTeX-visit-main t)
+                                                       buffer-file-name)))
+                       ".pdf"))
+              "#src:"
+              (number-to-string (save-restriction
+                                  (widen)
+                                  (count-lines (point-min) (point))))
+              " "
+              (buffer-name))))))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (define-key YaTeX-mode-map (kbd "C-c p") 'pdfviewer-forward-search)))
+
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (auto-fill-mode -1)))
+
+;;
+;; RefTeX with YaTeX
+;;
+;(add-hook 'yatex-mode-hook 'turn-on-reftex)
+(add-hook 'yatex-mode-hook
+          '(lambda ()
+             (reftex-mode 1)
+             (define-key reftex-mode-map (concat YaTeX-prefix ">") 'YaTeX-comment-region)
+             (define-key reftex-mode-map (concat YaTeX-prefix "<") 'YaTeX-uncomment-region)))
