@@ -1,12 +1,3 @@
-#
-# Defines environment variables.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# ZDOTDIR=~/workspace/project/dotfiles/zsh
-
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -14,7 +5,7 @@ fi
 
 # PATH
 export PATH="/usr/local/bin:$PATH"
-export PATH="/home/todoroki/lib/sublime:$PATH"
+export PATH="$HOME/lib/sublime:$PATH"
 
 # PATHs for texLive
 export MANPATH=/usr/local/texlive/2014/texmf-dist/doc/
@@ -22,28 +13,29 @@ export INFOPATH=/usr/local/texlive/2014/texmf-dist/doc/info
 export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
 
 # PATHs for gmp
-export CPLUS_INCLUDE_PATH=/home/todoroki/lib/simpath/gmp/
-export CPATH=/home/todoroki/lib/simpath/gmp/
-export PATH=/usr/local/gmp/lib/:/home/todoroki/lib/simpath/gmp/:$PATH
+export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/gmp/
+export CPATH=$HOME/lib/simpath/gmp/
+export PATH=/usr/local/gmp/lib/:$PATH
+export PATH=$HOME/lib/simpath/gmp/:$PATH
 
 # PATHs for sgb
-export CPLUS_INCLUDE_PATH=/home/todoroki/lib/simpath/sgb/:$CPLUS_INCLUDE_PATH
-export CPATH=/home/todoroki/lib/simpath/sgb/:$CPATH
+export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/sgb/:$CPLUS_INCLUDE_PATH
+export CPATH=$HOME/lib/simpath/sgb/:$CPATH
 
 # PATHs for cweb
-export PATH=/home/todoroki/lib/simpath/cweb/:$PATH
+export PATH=$HOME/lib/simpath/cweb/:$PATH
 
 # PATHs for learnlib
-export PYTHONPATH=/home/todoroki/lib/learnlib/:$PYTHONPATH
+export PYTHONPATH=$HOME/lib/learnlib/:$PYTHONPATH
 
 # PATHs for CUDD
-export CPATH=/home/todoroki/lib/pycudd/cudd-2.4.2/include/:$CPATH
-export PYTHONPATH=/home/todoroki/lib/pycudd/pycudd/:$PYTHONPATH
-export PYTHONPATH=/home/todoroki/lib/pycudd/cudd-2.4.2/lib/:$PYTHONPATH
-export LD_LIBRARY_PATH=/home/todoroki/lib/pycudd/cudd-2.4.2/lib/:$LD_LIBRARY_PATH
+export CPATH=$HOME/lib/pycudd/cudd-2.4.2/include/:$CPATH
+export PYTHONPATH=$HOME/lib/pycudd/pycudd/:$PYTHONPATH
+export PYTHONPATH=$HOME/lib/pycudd/cudd-2.4.2/lib/:$PYTHONPATH
+export LD_LIBRARY_PATH=$HOME/lib/pycudd/cudd-2.4.2/lib/:$LD_LIBRARY_PATH
 
 # PATHs for nysol
-export RUBYLIB=/home/todoroki/lib/nysol/nysol-2.0.0/gem/lib/nysol
+export RUBYLIB=$HOME/lib/nysol/nysol-2.0.0/gem/lib/nysol:$RUBYLIB
 
 
 
