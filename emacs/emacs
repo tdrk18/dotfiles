@@ -39,8 +39,8 @@
 
 ;; 初期フレームの設定
 (setq default-frame-alist
-     (append (list '(width . 75)
-                   '(height . 27))
+     (append (list '(width . 100)
+                   '(height . 50))
              default-frame-alist))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,7 +51,7 @@
 ;      http://cx4a.org/software/auto-complete/manual.ja.html#.E3.81.AF.E3.81.98.E3.82.81.E3.81.AB
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d//ac-dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
