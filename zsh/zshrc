@@ -63,14 +63,14 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias pdf='evince'
-alias lmk='latexmk -pv -pvc'
 alias latexmk='latexmk -pv -pvc'
+alias lmk='latexmk'
 alias tmux='tmux -2'
 
 # for my project
 alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
 
 # for lab-server ssh login
-alias nanaco='ssh todoroki@10.32.228.24'
-alias sashico='ssh todoroki@10.32.228.27'
+alias nanaco='ssh nanaco'
+alias sashico='ssh sashico'
 
