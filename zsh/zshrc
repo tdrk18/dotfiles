@@ -73,4 +73,5 @@ alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
 # for lab-server ssh login
 alias nanaco='ssh nanaco'
 alias sashico='ssh sashico'
+alias unico='ssh unico'
 
