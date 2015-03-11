@@ -9,7 +9,10 @@ if has('vim_starting')
       filetype indent off
         execute 'set runtimepath+=' . expand('~/.vim/bundle/neobundle.vim')
       endif
-      call neobundle#rc(expand('~/.vim/bundle'))
+      " call neobundle#rc(expand('~/.vim/bundle'))
+      call neobundle#begin(expand('~/.vim/bundle/'))
+      NeoBundleFetch 'Shougo/neobundle.vim'
+      call neobundle#end()
 
       NeoBundle 'git://github.com/kien/ctrlp.vim.git'
       NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
