@@ -1,6 +1,9 @@
 (setq menu-tree-coding-system 'utf-8)
 ;;(require 'menu-tree)
 
+;;カラーテーマ設定
+(load-theme 'railscasts t nil)
+
 ;;背景色変更
 (set-background-color "#000000")
 
@@ -32,7 +35,7 @@
 (setq inhibit-startup-message t)
 
 ;;フォント変更
-(set-default-font "Ricty")
+(set-default-font "Ricty-12")
 
 ;;行番号を表示
 (global-linum-mode t)
@@ -42,6 +45,18 @@
      (append (list '(width . 100)
                    '(height . 50))
              default-frame-alist))
+
+;; フレームに何文字目かも表示
+(column-number-mode t)
+
+;; Emacsからの質問をy/nで回答する
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; バックアップファイルを作らない
+(setq make-backup-files nil)
+
+;; オートセーブファイルを作らない
+(setq auto-save-default nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;オートコンプリート設定
