@@ -67,6 +67,8 @@ alias latexmk='latexmk -pv -pvc'
 alias lmk='latexmk'
 alias tmux='tmux -2'
 
+alias emacs='TERM=xterm-256color emacs'
+
 # for my project
 alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
 
