@@ -58,6 +58,13 @@
 ;; オートセーブファイルを作らない
 (setq auto-save-default nil)
 
+;; Ctrl-x 方向キーで分割ウィンドウを移動
+(global-set-key (kbd "C-x <left>")  'windmove-left)
+(global-set-key (kbd "C-x <down>")  'windmove-down)
+(global-set-key (kbd "C-x <up>")    'windmove-up)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(setq windmove-wrap-around t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;オートコンプリート設定
 ;
