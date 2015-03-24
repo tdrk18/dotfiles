@@ -15,7 +15,7 @@ if has('vim_starting')
       call neobundle#end()
 
       NeoBundle 'git://github.com/kien/ctrlp.vim.git'
-      NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
+      " NeoBundle 'git://github.com/Shougo/neobundle.vim.git'
       NeoBundle 'git://github.com/scrooloose/nerdtree.git'
       NeoBundle 'git://github.com/scrooloose/syntastic.git'
       NeoBundle 'Townk/vim-autoclose'
@@ -26,6 +26,7 @@ if has('vim_starting')
       set splitright
       NeoBundle 'grep.vim'
       NeoBundle 'Shougo/neocomplcache'
+      " NeoBundle 'Shougo/neosnippet'
       NeoBundle 'Shougo/vimshell'
       NeoBundle 'Shougo/vimproc'
       "NeoBundle 'supermomonga/vimshell_kawaii'
