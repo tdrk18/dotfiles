@@ -8,34 +8,32 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/lib/sublime:$PATH"
 
 # PATHs for texLive
-export MANPATH=/usr/local/texlive/2014/texmf-dist/doc/
-export INFOPATH=/usr/local/texlive/2014/texmf-dist/doc/info
+export MANPATH=/usr/local/texlive/2014/texmf-dist/doc:$MANPATH
+export INFOPATH=/usr/local/texlive/2014/texmf-dist/doc/info:$INFOPATH
 export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
 
 # PATHs for gmp
-export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/gmp/
-export CPATH=$HOME/lib/simpath/gmp/
-export PATH=/usr/local/gmp/lib/:$PATH
-export PATH=$HOME/lib/simpath/gmp/:$PATH
+export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/gmp:$CPLUS_INCLUDE_PATH
+export CPATH=$HOME/lib/simpath/gmp:$CPATH
+export PATH=/usr/local/gmp/lib:$PATH
+export PATH=$HOME/lib/simpath/gmp:$PATH
 
 # PATHs for sgb
-export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/sgb/:$CPLUS_INCLUDE_PATH
-export CPATH=$HOME/lib/simpath/sgb/:$CPATH
+export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/sgb:$CPLUS_INCLUDE_PATH
+export CPATH=$HOME/lib/simpath/sgb:$CPATH
 
 # PATHs for cweb
-export PATH=$HOME/lib/simpath/cweb/:$PATH
+export PATH=$HOME/lib/simpath/cweb:$PATH
 
 # PATHs for learnlib
-export PYTHONPATH=$HOME/lib/learnlib/:$PYTHONPATH
+export PYTHONPATH=$HOME/lib/learnlib:$PYTHONPATH
 
 # PATHs for CUDD
-export CPATH=$HOME/lib/pycudd/cudd-2.4.2/include/:$CPATH
-export PYTHONPATH=$HOME/lib/pycudd/pycudd/:$PYTHONPATH
-export PYTHONPATH=$HOME/lib/pycudd/cudd-2.4.2/lib/:$PYTHONPATH
-export LD_LIBRARY_PATH=$HOME/lib/pycudd/cudd-2.4.2/lib/:$LD_LIBRARY_PATH
+export CPATH=$HOME/lib/pycudd/cudd-2.4.2/include:$CPATH
+export PYTHONPATH=$HOME/lib/pycudd/pycudd:$PYTHONPATH
+export PYTHONPATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$PYTHONPATH
+export LD_LIBRARY_PATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$LD_LIBRARY_PATH
 
 # PATHs for nysol
 export RUBYLIB=$HOME/lib/nysol/nysol-2.0.0/gem/lib/nysol:$RUBYLIB
-
-
 
