@@ -11,11 +11,19 @@ fi
 # ホームフォルダの.vimrcに対してシンボリックリンクを張る
 ln -s $DIR/vimrc $HOME/.vimrc
 
-# カラーテーマを.vim/colorsにコピー
+# カラーテーマについてシンボリックリンクを張る
 if [ ! -e $HOME/.vim/colors ]; then
     mkdir -p $HOME/.vim/colors
 fi
-\cp -f colors/*.vim $HOME/.vim/colors
+cd colors
+for color in *.vim
+do
+    if [ -e $HOME/.vim/colors/$color ]; then
+        \rm -f $HOME/.vim/colors/$color
+    fi
+    ln -s $DIR/colors/$color $HOME/.vim/colors/$color
+done
+cd ..
 
 # NeoBundleのダウンロード
 if [ ! -e $HOME/.vim/bundle ]; then
