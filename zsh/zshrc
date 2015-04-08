@@ -53,7 +53,7 @@ alias inst='sudo apt-get install'
 alias uninst='sudo apt-get autoremove'
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
-alias zreload='source $HOME/.zshrc'
+alias zreload='exec zsh'
 
 alias ls='ls -l --color'
 alias la='ls -al --color'
