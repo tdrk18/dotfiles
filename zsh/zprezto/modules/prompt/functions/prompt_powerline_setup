@@ -200,7 +200,7 @@ function prompt_powerline_setup {
   POWERLINE_R_SEPARATOR=$'\u2b82'
 
   POWERLINE_LEFT_A="%K{green}%F{white} %(6~,%-5~/.../%1~,%~) %k%f%F{green}%K{blue}"$POWERLINE_SEPARATOR
-  POWERLINE_LEFT_B="%k%f%F{white}%K{blue} "'${vcs_info_msg_0_}%F{red}$(git_not_pushed)%F{white}'" %k%f%F{blue}%K{black}"$POWERLINE_SEPARATOR
+  POWERLINE_LEFT_B="%k%f%F{white}%K{blue} "'${vcs_info_msg_0_}%F{yellow}$(git_not_pushed)%F{white}'" %k%f%F{blue}%K{black}"$POWERLINE_SEPARATOR
   POWERLINE_LEFT_C=" %k%f%F{white}%K{black}"'$(time_details)'" %k%f%F{black}"$POWERLINE_SEPARATOR"%f
 [%h]-%{$fg[cyan]%}$%{$reset_color%} "
   #POWERLINE_LEFT_C=" %k%f%F{white}%K{black}"'$(git_time_details)'" %k%f%F{black}"$POWERLINE_SEPARATOR"%f "
