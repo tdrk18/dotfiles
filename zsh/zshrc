@@ -77,4 +77,5 @@ alias nanaco='ssh nanaco'
 alias sashico='ssh sashico'
 alias unico='ssh unico'
 alias deco='ssh deco'
+alias www='ssh www'
 
