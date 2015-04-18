@@ -1,0 +1,12 @@
+[user]
+    name = todoroki
+    email = s18.todoroki+git@gmail.com
+
+[alias]
+    st = status
+    co = checkout
+    ft = fetch
+    ci = commit
+    br = branch
+    ba = branch -a
+
