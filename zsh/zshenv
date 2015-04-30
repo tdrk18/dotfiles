@@ -3,6 +3,13 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+case "${OSTYPE}" in
+darwin*)
+    # /usr/bin より /usr/local/bin を優先する
+    export PATH=/usr/local/bin:$PATH
+    ;;
+esac
+
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/lib/sublime:$PATH"
