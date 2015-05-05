@@ -42,5 +42,12 @@ export PYTHONPATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$PYTHONPATH
 export LD_LIBRARY_PATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$LD_LIBRARY_PATH
 
 # PATHs for nysol
-export RUBYLIB=$HOME/lib/nysol/nysol-2.0.0/gem/lib/nysol:$RUBYLIB
+case "${OSTYPE}" in
+darwin*)
+    export RUBYLIB=/Library/Ruby/Gems/2.0.0/gems/nysol-2.0.1-universal-darwin/lib/nysol:$RUBYLIB
+    ;;
+linux*)
+    export RUBYLIB=$HOME/lib/nysol/nysol-2.0.0/gem/lib/nysol:$RUBYLIB
+    ;;
+esac
 
