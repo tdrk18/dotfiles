@@ -1,0 +1,21 @@
+# 横分割
+splitw -h -d
+selectp -R
+
+# 縦分割
+splitw -d
+selectp -D
+
+# 縦分割
+splitw -d
+selectp -D
+
+# 時計表示
+clock-mode
+
+# 最初のペインに戻る
+selectp -U
+killp
+
+selectp -L
+
