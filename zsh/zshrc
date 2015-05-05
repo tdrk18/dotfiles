@@ -81,6 +81,8 @@ alias mv='mv -i'
 alias latexmk='latexmk -pv -pvc'
 alias lmk='latexmk'
 alias tmux='tmux -2'
+alias tmuxa='tmux a'
+alias tmuxn='tmux new-session \; source-file ~/.tmux-session'
 
 # for my project
 alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
