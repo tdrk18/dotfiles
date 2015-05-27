@@ -29,5 +29,10 @@ cd ..
 if [ ! -e $HOME/.vim/bundle ]; then
     mkdir -p $HOME/.vim/bundle
 fi
-git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+if [ ! -e $HOME/.vim/bundle/neobundle.vim ]; then
+    git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+fi
+if [ ! -e $HOME/.vim/bundle/vimproc ]; then
+    git clone https://github.com/Shougo/vimproc ~/.vim/bundle/vimproc
+fi
 
