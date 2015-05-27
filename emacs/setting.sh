@@ -13,7 +13,7 @@ if [ -e $HOME/.emacs.d ]; then
 fi
 
 # ホームディレクトリの.emacsに対してシンボリックリンクを張る
-ln -s $DIR/emacs $HOME/.emacs
+# ln -s $DIR/emacs $HOME/.emacs
 # ホームディレクトリの.emacs.dに対してシンボリックリンクを張る
 ln -s $DIR/emacs.d $HOME/.emacs.d
 
