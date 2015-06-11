@@ -15,10 +15,10 @@
 (custom-set-faces
    '(default ((t (:background "#000022" :foreground "#EEEEEE"))))
     '(cursor (
-                         (((class color) (background dark )) (:background "#FFFFFF"))
-                                    (((class color) (background light)) (:background "#999999"))
-                                               (t ())
-                                                          )))
+              (((class color) (background dark )) (:background "#FFFFFF"))
+              (((class color) (background light)) (:background "#999999"))
+              (t ())
+              )))
 ;; フレーム透過設定
 (add-to-list 'default-frame-alist '(alpha . (0.95 1.00)))
 ;; カラーテーマ
@@ -218,7 +218,7 @@
 ;;
 ;;(add-to-list 'load-path "/some/path/neotree")
 (require 'neotree)
-(global-set-key (kbd "C-a") 'neotree-toggle)
+(global-set-key (kbd "C-s") 'neotree-toggle)
 
 ;;
 ;; git-gutter
@@ -242,6 +242,24 @@
 ;; minimap
 ;;
 (require 'minimap)
+
+;;
+;; volatile-highlights
+;;
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
+;;
+;; hlinum
+;;
+(require 'hlinum)
+(hlinum-activate)
+
+;;
+;; undohist
+;;
+(require 'undohist)
+(undohist-initialize)
 
 ;;
 ;; tabbar
@@ -341,3 +359,14 @@
 (global-set-key [(control shift tab)] 'shk-tabbar-prev)
 
 
+;;
+;; for YaTex
+;; YaTeX mode
+(setq auto-mode-alist
+    (cons (cons "\\.tex$" 'yatex-mode) auto-mode-alist))
+(autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
+(setq tex-command "platex")
+(setq dviprint-command-format "dvipdfmx %s")
+;; use Preview.app
+(setq dvi2-command "open -a Preview")
+(setq bibtex-command "pbibtex")
