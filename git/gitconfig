@@ -9,4 +9,7 @@
     ci = commit
     br = branch
     ba = branch -a
+    subadd = "!f () { git subtree add --prefix=${1} ${2} ${3} ;};f"
+    subpush = "!f () { git subtree push --prefix=${1} ${2} ${3} ;};f"
+    subpull = "!f () { git subtree pull --prefix=${1} ${2} ${3} ;};f"
 
