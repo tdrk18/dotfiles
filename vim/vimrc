@@ -125,8 +125,8 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#manual_completion_start_length = 0
+let g:neocomplete#auto_completion_start_length = 3
+let g:neocomplete#manual_completion_start_length = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
@@ -183,7 +183,12 @@ let g:clang_periodic_quickfix = 1
 let g:clang_complete_copen = 1
 let g:clang_use_library = 1
 " this need to be updated on llvm update 以下のパスにlibclang.soが必要
-let g:clang_library_path = '/usr/lib'
+if has('mac')
+    let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
+endif
+if has('unix')
+    let g:clang_library_path = '/usr/lib'
+endif
 " specify compiler options
 let g:clang_user_options = '-std=c++11 -stdlib=libc++'
 
@@ -537,3 +542,15 @@ let g:unite_source_file_mru_filename_format = ''
 " NERDTree
 " 隠しファイルを表示する
 let NERDTreeShowHidden = 1
+
+
+
+" --------------------
+"
+"  macvim
+"
+" --------------------
+if has('gui_macvim')
+    set transparency=25
+endif
+
