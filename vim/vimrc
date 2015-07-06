@@ -80,12 +80,16 @@ call neobundle#begin(expand('~/.vim/bundle'))
           \ 'autoload': {
           \   'filetypes': 'ruby',
           \ },
-          \ }
+        \ }
     " let g:rsenseUseOmniFunc = 1
     NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
-      \ 'insert' : 1,
-      \ 'filetypes': 'ruby',
-      \ }}
+          \ 'insert' : 1,
+          \ 'filetypes': 'ruby',
+        \ }}
+    " sessionを保存
+    NeoBundle 'xolox/vim-session', {
+          \ 'depends' : 'xolox/vim-misc',
+        \ }
 call neobundle#end()
 
 
@@ -544,7 +548,6 @@ let g:unite_source_file_mru_filename_format = ''
 let NERDTreeShowHidden = 1
 
 
-
 " --------------------
 "
 "  macvim
@@ -553,4 +556,28 @@ let NERDTreeShowHidden = 1
 if has('gui_macvim')
     set transparency=25
 endif
+
+
+" --------------------
+"
+"  vim-session
+"
+" --------------------
+" 現在のディレクトリ直下の .vimsessions/ を取得
+let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+" 存在すれば
+if isdirectory(s:local_session_directory)
+  " session保存ディレクトリをそのディレクトリの設定
+  let g:session_directory = s:local_session_directory
+  " vim終了時に自動保存
+  let g:session_autosave = 'yes'
+  " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+  let g:session_autoload = 'yes'
+  " 5分間に1回自動保存
+  let g:session_autosave_periodic = 5
+else
+  let g:session_autosave = 'no'
+  let g:session_autoload = 'no'
+endif
+unlet s:local_session_directory
 
