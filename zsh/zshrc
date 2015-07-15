@@ -45,8 +45,26 @@ REPORTTIME=30
 
 # タブ名を'title hogehoge'でhogehogeに変更する
 function title {
-	 echo -ne "\033]0;"$*"\007"
+    echo -ne "\033]0;"$*"\007"
 }
+
+# pecoを使ってコマンド履歴を表示する
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
 
 # Alias
 case "${OSTYPE}" in

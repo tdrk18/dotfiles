@@ -51,3 +51,9 @@ linux*)
     ;;
 esac
 
+# PATHs for go
+export GOROOT=$HOME/lib/go
+export GOPATH=$GOROOT/packages
+export PATH=$GOROOT/bin:$PATH
+export PATH=$GOPATH/bin:$PATH
+
