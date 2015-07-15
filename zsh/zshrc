@@ -74,7 +74,7 @@ function peco-find() {
     else
         search_root=`pwd`
     fi
-    file_path="$(find ${search_root} -maxdepth 5 | peco)"
+    file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | peco)"
     BUFFER="${current_buffer} ${file_path}"
     CURSOR=$#BUFFER
     zle clear-screen
