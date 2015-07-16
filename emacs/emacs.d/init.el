@@ -218,7 +218,7 @@
 ;;
 ;;(add-to-list 'load-path "/some/path/neotree")
 (require 'neotree)
-(global-set-key (kbd "C-s") 'neotree-toggle)
+(global-set-key (kbd "C-q") 'neotree-toggle)
 
 ;;
 ;; git-gutter
