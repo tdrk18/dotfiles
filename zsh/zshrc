@@ -61,6 +61,7 @@ function peco-select-history() {
         peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     # zle clear-screen
+    zle accept-line
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
@@ -78,6 +79,7 @@ function peco-find() {
     BUFFER="${current_buffer} ${file_path}"
     CURSOR=$#BUFFER
     # zle clear-screen
+    zle accept-line
 }
 zle -N peco-find
 bindkey '^f' peco-find
