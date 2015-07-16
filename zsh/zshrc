@@ -60,7 +60,7 @@ function peco-select-history() {
         eval $tac | \
         peco --query "$LBUFFER")
     CURSOR=$#BUFFER
-    zle clear-screen
+    # zle clear-screen
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
@@ -77,13 +77,13 @@ function peco-find() {
     file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | peco)"
     BUFFER="${current_buffer} ${file_path}"
     CURSOR=$#BUFFER
-    zle clear-screen
+    # zle clear-screen
 }
 zle -N peco-find
 bindkey '^f' peco-find
 
 function peco_select_from_git_status(){
-    git status --porcelain | \
+    git status --short | \
         peco | \
         awk -F ' ' '{print $NF}' | \
         tr '\n' ' '
