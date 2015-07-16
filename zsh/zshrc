@@ -48,6 +48,9 @@ function title {
     echo -ne "\033]0;"$*"\007"
 }
 
+# Ctrl+dでログアウトしないようにする
+setopt ignoreeof
+
 # pecoを使ってコマンド履歴を表示する
 function peco-select-history() {
     local tac
@@ -94,9 +97,28 @@ function peco_insert_selected_git_files(){
     LBUFFER+=$(peco_select_from_git_status)
     CURSOR=$#LBUFFER
     zle reset-prompt
+    zle accept-line
 }
 zle -N peco_insert_selected_git_files
 bindkey "^g^s" peco_insert_selected_git_files
+
+function peco_insert_select_gitadd(){
+    LBUFFER+="git add -p $(peco_select_from_git_status)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_select_gitadd
+bindkey "^g^a" peco_insert_select_gitadd
+
+function peco_insert_select_gitdiff(){
+    LBUFFER+="git diff $(peco_select_from_git_status)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_select_gitdiff
+bindkey "^g^d" peco_insert_select_gitdiff
 
 
 # Alias
