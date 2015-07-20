@@ -122,8 +122,7 @@ bindkey "^g^d" peco_insert_select_gitdiff
 
 function peco_select_from_git_branchs(){
     git branch --list | \
-        awk '$1!="\*"' | \
-        peco | \
+        peco --prompt='Branch>'| \
         awk -F ' ' '{print $NF}' | \
         tr '\n' ' '
 }
@@ -135,6 +134,20 @@ function peco_insert_select_gitcheckout(){
 }
 zle -N peco_insert_select_gitcheckout
 bindkey "^g^b" peco_insert_select_gitcheckout
+
+function peco_select_from_git_remotes(){
+    git remote | \
+        peco --prompt='Remote>'| \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_remotes
+function peco_insert_select_gitpush(){
+    LBUFFER="git push $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitpush
+bindkey "^g^p" peco_insert_select_gitpush
 
 
 # Alias
