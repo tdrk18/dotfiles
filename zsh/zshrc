@@ -120,6 +120,22 @@ function peco_insert_select_gitdiff(){
 zle -N peco_insert_select_gitdiff
 bindkey "^g^d" peco_insert_select_gitdiff
 
+function peco_select_from_git_branchs(){
+    git branch --list | \
+        awk '$1!="\*"' | \
+        peco | \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_branchs
+function peco_insert_select_gitcheckout(){
+    LBUFFER+="git checkout $(peco_select_from_git_branchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitcheckout
+bindkey "^g^b" peco_insert_select_gitcheckout
+
 
 # Alias
 case "${OSTYPE}" in
