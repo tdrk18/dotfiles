@@ -64,7 +64,7 @@ function peco-select-history() {
         peco --query "$LBUFFER")
     CURSOR=$#BUFFER
     # zle clear-screen
-    zle accept-line
+    # zle accept-line
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
