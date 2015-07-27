@@ -149,6 +149,20 @@ function peco_insert_select_gitpush(){
 zle -N peco_insert_select_gitpush
 bindkey "^g^p" peco_insert_select_gitpush
 
+function peco_select_from_git_allbranchs(){
+    git branch --all | \
+        peco --prompt='Branch>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_allbranchs
+function peco_insert_select_gitmerge(){
+    LBUFFER="git merge $(peco_select_from_git_allbranchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitmerge
+bindkey "^g^m" peco_insert_select_gitmerge
 
 # Alias
 case "${OSTYPE}" in
