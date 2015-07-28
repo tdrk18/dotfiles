@@ -172,6 +172,15 @@ function peco_insert_gitstatus(){
 zle -N peco_insert_gitstatus
 bindkey "^g^s" peco_insert_gitstatus
 
+function peco_insert_gitfetch(){
+    LBUFFER="git fetch"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_gitfetch
+bindkey "^g^f" peco_insert_gitfetch
+
 # Alias
 case "${OSTYPE}" in
 # MacOS用エイリアス
