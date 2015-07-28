@@ -100,10 +100,9 @@ function peco_insert_selected_git_files(){
     zle accept-line
 }
 zle -N peco_insert_selected_git_files
-bindkey "^g^s" peco_insert_selected_git_files
 
 function peco_insert_select_gitadd(){
-    LBUFFER+="git add -p $(peco_select_from_git_status)"
+    LBUFFER+="git add $(peco_select_from_git_status)"
     CURSOR=$#LBUFFER
     zle reset-prompt
     zle accept-line
@@ -163,6 +162,15 @@ function peco_insert_select_gitmerge(){
 }
 zle -N peco_insert_select_gitmerge
 bindkey "^g^m" peco_insert_select_gitmerge
+
+function peco_insert_gitstatus(){
+    LBUFFER="git status"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_gitstatus
+bindkey "^g^s" peco_insert_gitstatus
 
 # Alias
 case "${OSTYPE}" in
