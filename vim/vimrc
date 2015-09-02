@@ -90,6 +90,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'xolox/vim-session', {
           \ 'depends' : 'xolox/vim-misc',
         \ }
+    " crystalのシンタックス
+    NeoBundle 'rhysd/vim-crystal'
 call neobundle#end()
 
 
