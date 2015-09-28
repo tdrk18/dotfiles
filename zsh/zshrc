@@ -222,6 +222,8 @@ alias mv='mv -i'
 
 alias latexmk='latexmk -pvc'
 alias lmk='latexmk'
+alias lmkc='\latexmk -c'
+alias lmkC='\latexmk -C'
 alias tmux='tmux -2'
 alias tmuxa='tmux a'
 alias tmuxn='tmux new-session \; source-file ~/.tmux-session'
