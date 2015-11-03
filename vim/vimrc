@@ -99,6 +99,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
         \ }
     " crystalのシンタックス
     NeoBundle 'rhysd/vim-crystal'
+    " coffee scriptのシンタックス
+    NeoBundle 'kchmck/vim-coffee-script'
 call neobundle#end()
 
 
