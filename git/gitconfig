@@ -14,10 +14,15 @@
     subpull = "!f () { git subtree pull --prefix=${1} ${2} ${3} ;};f"
 
 [core]
-	excludesfile = /Users/todoroki/.gitignore_global
+    excludesfile = /Users/todoroki/.gitignore_global
+
+# [diff]
+    # external = icdiff
+
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
+
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
