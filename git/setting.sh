@@ -11,3 +11,10 @@ fi
 # ホームディレクトリの.gitconfigに対してシンボリックリンクを張る
 ln -s $DIR/gitconfig $HOME/.gitconfig
 
+# ホームディレクトリに.gitignore_globalがあった場合、.gitignore_global_oldにリネームして退避
+if [ -e $HOME/.gitignore_global ]; then
+    mv $HOME/.gitignore_global $HOME/.gitignore_global_old
+fi
+
+# ホームディレクトリの.gitconfigに対してシンボリックリンクを張る
+ln -s $DIR/gitignore $HOME/.gitignore_global
