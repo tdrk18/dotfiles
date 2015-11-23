@@ -84,7 +84,7 @@
 ### which Subversion will ignore in its 'status' output, and
 ### while importing or adding files and directories.
 ### '*' matches leading dots, e.g. '*.rej' matches '.foo.rej'.
-global-ignores = *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo .DS_Store *.aux *.dvi *.fdb_latexmk *.fls *.log *.synctex.gz *.toc
+global-ignores = *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo .DS_Store *.aux *.dvi *.fdb_latexmk *.fls *.log *.synctex.gz *.toc *.bbl
   # *.rej *~ #*# .#* .*.swp .DS_Store
 ### Set log-encoding to the default encoding for log messages
 # log-encoding = latin1
