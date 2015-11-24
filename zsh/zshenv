@@ -65,3 +65,6 @@ export GOPATH=$GOROOT/packages
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
+# PATHs for git-icdiff
+export PATH=$HOME/lib/icdiff:$PATH
+
