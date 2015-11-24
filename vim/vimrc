@@ -598,7 +598,7 @@ let NERDTreeShowHidden = 1
 "
 " --------------------
 if has('gui_macvim')
-    set transparency=25
+    set transparency=10
 endif
 
 
