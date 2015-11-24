@@ -101,6 +101,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'rhysd/vim-crystal'
     " coffee scriptのシンタックス
     NeoBundle 'kchmck/vim-coffee-script'
+    " vimdiffの色合い設定
+    NeoBundle 'lambdalisue/vim-unified-diff'
 call neobundle#end()
 
 
@@ -110,6 +112,23 @@ call neobundle#end()
 "
 " --------------------
 let g:syntastic_ignore_files=['\.tex$']
+
+
+" --------------------
+"
+" vim-unified-diff
+"
+" --------------------
+set diffexpr=unified_diff#diffexpr()
+
+" configure with the followings (default values are shown below)
+let unified_diff#executable = 'git'
+let unified_diff#arguments = [
+      \   'diff', '--no-index', '--no-color', '--no-ext-diff', '--unified=0',
+      \ ]
+let unified_diff#iwhite_arguments = [
+      \   '--ignore--all-space',
+      \ ]
 
 
 " --------------------
