@@ -5,6 +5,7 @@ fi
 
 case "${OSTYPE}" in
 darwin*)
+    export LC_ALL='ja_JP.UTF-8'
     # /usr/bin より /usr/local/bin を優先する
     export PATH=/usr/local/bin:$PATH
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
