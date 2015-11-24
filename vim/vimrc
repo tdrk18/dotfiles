@@ -103,6 +103,11 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'kchmck/vim-coffee-script'
     " vimdiffの色合い設定
     NeoBundle 'lambdalisue/vim-unified-diff'
+    " git操作
+    NeoBundleLazy 'lambdalisue/vim-gita', {
+        \ 'autoload': {
+        \   'commands': ['Gita'],
+        \}}
 call neobundle#end()
 
 
@@ -298,14 +303,7 @@ function! MyFilename()
 endfunction
 
 function! MyFugitive()
-  try
-    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-      let _ = fugitive#head()
-      return strlen(_) ? '⭠ '._ : ''
-    endif
-  catch
-  endtry
-  return ''
+    return winwidth(0) > 70 ? '⭠ '.gita#statusline#format('%lb') : ''
 endfunction
 
 function! MyFileformat()
@@ -410,6 +408,10 @@ noremap <C-c><C-c> :TComment<CR>
 nmap <F8> :TagbarToggle<CR>
 " Markdown
 noremap <C-m> :PrevimOpen<CR>
+" Gita status
+noremap <C-g><C-s> :Gita status<CR>
+" Gita diff
+noremap <C-g><C-d> :Gita diff-ls HEAD<CR>
 
 
 " ###############
