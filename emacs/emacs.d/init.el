@@ -252,8 +252,8 @@
 ;;
 ;; hlinum
 ;;
-(require 'hlinum)
-(hlinum-activate)
+;(require 'hlinum)
+;(hlinum-activate)
 
 ;;
 ;; undohist
