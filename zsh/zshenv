@@ -73,3 +73,6 @@ eval "$(rbenv init -)"
 # PATHs for git-icdiff
 export PATH=$HOME/lib/icdiff:$PATH
 
+# PATHs for git-ignore
+export PATH=$HOME/lib/git-ignore:$PATH
+
