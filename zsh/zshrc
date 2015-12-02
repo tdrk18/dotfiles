@@ -21,6 +21,9 @@ setopt auto_pushd
 # pushdしたとき、すでにスタックにあれば保存しない
 setopt pushd_ignore_dups
 
+# 先頭がスペースのときスタックに保存しない
+setopt hist_ignore_space
+
 # 色を使う
 setopt prompt_subst
 
