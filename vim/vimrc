@@ -66,7 +66,11 @@ call neobundle#begin(expand('~/.vim/bundle'))
     " オープニングページを変更
     NeoBundle 'mhinz/vim-startify'
     " Rubyのif...endやdef...endなどの対応を自動入力
-    NeoBundle 'tpope/vim-endwise'
+    NeoBundleLazy 'tpope/vim-endwise', {
+          \ 'autoload': {
+          \   'filetypes': 'ruby',
+          \ },
+        \ }
     " c++の補完
     NeoBundle 'Rip-Rip/clang_complete'
     " pythonでpep8準拠インデント
@@ -92,15 +96,25 @@ call neobundle#begin(expand('~/.vim/bundle'))
           \     'filetypes': ['ruby']
         \ }}
     " rubyのシンタックスハイライト
-    NeoBundle     'vim-ruby/vim-ruby'
+    NeoBundleLazy 'vim-ruby/vim-ruby', {
+          \   'autoload': {
+          \     'filetypes': ['ruby']
+        \ }}
     " sessionを保存
     NeoBundle 'xolox/vim-session', {
           \ 'depends' : 'xolox/vim-misc',
         \ }
     " crystalのシンタックス
     NeoBundle 'rhysd/vim-crystal'
+    " NeoBundleLazy 'rhysd/vim-crystal', {
+    "       \   'autoload': {
+    "       \     'filetypes': ['cr']
+    "     \ }}
     " coffee scriptのシンタックス
-    NeoBundle 'kchmck/vim-coffee-script'
+    NeoBundleLazy 'kchmck/vim-coffee-script', {
+          \ 'autoload':{
+          \     'filetypes': ['coffee']
+        \ }}
     " vimdiffの色合い設定
     NeoBundle 'lambdalisue/vim-unified-diff'
     " git操作
