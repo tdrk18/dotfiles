@@ -122,6 +122,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
         \ 'autoload': {
         \   'commands': ['Gita'],
         \}}
+    " table環境をきれいに整えてくれる
+    NeoBundle 'dhruvasagar/vim-table-mode'
 call neobundle#end()
 
 
