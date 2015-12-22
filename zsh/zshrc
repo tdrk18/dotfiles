@@ -271,6 +271,7 @@ alias lmkC='\latexmk -C'
 alias tmux='tmux -2'
 alias tmuxa='tmux a'
 alias tmuxn='tmux new-session \; source-file ~/.tmux-session'
+alias tig='tig --all'
 
 # for my project
 alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
