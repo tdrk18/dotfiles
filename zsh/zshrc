@@ -46,6 +46,15 @@ setopt share_history
 # 実行したプロセスが30秒以上かかったらその時間を表示する
 REPORTTIME=30
 
+# 'finish'でプロセス終了を音で知らせる
+function finish() {
+    if [ $? -eq 0 ]; then
+        afplay $HOME/Music/sounds/correct.mp3
+    else
+        afplay $HOME/Music/sounds/incorrect.mp3
+    fi
+}
+
 # タブ名を'title hogehoge'でhogehogeに変更する
 function title {
     echo -ne "\033]0;"$*"\007"
