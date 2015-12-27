@@ -60,6 +60,19 @@ function title {
     echo -ne "\033]0;"$*"\007"
 }
 
+# 'presh <cmd>'であらかじめコマンドの一部<cmd>を入力された状態にする
+function presh() {
+    eval "__precmd_for_presh() {
+        if [ $# -eq 0 ]; then
+            print -z ''
+        else
+            print -z '$* '
+        fi
+    }"
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd "__precmd_for_presh"
+}
+
 # Ctrl+dでログアウトしないようにする
 setopt ignoreeof
 
