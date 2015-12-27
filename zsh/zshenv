@@ -67,8 +67,13 @@ export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
 # PATHs for rbenv
-export PATH=$PATH:$HOME/.rbenv/bin:$HOME/.rbenv/shims
+export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 eval "$(rbenv init -)"
+
+# PATHs for pyenv
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
 
 # PATHs for git-icdiff
 export PATH=$HOME/lib/icdiff:$PATH
