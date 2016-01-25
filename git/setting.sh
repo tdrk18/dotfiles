@@ -18,3 +18,11 @@ fi
 
 # ホームディレクトリの.gitconfigに対してシンボリックリンクを張る
 ln -s $DIR/gitignore $HOME/.gitignore_global
+
+# commitメッセージのテンプレートを設定
+if [ -e $HOME/.gitmessage ]; then
+    mv $HOME/.gitmessage $HOME/.gitmessage_old
+fi
+ln -s $DIR/gitmessage $HOME/.gitmessage
+git config --global commit.template $HOME/.gitmessage
+
