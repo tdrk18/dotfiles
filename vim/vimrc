@@ -48,6 +48,15 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'itchyny/lightline.vim'
     " gitステータスを表示
     NeoBundle 'airblade/vim-gitgutter'
+    " gitのtree viewを表示
+    NeoBundle 'cohama/agit.vim'
+    " gitのcommit message入力支援
+    NeoBundle 'rhysd/committia.vim'
+    " git操作
+    NeoBundleLazy 'lambdalisue/vim-gita', {
+        \ 'autoload': {
+        \   'commands': ['Gita'],
+        \}}
     " classやmethodの一覧表示
     NeoBundle 'majutsushi/tagbar'
     " powerline表示
@@ -117,11 +126,6 @@ call neobundle#begin(expand('~/.vim/bundle'))
         \ }}
     " vimdiffの色合い設定
     NeoBundle 'lambdalisue/vim-unified-diff'
-    " git操作
-    NeoBundleLazy 'lambdalisue/vim-gita', {
-        \ 'autoload': {
-        \   'commands': ['Gita'],
-        \}}
     " table環境をきれいに整えてくれる
     NeoBundle 'dhruvasagar/vim-table-mode'
 call neobundle#end()
@@ -244,6 +248,30 @@ let g:jedi#rename_command = '<Leader> R'
 let g:gitgutter_sign_added = '✚'
 let g:gitgutter_sign_modified = '➜'
 let g:gitgutter_sign_removed = '✘'
+
+
+" --------------------
+"
+"  committia
+"
+" --------------------
+let g:committia_hooks = {}
+" single columnになるwindowの幅の境界
+let g:committia_min_window_width = 140
+function! g:committia_hooks.edit_open(info)
+    " Additional settings
+    setlocal spell
+
+    " If no commit message, start with insert mode
+    if a:info.vcs ==# 'git' && getline(1) ==# ''
+        startinsert
+    end
+
+    " Scroll the diff window from insert mode
+    " Map <C-n> and <C-p>
+    imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+    imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+endfunction
 
 
 " --------------------
