@@ -26,3 +26,9 @@ fi
 ln -s $DIR/gitmessage $HOME/.gitmessage
 git config --global commit.template $HOME/.gitmessage
 
+# tigの設定ファイルを設置
+if [ -e $HOME/.tigrc ]; then
+    mv $HOME/.tigrc $HOME/.tigrc_old
+fi
+ln -s $DIR/tigrc $HOME/.tigrc
+
