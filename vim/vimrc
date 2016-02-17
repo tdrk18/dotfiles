@@ -257,7 +257,7 @@ let g:gitgutter_sign_removed = '✘'
 " --------------------
 let g:committia_hooks = {}
 " single columnになるwindowの幅の境界
-let g:committia_min_window_width = 140
+let g:committia_min_window_width = 120
 function! g:committia_hooks.edit_open(info)
     " Additional settings
     setlocal spell
