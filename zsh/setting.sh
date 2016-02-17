@@ -28,5 +28,5 @@ darwin*)
     go get github.com/lestrrat/peco/cmd/peco/
     ;;
 esac
-exec zsh
+echo "'exec zsh'を実行してください"
 
