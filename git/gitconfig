@@ -15,9 +15,14 @@
 
 [core]
     excludesfile = /Users/todoroki/.gitignore_global
+    attributesfile = /Users/todoroki/.gitattributes
 
 # [diff]
     # external = icdiff
+
+[diff "xlsx"]
+    binary = true
+    textconv = $GOPATH/bin/git-xlsx-textconv
 
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -28,3 +33,4 @@
     trustExitCode = true
 [commit]
 	template = /Users/todoroki/.gitmessage
+
