@@ -7,6 +7,9 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:10
 # zshの補完
 zplug "zsh-users/zsh-completions"
 
+# 強力なcd
+zplug "b4b4r07/enhancd", of:enhancd.sh
+
 # gitルートへcd
 zplug "mollifier/cd-gitroot"
 
