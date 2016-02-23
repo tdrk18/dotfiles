@@ -20,7 +20,7 @@ zplug "supercrabtree/k"
 zplug "k4rthik/git-cal", as:command
 
 # peco
-zplug "peco/peco", as:command, from:gh-r
+zplug "peco/peco", as:command, from:gh-r, of:"*amd64*"
 
 # fzf-tmux の peco バージョン
 zplug "b4b4r07/dotfiles", as:command, of:bin/peco-tmux
