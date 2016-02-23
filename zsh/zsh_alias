@@ -1,0 +1,50 @@
+# Alias
+case "${OSTYPE}" in
+# MacOS用エイリアス
+darwin*)
+    alias inst='brew install'
+    alias uninst='brew rm'
+    alias update='brew update'
+    alias upgrade='brew upgrade'
+    alias ls='ls -lG'
+    alias la='ls -alG'
+    alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+    ;;
+# Linux用エイリアス
+linux*)
+    alias inst='sudo apt-get install'
+    alias uninst='sudo apt-get autoremove'
+    alias update='sudo apt-get update'
+    alias upgrade='sudo apt-get upgrade'
+    alias ls='ls -l --color'
+    alias la='ls -al --color'
+    alias emacs='TERM=xterm-256color emacs'
+    alias pdf='evince'
+    ;;
+esac
+alias zreload='exec zsh'
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+alias latexmk='latexmk -pvc'
+alias lmk='latexmk'
+alias lmkc='\latexmk -c'
+alias lmkC='\latexmk -C'
+alias tmux='tmux -2'
+alias tmuxa='tmux a'
+alias tmuxn='tmux new-session \; source-file ~/.tmux-session'
+alias tig='tig --all'
+
+# for my project
+alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
+
+# for lab-server ssh login
+alias nanaco='ssh nanaco'
+alias sashico='ssh sashico'
+alias unico='ssh unico'
+alias deco='ssh deco'
+alias mico='ssh mico'
+alias www='ssh www'
+

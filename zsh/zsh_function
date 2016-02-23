@@ -1,0 +1,195 @@
+# 'finish'でプロセス終了を音で知らせる
+function finish() {
+    if [ $? -eq 0 ]; then
+        afplay $HOME/Music/sounds/correct.mp3
+    else
+        afplay $HOME/Music/sounds/incorrect.mp3
+    fi
+}
+
+# タブ名を'title hogehoge'でhogehogeに変更する
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
+# 'presh <cmd>'であらかじめコマンドの一部<cmd>を入力された状態にする
+function presh() {
+    eval "__precmd_for_presh() {
+        if [ $# -eq 0 ]; then
+            print -z ''
+        else
+            print -z '$* '
+        fi
+    }"
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd "__precmd_for_presh"
+}
+
+# pecoを使ってコマンド履歴を表示する
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER" --prompt='History>')
+    CURSOR=$#BUFFER
+}
+zle -N peco-select-history
+
+function peco-find() {
+    local current_buffer=$BUFFER
+    local search_root=""
+    local file_path=""
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        search_root=`git rev-parse --show-toplevel`
+    else
+        search_root=`pwd`
+    fi
+    file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | peco --prompt='Find>')"
+    BUFFER="${current_buffer} ${file_path}"
+    CURSOR=$#BUFFER
+    # zle clear-screen
+    zle accept-line
+}
+zle -N peco-find
+
+function peco_select_from_git_status(){
+    git status --short | \
+        peco --prompt='git status>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+function peco_insert_selected_git_files(){
+    LBUFFER+=$(peco_select_from_git_status)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_selected_git_files
+
+function peco_select_from_svn_status(){
+    svn status | \
+    peco --prompt='svn status>'| \
+    awk -F ' ' '{print $NF}' | \
+    tr '\n' ' '
+}
+function peco_insert_selected_svn_files(){
+    LBUFFER+=$(peco_select_from_svn_status)
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_selected_svn_files
+
+function peco_insert_select_vcsadd(){
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        LBUFFER+="git add $(peco_select_from_git_status)"
+    elif svn info>/dev/null 2>&1; then
+        LBUFFER+="svn add $(peco_select_from_svn_status)"
+    fi
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_select_vcsadd
+
+function peco_insert_select_vcsdiff(){
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        LBUFFER+="git icdiff $(peco_select_from_git_status)"
+    elif svn info>/dev/null 2>&1; then
+        LBUFFER+="svn diff $(peco_select_from_svn_status)"
+    fi
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_select_vcsdiff
+
+function peco_select_from_git_branchs(){
+    git branch --list | \
+        peco --prompt='Branch>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_branchs
+
+function peco_insert_select_gitcheckout(){
+    LBUFFER+="git checkout $(peco_select_from_git_branchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitcheckout
+
+function peco_select_from_git_remotes(){
+    git remote | \
+        peco --prompt='Remote>'| \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_remotes
+
+function peco_insert_select_gitpush(){
+    LBUFFER="git push $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitpush
+
+function peco_select_from_git_allbranchs(){
+    git branch --all | \
+        peco --prompt='Branch>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_from_git_allbranchs
+
+function peco_insert_select_gitmerge(){
+    LBUFFER="git merge $(peco_select_from_git_allbranchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_select_gitmerge
+
+function peco_insert_vcsstatus(){
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        LBUFFER="git status"
+    elif svn info>/dev/null 2>&1; then
+        LBUFFER="svn status"
+    else
+        LBUFFER="ls"
+    fi
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_vcsstatus
+
+function peco_insert_vcsfetch(){
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        LBUFFER="git fetch"
+    elif svn info>/dev/null 2>&1; then
+        LBUFFER="svn update"
+    fi
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_vcsfetch
+
+function peco_insert_vcscommit(){
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        LBUFFER="git commit"
+    elif svn info>/dev/null 2>&1; then
+        LBUFFER="svn commit"
+    else
+        LBUFFER="ls"
+    fi
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+    zle accept-line
+}
+zle -N peco_insert_vcscommit
+

@@ -1,0 +1,31 @@
+# zshのヒストリサーチ
+zplug "zsh-users/zsh-history-substring-search"
+
+# zshのコマンドラインに色付け
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+
+# zshの補完
+zplug "zsh-users/zsh-completions"
+
+# gitルートへcd
+zplug "mollifier/cd-gitroot"
+
+# githubのカレンダー表示
+zplug "k4rthik/git-cal", as:command
+
+# カラーテーマ
+zplug "sorin-ionescu/prezto", of:init.zsh, do:"ln -s $ZPLUG_HOME/repos/sorin-ionescu/prezto ~/.zprezto && ln -s $ZPLUG_HOME/repos/sorin-ionescu/prezto/runcoms/zpreztorc ~/.zpreztorc"
+
+# check コマンドで未インストール項目があるかどうか verbose にチェックし
+# false のとき（つまり未インストール項目がある）y/N プロンプトで
+# インストールする
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# プラグインを読み込み、コマンドにパスを通す
+zplug load --verbose
+

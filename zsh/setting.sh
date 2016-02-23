@@ -4,7 +4,7 @@
 DIR=`cd $(dirname $0); pwd`
 
 
-for file in zshrc zshenv zprofile zpreztorc zprezto zlogout zlogin
+for file in zshrc zshenv zprofile zpreztorc zprezto zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin
 do
     # ホームディレクトリに.$fileがあった場合、.$file_oldとリネームして退避
     if [ -e $HOME/.$file ]; then
