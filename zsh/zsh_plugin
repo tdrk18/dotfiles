@@ -25,6 +25,13 @@ zplug "peco/peco", as:command, from:gh-r
 # fzf-tmux の peco バージョン
 zplug "b4b4r07/dotfiles", as:command, of:bin/peco-tmux
 
+# fzf-bin にホスティングされているので注意
+# またファイル名が fzf-bin となっているので file:fzf としてリネームする
+zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
+
+# ついでに tmux 用の拡張も入れるといい
+zplug "junegunn/fzf", as:command, of:bin/fzf-tmux
+
 # 絵文字をあいまい検索
 zplug "stedolan/jq", \
     as:command, \
