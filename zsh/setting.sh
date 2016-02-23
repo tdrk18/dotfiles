@@ -16,17 +16,5 @@ do
     ln -s $DIR/$file $HOME/.$file
 done
 
-# pecoをインストール
-case "${OSTYPE}" in
-linux*)
-    wget https://github.com/peco/peco/releases/download/v0.3.3/peco_linux_amd64.tar.gz
-    tar -xzvf peco_linux_amd64.tar.gz
-    sudo mv peco_linux_amd64/peco /usr/local/bin/
-    ;;
-darwin*)
-    brew install go
-    go get github.com/lestrrat/peco/cmd/peco/
-    ;;
-esac
 echo "'exec zsh'を実行してください"
 
