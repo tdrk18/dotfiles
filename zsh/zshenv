@@ -89,6 +89,3 @@ export PATH=$HOME/lib/icdiff:$PATH
 # PATHs for git-ignore
 export PATH=$HOME/lib/git-ignore:$PATH
 
-# PATHs for k
-source $HOME/lib/k/k.sh
-

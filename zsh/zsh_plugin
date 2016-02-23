@@ -13,6 +13,9 @@ zplug "b4b4r07/enhancd", of:enhancd.sh
 # gitルートへcd
 zplug "mollifier/cd-gitroot"
 
+# lsとgitの連携
+zplug "supercrabtree/k"
+
 # githubのカレンダー表示
 zplug "k4rthik/git-cal", as:command
 
