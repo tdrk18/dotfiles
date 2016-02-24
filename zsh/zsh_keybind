@@ -13,3 +13,6 @@ bindkey "^g^i" peco_insert_vcscommit
 bindkey "^xe" emoji::cli
 bindkey "^x^e" emoji::cli
 
+bindkey "^xf" mru
+bindkey "^x^f" mru
+
