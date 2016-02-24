@@ -32,6 +32,9 @@ zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
 # ついでに tmux 用の拡張も入れるといい
 zplug "junegunn/fzf", as:command, of:bin/fzf-tmux
 
+# ゴミ箱
+zplug "b4b4r07/zsh-gomi", as:command, of:bin
+
 # 絵文字をあいまい検索
 zplug "stedolan/jq", \
     as:command, \
