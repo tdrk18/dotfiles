@@ -64,3 +64,8 @@ if [ -f $ZPLUG_HOME/repos/b4b4r07/enhancd/enhancd.sh ]; then
     source $ZPLUG_HOME/repos/b4b4r07/enhancd/enhancd.sh
 fi
 
+# cdrを読み込む
+if [ -f $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh ]; then
+    source $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh
+fi
+
