@@ -14,7 +14,7 @@ call neobundle#begin(expand('~/.vim/bundle'))
     " 多機能セレクタ
     NeoBundle 'ctrlpvim/ctrlp.vim'
     " ディレクトリをツリー操作
-    NeoBundle 'scrooloose/nerdtree'
+    " NeoBundle 'scrooloose/nerdtree'
     " 構文エラーチェック
     NeoBundle 'scrooloose/syntastic'
     " 閉じ括弧などを補完
@@ -396,7 +396,8 @@ endfunction
 " ###############
 "  NORMAL mode
 " ###############
-noremap <Nul> :NERDTreeToggle<CR>
+" noremap <Nul> :NERDTreeToggle<CR>
+noremap <Nul> :VimFilerExplorer<CR>
 " ,is:シェルを起動
 nnoremap <silent>,is :VimShell<CR>
 " ,ipy: pythonを非同期で起動
