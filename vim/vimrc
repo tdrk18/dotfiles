@@ -396,7 +396,7 @@ endfunction
 " ###############
 "  NORMAL mode
 " ###############
-noremap <C-a> :NERDTreeToggle<CR>
+noremap <Nul> :NERDTreeToggle<CR>
 " ,is:シェルを起動
 nnoremap <silent>,is :VimShell<CR>
 " ,ipy: pythonを非同期で起動
