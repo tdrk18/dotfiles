@@ -1,0 +1,18 @@
+/* --------------------------------
+# File Name     : <+FILENAME+>.cpp
+# Author        : todoroki
+# Date Created  : <+DATE+>
+--------------------------------- */
+
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+int main(int argc, char* argv[]) {
+
+    <+CURSOR+>
+
+    return 0;
+}
+
