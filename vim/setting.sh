@@ -10,6 +10,12 @@ fi
 # ホームフォルダの.vimrcに対してシンボリックリンクを張る
 ln -s $DIR/vimrc $HOME/.vimrc
 
+# インデント設定についてシンボリックリンクを張る
+if [ -e $HOME/.vim/indent ]; then
+    mv $HOME/.vim/indent $HOME/.vim/indent_old
+fi
+ln -s $DIR/indent $HOME/.vim/indent
+
 # カラーテーマについてシンボリックリンクを張る
 if [ -e $HOME/.vim/colors ]; then
     mv $HOME/.vim/colors $HOME/.vim/colors_old
