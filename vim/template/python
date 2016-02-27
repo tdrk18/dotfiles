@@ -5,5 +5,7 @@
 # Date Created  : <+DATE+>
 #---------------------------------#
 
-<+CURSOR+>
+if __name__ == "__main__":
+    pass
+    <+CURSOR+>
 
