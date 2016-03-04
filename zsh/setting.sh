@@ -3,6 +3,10 @@
 # setting.shがあるパスを取得
 DIR=`cd $(dirname $0); pwd`
 
+# zplugをクローン
+if [ ! -e $HOME/.zplug ]; then
+    git clone https://github.com/b4b4r07/zplug ~/.zplug
+fi
 
 for file in zshrc zshenv zprofile zpreztorc zprezto zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin
 do
