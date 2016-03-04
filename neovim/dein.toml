@@ -1,0 +1,32 @@
+# 基本は github.com のレポジトリーを指定するだけ
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# git clone 後、実行すべきコマンドがある場合はこんな感じ
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+
+  [plugins.build]
+  windows = 'tools\\update-dll-mingw'
+  cygwin  = 'make -f make_cygwin.mak'
+  mac     = 'make -f make_mac.mak'
+  linux   = 'make'
+  unix    = 'gmake'
+
+# 画面下部の設定
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+# カラーテーマ
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'thinca/vim-template'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
