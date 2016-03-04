@@ -39,7 +39,17 @@ function git_time_details() {
 }
 
 function time_details() {
-  echo "%D{%y/%m/%d(%a)} %*"
+  DOW=$(date +%w)
+  case $DOW in
+    "0" ) dow="Sun";;
+    "1" ) dow="Mon";;
+    "2" ) dow="Tue";;
+    "3" ) dow="Wed";;
+    "4" ) dow="Thu";;
+    "5" ) dow="Fri";;
+    "6" ) dow="Sat";;
+  esac
+  echo "%D{%Y/%m/%d($dow)} %*"
 }
 
 function hostname() {
