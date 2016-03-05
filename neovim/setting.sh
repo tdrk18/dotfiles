@@ -30,3 +30,11 @@ if [ -e $DIR/../vim/indent ]; then
     ln -s $DIR/../vim/indent $HOME/.config/nvim/indent
 fi
 
+# テンプレート設定のシンボリックリンクを作成
+if [ -e $DIR/../vim/template ]; then
+    if [ -e $HOME/.config/nvim/template ]; then
+        mv $HOME/.config/nvim/template $HOME/.config/nvim/template_old
+    fi
+    ln -s $DIR/../vim/template $HOME/.config/nvim/template
+fi
+
