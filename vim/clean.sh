@@ -13,6 +13,6 @@ fi
 
 # ホームディレクトリの.vimを削除
 if [ -e $HOME/.vim ]; then
-    rm -f $HOME/.vim
+    rm -rf $HOME/.vim
 fi
 
