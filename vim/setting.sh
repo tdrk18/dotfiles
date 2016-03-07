@@ -10,6 +10,11 @@ fi
 # ホームフォルダの.vimrcに対してシンボリックリンクを張る
 ln -s $DIR/vimrc $HOME/.vimrc
 
+# ホームディレクトリに.vimディレクトリを作成
+if [ ! -e $HOME/.vim ]; then
+    mkdir $HOME/.vim
+fi
+
 # インデント設定についてシンボリックリンクを張る
 if [ -e $HOME/.vim/indent ]; then
     mv $HOME/.vim/indent $HOME/.vim/indent_old
