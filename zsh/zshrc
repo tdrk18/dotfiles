@@ -69,3 +69,8 @@ if [ -f $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh ]; then
     source $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh
 fi
 
+# zsh-syntax-highlightingを読み込む
+if [ -f $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
