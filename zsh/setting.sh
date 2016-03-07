@@ -20,5 +20,6 @@ do
     ln -s $DIR/$file $HOME/.$file
 done
 
+echo "zshをデフォルトのシェルにするために'chsh -s /bin/zsh'を実行してください"
 echo "'exec zsh'を実行してください"
 
