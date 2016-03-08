@@ -44,3 +44,5 @@ if [ ! -e $HOME/.vim/bundle/vimproc ]; then
     git clone https://github.com/Shougo/vimproc $HOME/.vim/bundle/vimproc
 fi
 
+echo "\033[0;32mvimを起動し、':NeoBundleInstall'を実行してください\033[0;39m"
+
