@@ -58,9 +58,6 @@ set guifont=Ricty:h16
 set pastetoggle=<F12>
 " 256色ターミナルに対応
 set t_Co=256
-" カラースキーム
-set background=dark " or light
-colorscheme hybrid
 "タブやインデントの設定
 " タブ入力を空白文字に置き換え
 set expandtab
@@ -76,6 +73,8 @@ set autoindent
 set smartindent
 " 行番号の表示
 set number
+" 行番号部分の文字色
+autocmd ColorScheme * highlight LineNr ctermfg=242
 " カーソル行の背景色を変える
 set cursorline
 " カーソル列の背景色を変える
@@ -127,6 +126,9 @@ set history=10000
 set splitright
 " :spのとき新しいウインドウを下側に開く
 set splitbelow
+" カラースキーム
+set background=dark " or light
+colorscheme hybrid
 
 " ------------------------------------------------------------
 "
