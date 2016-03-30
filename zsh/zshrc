@@ -21,12 +21,6 @@ setopt auto_cd
 # cdした先のディレクトリをディレクトリスタックに保存
 setopt auto_pushd
 
-# pushdしたとき、すでにスタックにあれば保存しない
-setopt pushd_ignore_dups
-
-# 先頭がスペースのときスタックに保存しない
-setopt hist_ignore_space
-
 # 色を使う
 setopt prompt_subst
 
@@ -36,6 +30,18 @@ HISTFILE=$HOME/.zsh_history
 # メモリ上のヒストリ数
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
+
+# ヒストリを「: 時刻:経過秒;コマンド」の形式で保存
+setopt extended_history
+
+# 履歴を削除する必要がある場合、重複しているものから削除
+setopt hist_expire_dups_first
+
+# pushdしたとき、すでにスタックにあれば保存しない
+setopt pushd_ignore_dups
+
+# 先頭がスペースのときスタックに保存しない
+setopt hist_ignore_space
 
 # 直前と同じコマンドをヒストリに追加しない
 setopt hist_ignore_dups
