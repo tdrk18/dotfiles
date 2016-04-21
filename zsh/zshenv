@@ -89,3 +89,8 @@ export PATH=$HOME/lib/icdiff:$PATH
 # PATHs for git-ignore
 export PATH=$HOME/lib/git-ignore:$PATH
 
+# PATHs for android studio
+export PATH=$PATH:~/Library/Android/sdk/platform-tools
+export PATH=$PATH:~/Library/Android/sdk/tools
+export ANDROID_HOME=~/Library/Android/sdk
+
