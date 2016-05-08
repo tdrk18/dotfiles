@@ -83,6 +83,10 @@ linux*)
 esac
 eval "$(pyenv init -)"
 
+# PATHs for plenv
+export PATH=$HOME/.plenv/bin:$HOME/.plenv/shims:$PATH
+eval "$(plenv init -)"
+
 # PATHs for git-icdiff
 export PATH=$HOME/lib/icdiff:$PATH
 
