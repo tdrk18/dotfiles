@@ -9,6 +9,7 @@ bindkey "^g^m" peco_insert_select_gitmerge
 bindkey "^g^s" peco_insert_vcsstatus
 bindkey "^g^f" peco_insert_vcsfetch
 bindkey "^g^i" peco_insert_vcscommit
+bindkey "^g^g" peco_insert_ghq_list
 
 bindkey "^xe" emoji::cli
 bindkey "^x^e" emoji::cli

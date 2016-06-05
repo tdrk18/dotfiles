@@ -193,6 +193,21 @@ function peco_insert_vcscommit(){
 }
 zle -N peco_insert_vcscommit
 
+# ghqの一覧をpecoで選択して移動
+function peco_select_ghq_list(){
+    ghq list | \
+        peco --prompt='ghq list>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_ghq_list
+function peco_insert_ghq_list(){
+    LBUFFER="cd $(ghq root)/$(peco_select_ghq_list)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_ghq_list
+
 # 最近使ったファイル一覧をfzfで見る
 function mru() {
     local -a f
