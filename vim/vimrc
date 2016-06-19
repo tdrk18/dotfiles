@@ -126,6 +126,8 @@ call neobundle#begin(expand('~/.vim/bundle'))
           \ 'autoload':{
           \     'filetypes': ['coffee']
         \ }}
+    " golang
+    NeoBundle 'vim-jp/vim-go-extra'
     " vimdiffの色合い設定
     NeoBundle 'lambdalisue/vim-unified-diff'
     " table環境をきれいに整えてくれる
@@ -139,6 +141,9 @@ call neobundle#end()
 "
 " --------------------
 let g:syntastic_ignore_files=['\.tex$']
+let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'golint']
 
 
 " --------------------
