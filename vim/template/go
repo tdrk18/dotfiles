@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+#---------------------------------#
+# File Name     : <+FILENAME+>.go
+# Author        : todoroki
+# Date Created  : <+DATE+>
+#---------------------------------#
+
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    <+CURSOR+>
+}
