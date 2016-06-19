@@ -56,7 +56,7 @@ esac
 # PATHs for go
 case "${OSTYPE}" in
 darwin*)
-    export GOROOT=/usr/local/Cellar/go/1.5.3/libexec
+    export GOROOT=/usr/local/Cellar/go/1.6.2/libexec
     ;;
 linux*)
     export GOROOT=$HOME/lib/go
