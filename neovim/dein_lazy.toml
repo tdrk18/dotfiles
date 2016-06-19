@@ -48,6 +48,10 @@ repo = 'nathanaelkane/vim-indent-guides'
 on_path = '.*'
 
 [[plugins]]
+repo = 'Raimondi/delimitMate'
+on_i = 1
+
+[[plugins]]
 repo = 'todesking/ruby_hl_lvar.vim'
 on_ft = 'ruby'
 
@@ -66,6 +70,14 @@ on_ft = 'ruby'
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
