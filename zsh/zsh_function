@@ -208,6 +208,21 @@ function peco_insert_ghq_list(){
 }
 zle -N peco_insert_ghq_list
 
+# tmuxのセッションをpecoで選択してattach
+function peco_select_tmux_session_list(){
+    tmux ls </dev/null | \
+        peco --prompt='tmux session>'| \
+        awk -F':' '{print $1}' | \
+        tr '\n' ' '
+}
+zle -N peco_select_tmux_session_list
+function peco_insert_tmux_session_list(){
+    LBUFFER="tmux a -t $(peco_select_tmux_session_list)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N peco_insert_tmux_session_list
+
 # 最近使ったファイル一覧をfzfで見る
 function mru() {
     local -a f
