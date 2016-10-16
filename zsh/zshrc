@@ -1,6 +1,12 @@
 source $HOME/.zplug/zplug
 source $HOME/.zsh_plugin
 
+source $HOME/.zsh_function
+autostart_tmux
+
+source $HOME/.zsh_alias
+source $HOME/.zsh_keybind
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/workspace/project/dotfiles/zsh/zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/workspace/project/dotfiles/zsh/zprezto/init.zsh"
@@ -60,10 +66,6 @@ setopt ignoreeof
 
 # Ctrl+sを使えるようにする
 stty stop undef
-
-source $HOME/.zsh_alias
-source $HOME/.zsh_function
-source $HOME/.zsh_keybind
 
 # enhancdを読み込む
 if [ -f $ZPLUG_HOME/repos/b4b4r07/enhancd/enhancd.sh ]; then
