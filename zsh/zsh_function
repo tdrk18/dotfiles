@@ -25,6 +25,8 @@ function presh() {
     add-zsh-hook precmd "__precmd_for_presh"
 }
 
+# terminal起動時にtmuxを立ち上げる
+# 既にtmuxセッションがあればそれを選択できるようにする
 function autostart_tmux() {
     if [[ ! -n $TMUX && $- == *l* ]]; then
         # get the IDs
