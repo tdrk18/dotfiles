@@ -10,11 +10,14 @@
 #
 # ===== emojis =====
 # 📝  :memo: ドキュメント追加・修正
+# 💡  :bulb: ファイルなど追加
+# 🔥  :fire: ファイルなど削除
 # ✨  :sparkles: 部分的な機能追加
 # 🎉  :tada: 盛大に祝うべき大きな機能追加
 # 👍  :+1: 機能改善
 # 🚀  :rocket: パフォーマンス改善
 # 🐛  :bug: バグ修正
+# 🚧  :construction: WIP commits
 # ♻️   :recycle: リファクタリング
 # 🚿  :shower: 不要な機能・使われなくなった機能の削除
 # ✅  :white_check_mark: テストの追加・修正
