@@ -133,6 +133,12 @@ function anyenv_version() {
         local version="[rbenv $(rbenv version-name)]"
     elif [ "$(pyenv version | grep '.python-version')" != "" ]; then
         local version="[pyenv $(pyenv version-name)]"
+    elif [ "$(plenv version | grep '.perl-version')" != "" ]; then
+        local version="[plenv $(plenv version-name)]"
+    elif [ "$(ndenv version | grep '.node-version')" != "" ]; then
+        local version="[ndenv $(ndenv version-name)]"
+    else
+        local version=""
     fi
     echo -n $version
 }
