@@ -2,7 +2,7 @@
 zplug "zsh-users/zsh-history-substring-search"
 
 # zshのコマンドラインに色付け
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
 # zshの補完
 zplug "zsh-users/zsh-completions"
@@ -62,5 +62,5 @@ if ! zplug check --verbose; then
 fi
 
 # プラグインを読み込み、コマンドにパスを通す
-zplug load --verbose
+zplug load
 
