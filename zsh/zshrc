@@ -8,8 +8,8 @@ source $HOME/.zsh_alias
 source $HOME/.zsh_keybind
 
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/workspace/project/dotfiles/zsh/zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/workspace/project/dotfiles/zsh/zprezto/init.zsh"
+if [[ -s "$(ghq root)/github.com/tdrk18/dotfiles/zsh/zprezto/init.zsh" ]]; then
+    source "$(ghq root)/github.com/tdrk18/dotfiles/zsh/zprezto/init.zsh"
 fi
 
 # 自動補完
