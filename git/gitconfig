@@ -15,8 +15,8 @@
     subpull = "!f () { git subtree pull --prefix=${1} ${2} ${3} ;};f"
 
 [core]
-    excludesfile = /Users/todoroki/.gitignore_global
-    attributesfile = /Users/todoroki/.gitattributes
+    excludesfile = ~/.gitignore_global
+    attributesfile = ~/.gitattributes
 
 # [diff]
     # external = icdiff
@@ -33,5 +33,5 @@
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
 [commit]
-    template = /Users/todoroki/.gitmessage
+    template = ~/.gitmessage
 
