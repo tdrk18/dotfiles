@@ -245,6 +245,18 @@ function peco_insert_tmux_session_list(){
 }
 zle -N peco_insert_tmux_session_list
 
+# sshの接続先をfzfで選択
+function fzf-select-ssh-host(){
+  local host="$(egrep -i '^Host\s+.+' $HOME/.ssh/config | egrep -v '[*?]' | awk '{print $2}' | sort | fzf)"
+
+  if [ ! -z "$host" ]; then
+    LBUFFER="ssh $host"
+    CURSOR=$#LBUFFER
+  fi
+  zle reset-prompt
+}
+zle -N fzf-select-ssh-host
+
 # 最近使ったファイル一覧をfzfで見る
 function mru() {
     local -a f

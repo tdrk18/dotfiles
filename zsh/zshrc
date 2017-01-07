@@ -1,4 +1,4 @@
-source $HOME/.zplug/zplug
+source $HOME/.zplug/init.zsh
 source $HOME/.zsh_plugin
 
 source $HOME/.zsh_function
