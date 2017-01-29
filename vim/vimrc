@@ -68,6 +68,7 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'Shougo/neomru.vim'
     " ファイル操作をサポート
     NeoBundle 'Shougo/vimfiler.vim'
+    NeoBundle 'cocopon/vaffle.vim'
     " インデントに色をつける
     NeoBundle 'nathanaelkane/vim-indent-guides'
     " コメントON/OFFを手軽に実行
@@ -477,6 +478,8 @@ nnoremap <silent> <Space>oT :<C-u>call <SID>toggle_transparence()<CR>
 noremap <C-c><C-c> :TComment<CR>
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+" Vaffle
+nmap <F7> :Vaffle<CR>
 " Markdown
 noremap <C-m> :PrevimOpen<CR>
 " Gita status
