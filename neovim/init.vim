@@ -388,6 +388,8 @@ nnoremap <silent> ,vch :UniteBuildClearHighlight<CR>
 noremap <C-c><C-c> :TComment<CR>
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+" Vaffle
+nmap <F7> :Vaffle<CR>
 " Markdown
 noremap <C-m> :PrevimOpen<CR>
 " Gita status
