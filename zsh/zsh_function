@@ -264,6 +264,7 @@ function fzf-select-ssh-host(){
 }
 zle -N fzf-select-ssh-host
 
+# docker image 一覧から起動する image を選択する
 function peco-select-docker-image-run(){
   local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | peco)"
   LBUFFER="docker run -ti -d $docker_image /bin/bash"
