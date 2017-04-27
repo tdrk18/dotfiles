@@ -1,0 +1,24 @@
+""""""""""""
+" settings "
+""""""""""""
+set hlsearch
+set ignorecase
+set smartcase
+
+
+""""""""""""
+" keybinds "
+""""""""""""
+"ヘッダー＆ソース切り替え
+noremap <C-n> :xccmd jumpToNextCounterpart<CR>
+"フォルダ内のファイル一覧表示
+noremap <C-m> :xccmd showGroupFilesMenu<CR>
+
+imap jj <Esc>
+imap <C-l> <Right>
+imap <C-h> <Left>
+imap <C-k> <Up>
+imap <C-j> <Down>
+
+noremap <Esc><Esc> :noh<CR>
+

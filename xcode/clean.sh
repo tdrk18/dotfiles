@@ -3,13 +3,11 @@
 #---------------------------------#
 # File Name     : clean.sh
 # Author        : todoroki
-# Date Created  : 2016-03-07
+# Date Created  : 2017-04-27
 #---------------------------------#
 
-for folder in emacs latexmk tmux vim neovim zsh fonts git svn xcode
-do
-    cd $folder
-    sh clean.sh
-    cd ..
-done
+# ホームディレクトリの.xvimrcを削除
+if [ -e $HOME/.xvimrc ]; then
+    rm -f $HOME/.xvimrc
+fi
 
