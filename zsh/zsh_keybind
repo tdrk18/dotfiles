@@ -5,6 +5,7 @@ bindkey "^g^a" peco_insert_select_vcsadd
 bindkey "^g^d" peco_insert_select_vcsdiff
 bindkey "^g^b" peco_insert_select_gitcheckout
 bindkey "^g^p" peco_insert_select_gitpush
+bindkey "^g^l" peco_insert_select_gitpull
 bindkey "^g^m" peco_insert_select_gitmerge
 bindkey "^g^s" peco_insert_vcsstatus
 bindkey "^g^f" peco_insert_vcsfetch
