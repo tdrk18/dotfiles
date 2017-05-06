@@ -82,3 +82,6 @@ if [ -f $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlight
     source $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# configure for rust
+source $HOME/.cargo/env
+
