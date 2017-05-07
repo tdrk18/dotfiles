@@ -90,3 +90,11 @@ on_path = '.*'
 repo = 'tomtom/tcomment_vim'
 on_path = '.*'
 
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_path = '.rs'
+
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_path = '.rs'
+
