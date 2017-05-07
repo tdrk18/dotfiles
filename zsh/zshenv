@@ -120,4 +120,5 @@ export PATH=$PATH:/Applications/Julia-0.4.6.app/Contents/Resources/julia/bin
 
 # for rust
 export PATH=$PATH:~/.cargo/bin
+export RUST_SRC_PATH=$HOME/.multirust/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src/
 
