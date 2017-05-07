@@ -92,9 +92,9 @@ on_path = '.*'
 
 [[plugins]]
 repo = 'rust-lang/rust.vim'
-on_path = '.rs'
+on_ft = 'rust'
 
 [[plugins]]
 repo = 'racer-rust/vim-racer'
-on_path = '.rs'
+on_ft = 'rust'
 
