@@ -6,12 +6,7 @@
 # Date Created  : 2016-03-07
 #---------------------------------#
 
-# zplug削除
-if [ -e $HOME/.zplug ]; then
-    rm -rf $HOME/.zplug
-fi
-
-for file in zshrc zshenv zprofile zpreztorc zprezto zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin
+for file in zshrc zshenv zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin zsh_vcs
 do
     # ホームディレクトリの.$fileを削除
     if [ -e $HOME/.$file ]; then

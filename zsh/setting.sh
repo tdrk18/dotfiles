@@ -3,12 +3,7 @@
 # setting.shがあるパスを取得
 DIR=`cd $(dirname $0); pwd`
 
-# zplugをクローン
-if [ ! -e $HOME/.zplug ]; then
-    git clone https://github.com/b4b4r07/zplug ~/.zplug
-fi
-
-for file in zshrc zshenv zprofile zpreztorc zprezto zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin
+for file in zshrc zshenv zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin zsh_vcs
 do
     # ホームディレクトリに.$fileがあった場合、.$file_oldとリネームして退避
     if [ -e $HOME/.$file ]; then
