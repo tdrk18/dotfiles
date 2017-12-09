@@ -1,19 +1,16 @@
-source $HOME/.zplug/init.zsh
-source $HOME/.zsh_plugin
+# 日本語を使用
+export LANG=ja_JP.UTF-8
 
-source $HOME/.zsh_function
-autostart_tmux
+# パスを追加したい場合
+export PATH="$HOME/bin:$PATH"
 
-source $HOME/.zsh_alias
-source $HOME/.zsh_keybind
+# 色を使用
+autoload -Uz colors
+colors
 
-# Source Prezto.
-if [[ -s "$(ghq root)/github.com/tdrk18/dotfiles/zsh/zprezto/init.zsh" ]]; then
-    source "$(ghq root)/github.com/tdrk18/dotfiles/zsh/zprezto/init.zsh"
-fi
-
-# 自動補完
-autoload -U compinit; compinit
+# 補完
+autoload -Uz compinit
+compinit
 
 # コマンドの途中でもカーソル位置で補完
 setopt complete_in_word
@@ -21,30 +18,27 @@ setopt complete_in_word
 # カーソル位置を保持してファイル名一覧を補完
 setopt always_last_prompt
 
-# ディレクトリ名を直接入力するとそこに移動する
-setopt auto_cd
-
-# cdした先のディレクトリをディレクトリスタックに保存
-setopt auto_pushd
-
 # 色を使う
 setopt prompt_subst
 
-# ヒストリを保存するファイル
-HISTFILE=$HOME/.zsh_history
+# emacsキーバインド
+bindkey -e
 
-# メモリ上のヒストリ数
+HISTFILE=~/.zsh_history
 HISTSIZE=1000000
-SAVEHIST=$HISTSIZE
+SAVEHIST=1000000
+
+# 他のターミナルとヒストリーを共有
+setopt share_history
+
+# ヒストリーに重複を表示しない
+setopt histignorealldups
 
 # ヒストリを「: 時刻:経過秒;コマンド」の形式で保存
 setopt extended_history
 
 # 履歴を削除する必要がある場合、重複しているものから削除
 setopt hist_expire_dups_first
-
-# pushdしたとき、すでにスタックにあれば保存しない
-setopt pushd_ignore_dups
 
 # 先頭がスペースのときスタックに保存しない
 setopt hist_ignore_space
@@ -58,27 +52,103 @@ setopt inc_append_history
 # zshプロセス間でヒストリを共有
 setopt share_history
 
-# 実行したプロセスが30秒以上かかったらその時間を表示する
-REPORTTIME=30
+# cdコマンドを省略して、ディレクトリ名のみの入力で移動
+setopt auto_cd
+
+# 自動でpushdを実行
+setopt auto_pushd
+
+# pushdから重複を削除
+setopt pushd_ignore_dups
+
+# コマンドミスを修正
+setopt correct
 
 # Ctrl+dでログアウトしないようにする
 setopt ignoreeof
 
+# Ctrl+sのロック, Ctrl+qのロック解除を無効にする
+setopt no_flow_control
+
 # Ctrl+sを使えるようにする
-stty stop undef
+# stty stop undef
 
-# enhancdを読み込む
-if [ -f $ZPLUG_HOME/repos/b4b4r07/enhancd/enhancd.sh ]; then
-    source $ZPLUG_HOME/repos/b4b4r07/enhancd/enhancd.sh
+# cdの後にlsを実行
+chpwd() { ls }
+
+# どこからでも参照できるディレクトリパス
+# cdpath=(~)
+
+# 区切り文字の設定
+autoload -Uz select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars "_-./;@"
+zstyle ':zle:*' word-style unspecified
+
+# 補完後、メニュー選択モードになり左右キーで移動が出来る
+zstyle ':completion:*:default' menu select=2
+
+# 補完で大文字にもマッチ
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Ctrl+rでヒストリーのインクリメンタルサーチ、Ctrl+sで逆順
+# bindkey '^r' history-incremental-pattern-search-backward
+# bindkey '^s' history-incremental-pattern-search-forward
+
+# コマンドを途中まで入力後、historyから絞り込み
+# 例 ls まで打ってCtrl+pでlsコマンドをさかのぼる、Ctrl+bで逆順
+autoload -Uz history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^p" history-beginning-search-backward-end
+bindkey "^b" history-beginning-search-forward-end
+
+# cdrコマンドを有効 ログアウトしても有効なディレクトリ履歴
+# cdr タブでリストを表示
+autoload -Uz add-zsh-hook
+autoload -Uz chpwd_recent_dirs cdr
+add-zsh-hook chpwd chpwd_recent_dirs
+# cdrコマンドで履歴にないディレクトリにも移動可能に
+zstyle ":chpwd:*" recent-dirs-default true
+
+# mkdirとcdを同時実行
+function mkcd() {
+  if [[ -d $1 ]]; then
+    echo "$1 already exists!"
+    cd $1
+  else
+    mkdir -p $1 && cd $1
+  fi
+}
+
+# プロンプトを2行で表示、時刻を表示
+PROMPT="%{${bg[green]}%} @%m %{${reset_color}%}%{${bg[blue]}%}%{${fg[green]}%}⮀%{${fg[white]}%} %(6~,%-2~/.../%3~,%~) %{${reset_color}%}%{${fg[blue]}%}⮀%{${reset_color}%}
+[%h]-%(?.%{${fg[green]}%}.%{${fg[red]}%})$%{${reset_color}%} "
+
+# git設定
+if [ -e $HOME/.zsh_vcs ]; then
+    source $HOME/.zsh_vcs
 fi
 
-# cdrを読み込む
-if [ -f $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh ]; then
-    source $ZPLUG_HOME/repos/willghatch/zsh-cdr/cdr.plugin.zsh
+if [ -e $HOME/.zsh_function ]; then
+    source $HOME/.zsh_function
 fi
 
-# zsh-syntax-highlightingを読み込む
-if [ -f $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source $ZPLUG_HOME/repos/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -e $HOME/.zsh_alias ]; then
+    source $HOME/.zsh_alias
 fi
+
+if [ -e $HOME/.zsh_keybind ]; then
+    source $HOME/.zsh_keybind
+fi
+
+if [ -e $HOME/lib/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source $HOME/lib/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -e $HOME/lib/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source $HOME/lib/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+fpath=($HOME/lib/zsh/zsh-completions/src $fpath)
 
