@@ -18,8 +18,8 @@ bindkey '^s^s' fzf-select-ssh-host
 
 bindkey "^x^d" peco-select-docker-image-run
 
-bindkey "^xe" emoji::cli
-bindkey "^x^e" emoji::cli
+# bindkey "^xe" emoji::cli
+# bindkey "^x^e" emoji::cli
 
 bindkey "^xf" mru
 bindkey "^x^f" mru
