@@ -70,8 +70,8 @@ setopt ignoreeof
 # Ctrl+sのロック, Ctrl+qのロック解除を無効にする
 setopt no_flow_control
 
-# Ctrl+sを使えるようにする
-# stty stop undef
+# 実行したプロセスが30秒以上かかったらその時間を表示する
+REPORTTIME=30
 
 # cdの後にlsを実行
 chpwd() { ls }
