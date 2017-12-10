@@ -83,8 +83,7 @@ function peco_select_from_git_status(){
     git status --short | \
         peco --prompt='git status>'| \
         cut -c 4- | \
-        sed -e "s/^/'/" | \
-        sed -e "s/\$/'/" | \
+        sed -e "s/^/'/" -e "s/\$/'/" | \
         tr '\n' ' '
 }
 function peco_insert_selected_git_files(){
