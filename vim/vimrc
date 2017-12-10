@@ -102,11 +102,6 @@ call neobundle#begin(expand('~/.vim/bundle'))
           \ 'insert' : 1,
           \ 'filetypes': 'ruby',
         \ }}
-    " rubyのローカル変数をハイライト
-    NeoBundleLazy 'todesking/ruby_hl_lvar.vim', {
-          \   'autoload': {
-          \     'filetypes': ['ruby']
-        \ }}
     " rubyのシンタックスハイライト
     NeoBundleLazy 'vim-ruby/vim-ruby', {
           \   'autoload': {
@@ -231,12 +226,6 @@ let g:neocomplete#force_omni_input_patterns.ruby =
 " let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 " 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
 let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
-" setting for ruby_hl_lvar
-let s:bundle = neobundle#get('ruby_hl_lvar.vim')
-function! s:bundle.hooks.on_post_source(bundle)
-  silent! execute 'doautocmd FileType' &filetype
-endfunction
-unlet s:bundle
 
 
 " --------------------
@@ -524,8 +513,6 @@ vmap <silent> ,ss :VimShellSendString<CR>
 "  settings
 "
 " --------------------
-" vi互換モードにならないようにする
-set nocompatible
 " 構文により色をつける
 syntax on
 " filetypeの自動検出
