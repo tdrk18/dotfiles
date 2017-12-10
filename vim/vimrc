@@ -524,8 +524,6 @@ vmap <silent> ,ss :VimShellSendString<CR>
 "  settings
 "
 " --------------------
-" vi互換モードにならないようにする
-set nocompatible
 " 構文により色をつける
 syntax on
 " filetypeの自動検出
