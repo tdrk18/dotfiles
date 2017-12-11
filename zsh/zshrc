@@ -125,7 +125,7 @@ function mkcd() {
 }
 
 # プロンプトを2行で表示、時刻を表示
-PROMPT="%(?.%{${fg[green]}%}.%{${fg[red]}%})%(?!╭(๑˃̵ᴗ˂̵)و!(｡>﹏<｡%))%{${reset_color}%}%{${bg[blue]}%}%{${fg[white]}%} %(6~,%-2~/.../%3~,%~) %{${reset_color}%}%{${fg[blue]}%}⮀%{${reset_color}%}
+PROMPT="%(?.%{${fg[green]}%}.%{${fg[red]}%})%(?!╭(๑˃̵ᴗ˂̵%)و!(｡>﹏<｡%))%{${reset_color}%}%{${bg[blue]}%}%{${fg[white]}%} %(6~,%-2~/.../%3~,%~) %{${reset_color}%}%{${fg[blue]}%}⮀%{${reset_color}%}
 [%h]-%(?.%{${fg[green]}%}.%{${fg[red]}%})$%{${reset_color}%} "
 
 # git設定
