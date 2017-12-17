@@ -58,13 +58,13 @@ esac
 # PATHs for go
 case "${OSTYPE}" in
 darwin*)
-    export GOROOT=/usr/local/Cellar/go/1.6.2/libexec
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/workspace/go
     ;;
 linux*)
     export GOROOT=$HOME/lib/go
     ;;
 esac
-export GOPATH=$GOROOT/packages
 export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
