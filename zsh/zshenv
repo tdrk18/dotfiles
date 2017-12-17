@@ -12,6 +12,8 @@ darwin*)
     ;;
 esac
 
+export EDITOR=vim
+
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/lib/sublime:$PATH"
