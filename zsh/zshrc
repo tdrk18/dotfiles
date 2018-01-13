@@ -153,5 +153,9 @@ if [ -e $HOME/lib/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     source $HOME/lib/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+if [ -e $HOME/lib/zsh/zsh-abbrev-alias/abbrev-alias.plugin.zsh ]; then
+    source $HOME/lib/zsh/zsh-abbrev-alias/abbrev-alias.plugin.zsh
+fi
+
 fpath=($HOME/lib/zsh/zsh-completions/src $fpath)
 
