@@ -157,5 +157,9 @@ if [ -e $HOME/lib/zsh/zsh-abbrev-alias/abbrev-alias.plugin.zsh ]; then
     source $HOME/lib/zsh/zsh-abbrev-alias/abbrev-alias.plugin.zsh
 fi
 
+if [ -e $HOME/.zsh_abbreviations ]; then
+    source $HOME/.zsh_abbreviations
+fi
+
 fpath=($HOME/lib/zsh/zsh-completions/src $fpath)
 

@@ -3,7 +3,7 @@
 # setting.shがあるパスを取得
 DIR=`cd $(dirname $0); pwd`
 
-for file in zshrc zshenv zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin zsh_vcs
+for file in zshrc zshenv zlogout zlogin zsh_alias zsh_function zsh_keybind zsh_plugin zsh_vcs zsh_abbreviations
 do
     # ホームディレクトリに.$fileがあった場合、.$file_oldとリネームして退避
     if [ -e $HOME/.$file ]; then
