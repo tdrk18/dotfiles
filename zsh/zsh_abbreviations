@@ -4,8 +4,10 @@ typeset -A abbreviations
 abbreviations=(
   "G"   "| grep"
   "X"   "| xargs"
+  "H"   "| head"
   "T"   "| tail"
   "C"   "| cat"
+  "L"   "| less"
   "W"   "| wc"
   "A"   "| awk"
   "S"   "| sed"
