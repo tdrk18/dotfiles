@@ -191,7 +191,7 @@ eggs/
 .eggs/
 # lib/
 # lib64/
-parts/
+# parts/
 sdist/
 var/
 *.egg-info/
@@ -379,3 +379,9 @@ fastlane/screenshots
 # direnv #
 ##########
 .envrc
+
+#############
+# jetbrains #
+#############
+.idea/
+
