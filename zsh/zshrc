@@ -161,5 +161,9 @@ if [ -e $HOME/.zsh_abbreviations ]; then
     source $HOME/.zsh_abbreviations
 fi
 
+if [ -e $HOME/lib/zsh/per-directory-history/per-directory-history.zsh ]; then
+    source $HOME/lib/zsh/per-directory-history/per-directory-history.zsh
+fi
+
 fpath=($HOME/lib/zsh/zsh-completions/src $fpath)
 
