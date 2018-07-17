@@ -5,10 +5,14 @@
 [alias]
     st = status
     co = checkout
+    cb = checkout -b
     ft = fetch
+    fp = fetch -p
     ci = commit
+    cp = cherry-pick
     br = branch
     ba = branch -a
+    rm-br-merged = "!f () { git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d; };f"
     unstage = reset HEAD
     subadd = "!f () { git subtree add --prefix=${1} ${2} ${3} ;};f"
     subpush = "!f () { git subtree push --prefix=${1} ${2} ${3} ;};f"
