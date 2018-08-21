@@ -12,6 +12,7 @@ brew fribidi
 brew fswatch
 brew fzf
 brew gdbm
+brew gdub
 brew gettext
 brew ghq
 brew git
@@ -103,7 +104,7 @@ cask zeplin
 # App Store applications
 appstore 905155357 Cybozu Desktop (2.1.1)
 appstore 682658836 GarageBand (10.3.1)
-appstore 668208984 GIPHY CAPTURE (4.0)
+appstore 668208984 GIPHY CAPTURE (4.1)
 appstore 408981434 iMovie (10.1.9)
 appstore 409183694 Keynote (8.1)
 appstore 539883307 LINE (5.9.3)
