@@ -23,6 +23,7 @@ git clone git@github.com:tdrk18/zsh-syntax-highlighting.git
 git clone git@github.com:tdrk18/zsh-autosuggestions.git
 git clone git@github.com:tdrk18/zsh-abbrev-alias.git
 git clone git@github.com:tdrk18/per-directory-history.git
+cd -
 
 echo "\033[0;32mzshをデフォルトのシェルにするために'chsh -s /bin/zsh'を実行してください\033[0;39m"
 echo "\033[0;32m'exec zsh'を実行してください\033[0;39m"
