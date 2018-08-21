@@ -7,5 +7,6 @@ DIR=`cd $(dirname $0); pwd`
 if [ -e $HOME/.config/brewfile/Brewfile ]; then
     mv $HOME/.config/brewfile/Brewfile $HOME/.config/brewfile/Brewfile_old
 fi
+mkdir -p $HOME/.config/brewfile
 ln -s $DIR/Brewfile $HOME/.config/brewfile/Brewfile
 
