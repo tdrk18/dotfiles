@@ -19,10 +19,20 @@ done
 PLUGIN_DIR=$HOME/lib/zsh
 mkdir -p $PLUGIN_DIR
 cd $PLUGIN_DIR
-git clone git@github.com:tdrk18/zsh-syntax-highlighting.git
-git clone git@github.com:tdrk18/zsh-autosuggestions.git
-git clone git@github.com:tdrk18/zsh-abbrev-alias.git
-git clone git@github.com:tdrk18/per-directory-history.git
+
+if [ ! -e $PLUGIN_DIR/zsh-syntax-highlighting ]; then
+    git clone git@github.com:tdrk18/zsh-syntax-highlighting.git
+fi
+if [ ! -e $PLUGIN_DIR/zsh-autosuggestions ]; then
+    git clone git@github.com:tdrk18/zsh-autosuggestions.git
+fi
+if [ ! -e $PLUGIN_DIR/zsh-abbrev-alias ]; then
+    git clone git@github.com:tdrk18/zsh-abbrev-alias.git
+fi
+if [ ! -e $PLUGIN_DIR/per-directory-history ]; then
+    git clone git@github.com:tdrk18/per-directory-history.git
+fi
+
 cd -
 
 echo "\033[0;32mzshをデフォルトのシェルにするために'chsh -s /bin/zsh'を実行してください\033[0;39m"
