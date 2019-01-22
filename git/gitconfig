@@ -12,6 +12,7 @@
     cp = cherry-pick
     br = branch
     ba = branch -a
+    dsf = "!f () { git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; };f"
     rm-br-merged = "!f () { git branch --merged | egrep -v '\\*|develop|master' | xargs git branch -d; };f"
     unstage = reset HEAD
     subadd = "!f () { git subtree add --prefix=${1} ${2} ${3} ;};f"
