@@ -123,3 +123,5 @@ export PATH=$PATH:/Applications/Julia-0.4.6.app/Contents/Resources/julia/bin
 # for zsh-per-directory-history
 export PER_DIRECTORY_HISTORY_TOGGLE=^G^R
 
+# for flutter
+export PATH=$HOME/lib/flutter/bin:$PATH
