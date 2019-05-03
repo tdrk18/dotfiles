@@ -450,6 +450,13 @@ function peco-select-docker-image-run(){
 }
 zle -N peco-select-docker-image-run
 
+function fzf-select-docker-image-run(){
+  local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | fzf-tmux)"
+  LBUFFER="docker run -ti -d $docker_image /bin/bash"
+  zle reset-prompt
+}
+zle -N fzf-select-docker-image-run
+
 # 最近使ったファイル一覧をfzfで見る
 function mru() {
     local -a f

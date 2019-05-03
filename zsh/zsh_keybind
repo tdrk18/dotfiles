@@ -16,7 +16,7 @@ bindkey "^t^t" fzf_insert_tmux_session_list
 
 bindkey '^s^s' fzf-select-ssh-host
 
-bindkey "^x^d" peco-select-docker-image-run
+bindkey "^x^d" fzf-select-docker-image-run
 
 # bindkey "^xe" emoji::cli
 # bindkey "^x^e" emoji::cli
