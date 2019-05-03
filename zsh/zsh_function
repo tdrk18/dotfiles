@@ -293,6 +293,13 @@ function peco_insert_select_gitpull(){
 }
 zle -N peco_insert_select_gitpull
 
+function fzf_insert_select_gitpull(){
+    LBUFFER="git pull $(fzf_select_from_git_remotes) $(fzf_select_from_git_branchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N fzf_insert_select_gitpull
+
 function peco_select_from_git_allbranchs(){
     git branch --all | \
         peco --prompt='Branch>'| \
