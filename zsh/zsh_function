@@ -323,6 +323,13 @@ function peco_insert_select_gitmerge(){
 }
 zle -N peco_insert_select_gitmerge
 
+function fzf_insert_select_gitmerge(){
+    LBUFFER="git merge $(fzf_select_from_git_allbranchs)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N fzf_insert_select_gitmerge
+
 function peco_insert_vcsstatus(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER="git status"
