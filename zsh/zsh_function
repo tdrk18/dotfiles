@@ -62,6 +62,21 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 
+# fzfを使ってコマンド履歴を表示する
+function fzf-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        fzf-tmux --query "$LBUFFER" --prompt='History>')
+    CURSOR=$#BUFFER
+}
+zle -N fzf-select-history
+
 function peco-find() {
     local current_buffer=$BUFFER
     local search_root=""

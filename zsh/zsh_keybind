@@ -1,4 +1,4 @@
-bindkey '^r' peco-select-history
+bindkey '^r' fzf-select-history
 bindkey '^f' peco-find
 
 bindkey "^g^a" peco_insert_select_vcsadd
