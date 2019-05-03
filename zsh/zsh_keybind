@@ -10,7 +10,7 @@ bindkey "^g^m" fzf_insert_select_gitmerge
 bindkey "^g^s" insert_vcsstatus
 bindkey "^g^f" insert_vcsfetch
 bindkey "^g^i" insert_vcscommit
-bindkey "^g^g" peco_insert_ghq_list
+bindkey "^g^g" fzf_insert_ghq_list
 
 bindkey "^t^t" peco_insert_tmux_session_list
 

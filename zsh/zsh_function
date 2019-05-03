@@ -385,6 +385,21 @@ function peco_insert_ghq_list(){
 }
 zle -N peco_insert_ghq_list
 
+# ghqの一覧をfzfで選択して移動
+function fzf_select_ghq_list(){
+    ghq list | \
+        fzf-tmux --prompt='ghq list>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N fzf_select_ghq_list
+function fzf_insert_ghq_list(){
+    LBUFFER="cd $(ghq root)/$(fzf_select_ghq_list)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N fzf_insert_ghq_list
+
 # tmuxのセッションをpecoで選択してattach
 function peco_select_tmux_session_list(){
     tmux ls </dev/null | \
