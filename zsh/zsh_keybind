@@ -1,5 +1,5 @@
 bindkey '^r' fzf-select-history
-bindkey '^f' peco-find
+bindkey '^f' fzf-find
 
 bindkey "^g^a" peco_insert_select_vcsadd
 bindkey "^g^d" peco_insert_select_vcsdiff

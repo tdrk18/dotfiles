@@ -94,6 +94,24 @@ function peco-find() {
 }
 zle -N peco-find
 
+function fzf-find() {
+    local current_buffer=$BUFFER
+    local search_root=""
+    local file_path=""
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        search_root=`git rev-parse --show-toplevel`
+    else
+        search_root=`pwd`
+    fi
+    file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | \
+        fzf-tmux --prompt='Find>')"
+    BUFFER="${current_buffer} ${file_path}"
+    CURSOR=$#BUFFER
+    # zle clear-screen
+    zle accept-line
+}
+zle -N fzf-find
+
 function peco_select_from_git_status(){
     git status --short | \
         peco --prompt='git status>'| \
