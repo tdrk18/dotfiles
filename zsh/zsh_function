@@ -265,6 +265,13 @@ function peco_select_from_git_remotes(){
 }
 zle -N peco_select_from_git_remotes
 
+function fzf_select_from_git_remotes(){
+    git remote | \
+        fzf-tmux -m --prompt='Remote>'| \
+        tr '\n' ' '
+}
+zle -N fzf_select_from_git_remotes
+
 function peco_insert_select_gitpush(){
     LBUFFER="git push $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
     CURSOR=$#LBUFFER
