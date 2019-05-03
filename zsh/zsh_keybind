@@ -7,9 +7,9 @@ bindkey "^g^b" fzf_insert_select_gitcheckout
 bindkey "^g^p" fzf_insert_select_gitpush
 bindkey "^g^l" fzf_insert_select_gitpull
 bindkey "^g^m" fzf_insert_select_gitmerge
-bindkey "^g^s" peco_insert_vcsstatus
-bindkey "^g^f" peco_insert_vcsfetch
-bindkey "^g^i" peco_insert_vcscommit
+bindkey "^g^s" insert_vcsstatus
+bindkey "^g^f" insert_vcsfetch
+bindkey "^g^i" insert_vcscommit
 bindkey "^g^g" peco_insert_ghq_list
 
 bindkey "^t^t" peco_insert_tmux_session_list
