@@ -440,7 +440,11 @@ zle -N fzf_insert_tmux_session_list
 
 # sshの接続先をfzfで選択
 function fzf-select-ssh-host(){
-  local host="$(egrep -i '^Host\s+.+' $HOME/.ssh/config | egrep -v '[*?]' | awk '{print $2}' | sort | fzf)"
+  local host="$(egrep -i '^Host\s+.+' $HOME/.ssh/config | \
+      egrep -v '[*?]' | \
+      awk '{print $2}' | \
+      sort | \
+      fzf-tmux)"
 
   if [ ! -z "$host" ]; then
     LBUFFER="ssh $host"
