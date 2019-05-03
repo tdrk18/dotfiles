@@ -308,6 +308,14 @@ function peco_select_from_git_allbranchs(){
 }
 zle -N peco_select_from_git_allbranchs
 
+function fzf_select_from_git_allbranchs(){
+    git branch --all | \
+        fzf-tmux -m --prompt='Branch>'| \
+        awk -F ' ' '{print $NF}' | \
+        tr '\n' ' '
+}
+zle -N fzf_select_from_git_allbranchs
+
 function peco_insert_select_gitmerge(){
     LBUFFER="git merge $(peco_select_from_git_allbranchs)"
     CURSOR=$#LBUFFER
