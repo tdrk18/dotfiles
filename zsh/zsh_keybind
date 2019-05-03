@@ -12,7 +12,7 @@ bindkey "^g^f" insert_vcsfetch
 bindkey "^g^i" insert_vcscommit
 bindkey "^g^g" fzf_insert_ghq_list
 
-bindkey "^t^t" peco_insert_tmux_session_list
+bindkey "^t^t" fzf_insert_tmux_session_list
 
 bindkey '^s^s' fzf-select-ssh-host
 

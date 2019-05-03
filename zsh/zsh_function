@@ -415,6 +415,21 @@ function peco_insert_tmux_session_list(){
 }
 zle -N peco_insert_tmux_session_list
 
+# tmuxのセッションをfzfで選択してattach
+function fzf_select_tmux_session_list(){
+    tmux ls </dev/null | \
+        fzf-tmux --prompt='tmux session>'| \
+        awk -F':' '{print $1}' | \
+        tr '\n' ' '
+}
+zle -N fzf_select_tmux_session_list
+function fzf_insert_tmux_session_list(){
+    LBUFFER="tmux a -t $(fzf_select_tmux_session_list)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N fzf_insert_tmux_session_list
+
 # sshの接続先をfzfで選択
 function fzf-select-ssh-host(){
   local host="$(egrep -i '^Host\s+.+' $HOME/.ssh/config | egrep -v '[*?]' | awk '{print $2}' | sort | fzf)"
