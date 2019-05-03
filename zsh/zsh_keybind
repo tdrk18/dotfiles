@@ -1,7 +1,7 @@
 bindkey '^r' fzf-select-history
 bindkey '^f' fzf-find
 
-bindkey "^g^a" peco_insert_select_vcsadd
+bindkey "^g^a" fzf_insert_select_vcsadd
 bindkey "^g^d" peco_insert_select_vcsdiff
 bindkey "^g^b" peco_insert_select_gitcheckout
 bindkey "^g^p" peco_insert_select_gitpush
