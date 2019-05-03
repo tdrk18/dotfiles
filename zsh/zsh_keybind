@@ -1,22 +1,22 @@
-bindkey '^r' peco-select-history
-bindkey '^f' peco-find
+bindkey '^r' fzf-select-history
+bindkey '^f' fzf-find
 
-bindkey "^g^a" peco_insert_select_vcsadd
-bindkey "^g^d" peco_insert_select_vcsdiff
-bindkey "^g^b" peco_insert_select_gitcheckout
-bindkey "^g^p" peco_insert_select_gitpush
-bindkey "^g^l" peco_insert_select_gitpull
-bindkey "^g^m" peco_insert_select_gitmerge
-bindkey "^g^s" peco_insert_vcsstatus
-bindkey "^g^f" peco_insert_vcsfetch
-bindkey "^g^i" peco_insert_vcscommit
-bindkey "^g^g" peco_insert_ghq_list
+bindkey "^g^a" fzf_insert_select_vcsadd
+bindkey "^g^d" fzf_insert_select_vcsdiff
+bindkey "^g^b" fzf_insert_select_gitcheckout
+bindkey "^g^p" fzf_insert_select_gitpush
+bindkey "^g^l" fzf_insert_select_gitpull
+bindkey "^g^m" fzf_insert_select_gitmerge
+bindkey "^g^s" insert_vcsstatus
+bindkey "^g^f" insert_vcsfetch
+bindkey "^g^i" insert_vcscommit
+bindkey "^g^g" fzf_insert_ghq_list
 
-bindkey "^t^t" peco_insert_tmux_session_list
+bindkey "^t^t" fzf_insert_tmux_session_list
 
 bindkey '^s^s' fzf-select-ssh-host
 
-bindkey "^x^d" peco-select-docker-image-run
+bindkey "^x^d" fzf-select-docker-image-run
 
 # bindkey "^xe" emoji::cli
 # bindkey "^x^e" emoji::cli
