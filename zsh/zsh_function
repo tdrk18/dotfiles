@@ -408,6 +408,21 @@ function fzf_insert_ghq_list(){
 }
 zle -N fzf_insert_ghq_list
 
+# git stash listをfzfで選択してgit stash pop
+function fzf_select_git_stash_list(){
+    git stash list | \
+        fzf-tmux -m --preview="echo {} | cut -f 1 -d ':' | xargs git stash show -v" --prompt='git stash list>'| \
+        cut -f 1 -d ':' | \
+        tr '\n' ' '
+}
+zle -N fzf_select_git_stash_list
+function fzf_insert_git_stash_list(){
+    LBUFFER="git stash pop $(fzf_select_git_stash_list)"
+    CURSOR=$#LBUFFER
+    zle reset-prompt
+}
+zle -N fzf_insert_git_stash_list
+
 # tmuxのセッションをpecoで選択してattach
 function peco_select_tmux_session_list(){
     tmux ls </dev/null | \

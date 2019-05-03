@@ -7,6 +7,7 @@ bindkey "^g^b" fzf_insert_select_gitcheckout
 bindkey "^g^p" fzf_insert_select_gitpush
 bindkey "^g^l" fzf_insert_select_gitpull
 bindkey "^g^m" fzf_insert_select_gitmerge
+bindkey "^g^h" fzf_insert_git_stash_list
 bindkey "^g^s" insert_vcsstatus
 bindkey "^g^f" insert_vcsfetch
 bindkey "^g^i" insert_vcscommit
