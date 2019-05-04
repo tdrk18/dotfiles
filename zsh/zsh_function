@@ -186,8 +186,6 @@ zle -N fzf_insert_select_gitmerge
 function insert_vcsstatus(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER="git status"
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER="svn status"
     else
         LBUFFER="ls"
     fi
@@ -200,8 +198,8 @@ zle -N insert_vcsstatus
 function insert_vcsfetch(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER="git fetch"
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER="svn update"
+    else
+        LBUFFER="ls"
     fi
     CURSOR=$#LBUFFER
     zle reset-prompt
@@ -212,8 +210,6 @@ zle -N insert_vcsfetch
 function insert_vcscommit(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER="git commit"
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER="svn commit"
     else
         LBUFFER="ls"
     fi
