@@ -227,13 +227,6 @@ function fzf_select_from_git_allbranchs(){
 }
 zle -N fzf_select_from_git_allbranchs
 
-function peco_insert_select_gitmerge(){
-    LBUFFER="git merge $(peco_select_from_git_allbranchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitmerge
-
 function fzf_insert_select_gitmerge(){
     LBUFFER="git merge $(fzf_select_from_git_allbranchs)"
     CURSOR=$#LBUFFER
