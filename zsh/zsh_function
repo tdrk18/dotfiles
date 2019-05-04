@@ -197,13 +197,6 @@ function fzf_select_from_git_remotes(){
 }
 zle -N fzf_select_from_git_remotes
 
-function peco_insert_select_gitpush(){
-    LBUFFER="git push $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitpush
-
 function fzf_insert_select_gitpush(){
     LBUFFER="git push $(fzf_select_from_git_remotes) $(fzf_select_from_git_branchs)"
     CURSOR=$#LBUFFER
