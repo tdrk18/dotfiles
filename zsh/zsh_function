@@ -47,21 +47,6 @@ function autostart_tmux() {
     fi
 }
 
-# pecoを使ってコマンド履歴を表示する
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(\history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER" --prompt='History>')
-    CURSOR=$#BUFFER
-}
-zle -N peco-select-history
-
 # fzfを使ってコマンド履歴を表示する
 function fzf-select-history() {
     local tac
