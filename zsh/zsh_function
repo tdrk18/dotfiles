@@ -86,13 +86,6 @@ function peco_select_from_git_status(){
         cut -c 4- | \
         tr '\n' ' '
 }
-function peco_insert_selected_git_files(){
-    LBUFFER+=$(peco_select_from_git_status)
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_selected_git_files
 
 function fzf_select_from_git_status(){
     local DIFF_COMMAND
