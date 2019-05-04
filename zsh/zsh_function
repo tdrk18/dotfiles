@@ -80,13 +80,6 @@ function fzf-find() {
 }
 zle -N fzf-find
 
-function peco_select_from_git_status(){
-    git status --short | \
-        peco --prompt='git status>'| \
-        cut -c 4- | \
-        tr '\n' ' '
-}
-
 function fzf_select_from_git_status(){
     local DIFF_COMMAND
     if git dsf > /dev/null 2>&1; then
