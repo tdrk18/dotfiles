@@ -102,13 +102,6 @@ function fzf_insert_selected_git_files(){
 }
 zle -N fzf_insert_selected_git_files
 
-function peco_select_from_svn_status(){
-    svn status | \
-    peco --prompt='svn status>'| \
-    awk -F ' ' '{print $NF}' | \
-    tr '\n' ' '
-}
-
 function fzf_select_from_svn_status(){
     svn status | \
     fzf-tmux -m --prompt='svn status>'| \
