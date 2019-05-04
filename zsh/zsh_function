@@ -119,8 +119,8 @@ zle -N fzf_insert_selected_svn_files
 function fzf_insert_select_vcsadd(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER+="git add $(fzf_select_from_git_status)"
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER+="svn add $(fzf_select_from_svn_status)"
+    else
+        return
     fi
     CURSOR=$#LBUFFER
     zle reset-prompt
@@ -137,8 +137,8 @@ function fzf_insert_select_vcsdiff(){
         else
             LBUFFER+="git diff $(fzf_select_from_git_status)"
         fi
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER+="svn diff $(fzf_select_from_svn_status)"
+    else
+        return
     fi
     CURSOR=$#LBUFFER
     zle reset-prompt
