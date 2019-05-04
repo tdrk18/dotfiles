@@ -47,21 +47,6 @@ function autostart_tmux() {
     fi
 }
 
-# pecoを使ってコマンド履歴を表示する
-function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(\history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER" --prompt='History>')
-    CURSOR=$#BUFFER
-}
-zle -N peco-select-history
-
 # fzfを使ってコマンド履歴を表示する
 function fzf-select-history() {
     local tac
@@ -76,23 +61,6 @@ function fzf-select-history() {
     CURSOR=$#BUFFER
 }
 zle -N fzf-select-history
-
-function peco-find() {
-    local current_buffer=$BUFFER
-    local search_root=""
-    local file_path=""
-    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        search_root=`git rev-parse --show-toplevel`
-    else
-        search_root=`pwd`
-    fi
-    file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | peco --prompt='Find>')"
-    BUFFER="${current_buffer} ${file_path}"
-    CURSOR=$#BUFFER
-    # zle clear-screen
-    zle accept-line
-}
-zle -N peco-find
 
 function fzf-find() {
     local current_buffer=$BUFFER
@@ -111,20 +79,6 @@ function fzf-find() {
     zle accept-line
 }
 zle -N fzf-find
-
-function peco_select_from_git_status(){
-    git status --short | \
-        peco --prompt='git status>'| \
-        cut -c 4- | \
-        tr '\n' ' '
-}
-function peco_insert_selected_git_files(){
-    LBUFFER+=$(peco_select_from_git_status)
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_selected_git_files
 
 function fzf_select_from_git_status(){
     local DIFF_COMMAND
@@ -148,20 +102,6 @@ function fzf_insert_selected_git_files(){
 }
 zle -N fzf_insert_selected_git_files
 
-function peco_select_from_svn_status(){
-    svn status | \
-    peco --prompt='svn status>'| \
-    awk -F ' ' '{print $NF}' | \
-    tr '\n' ' '
-}
-function peco_insert_selected_svn_files(){
-    LBUFFER+=$(peco_select_from_svn_status)
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_selected_svn_files
-
 function fzf_select_from_svn_status(){
     svn status | \
     fzf-tmux -m --prompt='svn status>'| \
@@ -176,18 +116,6 @@ function fzf_insert_selected_svn_files(){
 }
 zle -N fzf_insert_selected_svn_files
 
-function peco_insert_select_vcsadd(){
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        LBUFFER+="git add $(peco_select_from_git_status)"
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER+="svn add $(peco_select_from_svn_status)"
-    fi
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_select_vcsadd
-
 function fzf_insert_select_vcsadd(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         LBUFFER+="git add $(fzf_select_from_git_status)"
@@ -199,24 +127,6 @@ function fzf_insert_select_vcsadd(){
     zle accept-line
 }
 zle -N fzf_insert_select_vcsadd
-
-function peco_insert_select_vcsdiff(){
-    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        if git dsf > /dev/null 2>&1; then
-            LBUFFER+="git dsf $(peco_select_from_git_status)"
-        elif git icdiff > /dev/null 2>&1; then
-            LBUFFER+="git icdiff $(peco_select_from_git_status)"
-        else
-            LBUFFER+="git diff $(peco_select_from_git_status)"
-        fi
-    elif svn info>/dev/null 2>&1; then
-        LBUFFER+="svn diff $(peco_select_from_svn_status)"
-    fi
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_select_vcsdiff
 
 function fzf_insert_select_vcsdiff(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -236,14 +146,6 @@ function fzf_insert_select_vcsdiff(){
 }
 zle -N fzf_insert_select_vcsdiff
 
-function peco_select_from_git_branchs(){
-    git branch --list | \
-        peco --prompt='Branch>'| \
-        awk -F ' ' '{print $NF}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_from_git_branchs
-
 function fzf_select_from_git_branchs(){
     git branch --list | \
         fzf-tmux -m --prompt='Branch>'| \
@@ -252,26 +154,12 @@ function fzf_select_from_git_branchs(){
 }
 zle -N fzf_select_from_git_branchs
 
-function peco_insert_select_gitcheckout(){
-    LBUFFER+="git checkout $(peco_select_from_git_branchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitcheckout
-
 function fzf_insert_select_gitcheckout(){
     LBUFFER+="git checkout $(fzf_select_from_git_branchs)"
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
 zle -N fzf_insert_select_gitcheckout
-
-function peco_select_from_git_remotes(){
-    git remote | \
-        peco --prompt='Remote>'| \
-        tr '\n' ' '
-}
-zle -N peco_select_from_git_remotes
 
 function fzf_select_from_git_remotes(){
     git remote | \
@@ -280,26 +168,12 @@ function fzf_select_from_git_remotes(){
 }
 zle -N fzf_select_from_git_remotes
 
-function peco_insert_select_gitpush(){
-    LBUFFER="git push $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitpush
-
 function fzf_insert_select_gitpush(){
     LBUFFER="git push $(fzf_select_from_git_remotes) $(fzf_select_from_git_branchs)"
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
 zle -N fzf_insert_select_gitpush
-
-function peco_insert_select_gitpull(){
-    LBUFFER="git pull $(peco_select_from_git_remotes) $(peco_select_from_git_branchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitpull
 
 function fzf_insert_select_gitpull(){
     LBUFFER="git pull $(fzf_select_from_git_remotes) $(fzf_select_from_git_branchs)"
@@ -308,14 +182,6 @@ function fzf_insert_select_gitpull(){
 }
 zle -N fzf_insert_select_gitpull
 
-function peco_select_from_git_allbranchs(){
-    git branch --all | \
-        peco --prompt='Branch>'| \
-        awk -F ' ' '{print $NF}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_from_git_allbranchs
-
 function fzf_select_from_git_allbranchs(){
     git branch --all | \
         fzf-tmux -m --prompt='Branch>'| \
@@ -323,13 +189,6 @@ function fzf_select_from_git_allbranchs(){
         tr '\n' ' '
 }
 zle -N fzf_select_from_git_allbranchs
-
-function peco_insert_select_gitmerge(){
-    LBUFFER="git merge $(peco_select_from_git_allbranchs)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_select_gitmerge
 
 function fzf_insert_select_gitmerge(){
     LBUFFER="git merge $(fzf_select_from_git_allbranchs)"
@@ -378,21 +237,6 @@ function insert_vcscommit(){
 }
 zle -N insert_vcscommit
 
-# ghqの一覧をpecoで選択して移動
-function peco_select_ghq_list(){
-    ghq list | \
-        peco --prompt='ghq list>'| \
-        awk -F ' ' '{print $NF}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_ghq_list
-function peco_insert_ghq_list(){
-    LBUFFER="cd $(ghq root)/$(peco_select_ghq_list)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_ghq_list
-
 # ghqの一覧をfzfで選択して移動
 function fzf_select_ghq_list(){
     ghq list | \
@@ -422,21 +266,6 @@ function fzf_insert_git_stash_list(){
     zle reset-prompt
 }
 zle -N fzf_insert_git_stash_list
-
-# tmuxのセッションをpecoで選択してattach
-function peco_select_tmux_session_list(){
-    tmux ls </dev/null | \
-        peco --prompt='tmux session>'| \
-        awk -F':' '{print $1}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_tmux_session_list
-function peco_insert_tmux_session_list(){
-    LBUFFER="tmux a -t $(peco_select_tmux_session_list)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_tmux_session_list
 
 # tmuxのセッションをfzfで選択してattach
 function fzf_select_tmux_session_list(){
@@ -470,13 +299,6 @@ function fzf-select-ssh-host(){
 zle -N fzf-select-ssh-host
 
 # docker image 一覧から起動する image を選択する
-function peco-select-docker-image-run(){
-  local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | peco)"
-  LBUFFER="docker run -ti -d $docker_image /bin/bash"
-  zle reset-prompt
-}
-zle -N peco-select-docker-image-run
-
 function fzf-select-docker-image-run(){
   local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | fzf-tmux)"
   LBUFFER="docker run -ti -d $docker_image /bin/bash"
