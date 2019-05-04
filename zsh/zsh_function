@@ -115,13 +115,6 @@ function peco_select_from_svn_status(){
     awk -F ' ' '{print $NF}' | \
     tr '\n' ' '
 }
-function peco_insert_selected_svn_files(){
-    LBUFFER+=$(peco_select_from_svn_status)
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-    zle accept-line
-}
-zle -N peco_insert_selected_svn_files
 
 function fzf_select_from_svn_status(){
     svn status | \
