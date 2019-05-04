@@ -282,12 +282,6 @@ function peco_select_ghq_list(){
         tr '\n' ' '
 }
 zle -N peco_select_ghq_list
-function peco_insert_ghq_list(){
-    LBUFFER="cd $(ghq root)/$(peco_select_ghq_list)"
-    CURSOR=$#LBUFFER
-    zle reset-prompt
-}
-zle -N peco_insert_ghq_list
 
 # ghqの一覧をfzfで選択して移動
 function fzf_select_ghq_list(){
