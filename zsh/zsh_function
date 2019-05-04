@@ -161,13 +161,6 @@ function fzf_insert_select_gitcheckout(){
 }
 zle -N fzf_insert_select_gitcheckout
 
-function peco_select_from_git_remotes(){
-    git remote | \
-        peco --prompt='Remote>'| \
-        tr '\n' ' '
-}
-zle -N peco_select_from_git_remotes
-
 function fzf_select_from_git_remotes(){
     git remote | \
         fzf-tmux -m --prompt='Remote>'| \
