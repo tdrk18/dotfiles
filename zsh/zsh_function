@@ -274,15 +274,6 @@ function insert_vcscommit(){
 }
 zle -N insert_vcscommit
 
-# ghqの一覧をpecoで選択して移動
-function peco_select_ghq_list(){
-    ghq list | \
-        peco --prompt='ghq list>'| \
-        awk -F ' ' '{print $NF}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_ghq_list
-
 # ghqの一覧をfzfで選択して移動
 function fzf_select_ghq_list(){
     ghq list | \
