@@ -146,14 +146,6 @@ function fzf_insert_select_vcsdiff(){
 }
 zle -N fzf_insert_select_vcsdiff
 
-function peco_select_from_git_branchs(){
-    git branch --list | \
-        peco --prompt='Branch>'| \
-        awk -F ' ' '{print $NF}' | \
-        tr '\n' ' '
-}
-zle -N peco_select_from_git_branchs
-
 function fzf_select_from_git_branchs(){
     git branch --list | \
         fzf-tmux -m --prompt='Branch>'| \
