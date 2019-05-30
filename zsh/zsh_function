@@ -57,7 +57,7 @@ function fzf-select-history() {
     fi
     BUFFER=$(\history -n 1 | \
         eval $tac | \
-        fzf-tmux --query "$LBUFFER" --prompt='History>')
+        fzf --query "$LBUFFER" --prompt='History>')
     CURSOR=$#BUFFER
 }
 zle -N fzf-select-history
@@ -72,7 +72,7 @@ function fzf-find() {
         search_root=`pwd`
     fi
     file_path="$(find ${search_root} -maxdepth 5 -type d ! -path "*/.*" | \
-        fzf-tmux --prompt='Find>')"
+        fzf --prompt='Find>')"
     BUFFER="${current_buffer} ${file_path}"
     CURSOR=$#BUFFER
     # zle clear-screen
@@ -90,7 +90,7 @@ function fzf_select_from_git_status(){
         DIFF_COMMAND+="diff"
     fi
     git status --short | \
-        fzf-tmux -m --preview="echo {} | awk '{print \$2}' | xargs git $DIFF_COMMAND --color" --prompt='git status>'| \
+        fzf -m --preview="echo {} | awk '{print \$2}' | xargs git $DIFF_COMMAND --color" --prompt='git status>'| \
         cut -c 4- | \
         tr '\n' ' '
 }
@@ -134,7 +134,7 @@ zle -N fzf_insert_select_vcsdiff
 
 function fzf_select_from_git_branchs(){
     git branch --list | \
-        fzf-tmux -m --prompt='Branch>'| \
+        fzf -m --prompt='Branch>'| \
         awk -F ' ' '{print $NF}' | \
         tr '\n' ' '
 }
@@ -149,7 +149,7 @@ zle -N fzf_insert_select_gitcheckout
 
 function fzf_select_from_git_remotes(){
     git remote | \
-        fzf-tmux -m --prompt='Remote>'| \
+        fzf -m --prompt='Remote>'| \
         tr '\n' ' '
 }
 zle -N fzf_select_from_git_remotes
@@ -170,7 +170,7 @@ zle -N fzf_insert_select_gitpull
 
 function fzf_select_from_git_allbranchs(){
     git branch --all | \
-        fzf-tmux -m --prompt='Branch>'| \
+        fzf -m --prompt='Branch>'| \
         awk -F ' ' '{print $NF}' | \
         tr '\n' ' '
 }
@@ -222,7 +222,7 @@ zle -N insert_vcscommit
 # ghqの一覧をfzfで選択して移動
 function fzf_select_ghq_list(){
     ghq list | \
-        fzf-tmux --prompt='ghq list>'| \
+        fzf --prompt='ghq list>'| \
         awk -F ' ' '{print $NF}' | \
         tr '\n' ' '
 }
@@ -237,7 +237,7 @@ zle -N fzf_insert_ghq_list
 # git stash listをfzfで選択してgit stash pop
 function fzf_select_git_stash_list(){
     git stash list | \
-        fzf-tmux -m --preview="echo {} | cut -f 1 -d ':' | xargs git stash show -v" --prompt='git stash list>'| \
+        fzf -m --preview="echo {} | cut -f 1 -d ':' | xargs git stash show -v" --prompt='git stash list>'| \
         cut -f 1 -d ':' | \
         tr '\n' ' '
 }
@@ -252,7 +252,7 @@ zle -N fzf_insert_git_stash_list
 # tmuxのセッションをfzfで選択してattach
 function fzf_select_tmux_session_list(){
     tmux ls </dev/null | \
-        fzf-tmux --prompt='tmux session>'| \
+        fzf --prompt='tmux session>'| \
         awk -F':' '{print $1}' | \
         tr '\n' ' '
 }
@@ -270,7 +270,7 @@ function fzf-select-ssh-host(){
       egrep -v '[*?]' | \
       awk '{print $2}' | \
       sort | \
-      fzf-tmux)"
+      fzf)"
 
   if [ ! -z "$host" ]; then
     LBUFFER="ssh $host"
@@ -282,7 +282,7 @@ zle -N fzf-select-ssh-host
 
 # docker image 一覧から起動する image を選択する
 function fzf-select-docker-image-run(){
-  local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | fzf-tmux)"
+  local docker_image="$(docker images | grep -v "REPOSITORY" | awk '{print $3}' | fzf)"
   LBUFFER="docker run -ti -d $docker_image /bin/bash"
   zle reset-prompt
 }
