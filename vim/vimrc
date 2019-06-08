@@ -40,10 +40,6 @@ call neobundle#begin(expand('~/.vim/bundle'))
     " ドキュメント(リファレンス)参照
     NeoBundle 'thinca/vim-ref'
     NeoBundle 'yuku-t/vim-ref-ri'
-    " Markdownをプレビュー
-    NeoBundle 'plasticboy/vim-markdown'
-    NeoBundle 'kannokanno/previm'
-    NeoBundle 'tyru/open-browser.vim'
     " ステータスラインを綺麗に
     NeoBundle 'itchyny/lightline.vim'
     " gitステータスを表示
@@ -469,8 +465,6 @@ noremap <C-c><C-c> :TComment<CR>
 nmap <F8> :TagbarToggle<CR>
 " Vaffle
 nmap <F7> :Vaffle<CR>
-" Markdown
-noremap <C-m> :PrevimOpen<CR>
 " Gita status
 noremap <C-g><C-s> :Gita status<CR>
 " Gita diff
@@ -632,13 +626,6 @@ if &term =~ "xterm"
     cnoremap <special> <Esc>[200~ <nop>
     cnoremap <special> <Esc>[201~ <nop>
 endif
-" Markdownの設定
-augroup PrevimSettings
-    autocmd!
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
-augroup END
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-" let g:previm_open_cmd = 'open -a Firefox'
 
 " Anywhere SID.
 function! s:SID_PREFIX()
