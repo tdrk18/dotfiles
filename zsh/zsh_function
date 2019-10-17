@@ -141,7 +141,11 @@ function fzf_select_from_git_branchs(){
 zle -N fzf_select_from_git_branchs
 
 function fzf_insert_select_gitcheckout(){
-    LBUFFER+="git checkout $(fzf_select_from_git_branchs)"
+    if git switch --help > /dev/null 2>&1; then
+        LBUFFER+="git switch $(fzf_select_from_git_branchs)"
+    else
+        LBUFFER+="git checkout $(fzf_select_from_git_branchs)"
+    fi
     CURSOR=$#LBUFFER
     zle reset-prompt
 }
