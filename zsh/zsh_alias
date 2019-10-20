@@ -42,3 +42,7 @@ alias tig='tig --all'
 # for my project
 alias dic='ruby $HOME/workspace/project/dictionary/dict.rb'
 
+# avoid warnings for anyenv in brew doctor
+if [ -e $HOME/.anyenv/bin/anyenv ]; then
+    alias brew="env PATH=${PATH/${HOME}\/\.anyenv\/envs\/*env\/shims:/} brew"
+fi
