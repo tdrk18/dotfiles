@@ -15,6 +15,8 @@ do
     ln -s $DIR/$file $HOME/.$file
 done
 
+touch $HOME/.zshenv_local
+
 # pluginのインストール
 PLUGIN_DIR=$HOME/lib/zsh
 mkdir -p $PLUGIN_DIR
