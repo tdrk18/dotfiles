@@ -11,7 +11,7 @@ eval "$(anyenv init -)"
 exec $SHELL -l
 
 # pluginの設定
-if [ ! -e $(anyenv root)/plugins ]; then
+if [ ! -e $(anyenv root)/plugins/anyenv-update ]; then
     mkdir -p $(anyenv root)/plugins
     git clone https://github.com/znz/anyenv-update.git $(anyenv root)/plugins/anyenv-update
 fi
