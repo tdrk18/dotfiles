@@ -201,7 +201,7 @@ zle -N insert_vcsstatus
 
 function insert_vcsfetch(){
     if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-        LBUFFER="git fetch"
+        LBUFFER="git fetch -p"
     else
         LBUFFER="ls"
     fi
