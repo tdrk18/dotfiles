@@ -2,7 +2,7 @@
 ## settings ##
 ##############
 # main viewをコミットID, 日付, 作者, コミットの表示にする
-set main-view = id:width=10 date author commit-title:graph=yes,refs=yes
+set main-view = id:width=10 date author:width=15 commit-title:graph=yes,refs=yes
 
 # 画面を垂直方向に分割する
 # set vertical-split = yes
