@@ -491,7 +491,7 @@ set pastetoggle=<F12>
 " 256色ターミナルに対応
 set t_Co=256
 " カラースキーム
-colorscheme railscasts
+colorscheme iceberg
 "タブやインデントの設定
 " タブ入力を空白文字に置き換え
 set expandtab
