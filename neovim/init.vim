@@ -129,7 +129,7 @@ set splitright
 set splitbelow
 " カラースキーム
 set background=dark " or light
-colorscheme hybrid
+colorscheme iceberg
 
 " ------------------------------------------------------------
 "

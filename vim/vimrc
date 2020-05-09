@@ -79,8 +79,6 @@ call neobundle#begin(expand('~/.vim/bundle'))
           \   'filetypes': 'ruby',
           \ },
         \ }
-    " c++の補完
-    NeoBundle 'Rip-Rip/clang_complete'
     " pythonでpep8準拠インデント
     NeoBundle 'hynek/vim-python-pep8-indent'
     " pythonの補完
@@ -97,17 +95,6 @@ call neobundle#begin(expand('~/.vim/bundle'))
     NeoBundle 'xolox/vim-session', {
           \ 'depends' : 'xolox/vim-misc',
         \ }
-    " crystalのシンタックス
-    NeoBundle 'rhysd/vim-crystal'
-    " NeoBundleLazy 'rhysd/vim-crystal', {
-    "       \   'autoload': {
-    "       \     'filetypes': ['cr']
-    "     \ }}
-    " coffee scriptのシンタックス
-    NeoBundleLazy 'kchmck/vim-coffee-script', {
-          \ 'autoload':{
-          \     'filetypes': ['coffee']
-        \ }}
     " golang
     NeoBundle 'vim-jp/vim-go-extra'
     " vimdiffの色合い設定
@@ -504,7 +491,7 @@ set pastetoggle=<F12>
 " 256色ターミナルに対応
 set t_Co=256
 " カラースキーム
-colorscheme railscasts
+colorscheme iceberg
 "タブやインデントの設定
 " タブ入力を空白文字に置き換え
 set expandtab
