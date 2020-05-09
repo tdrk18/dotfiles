@@ -12,7 +12,11 @@ darwin*)
     ;;
 esac
 
-export EDITOR=vim
+if type nvim > /dev/null 2>&1; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 # PATH
 export PATH="/usr/local/bin:$PATH"
