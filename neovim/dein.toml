@@ -19,7 +19,7 @@ repo = 'itchyny/lightline.vim'
 
 # カラーテーマ
 [[plugins]]
-repo = 'w0ng/vim-hybrid'
+repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'thinca/vim-template'
