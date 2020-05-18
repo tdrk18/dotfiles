@@ -1,1 +1,22 @@
-selectmode+=refactoring
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set showmatch matchtime=1
+set cmdheight=2
+set laststatus=2
+set showcmd
+set display=lastline
+set listchars=tab:^\ ,trail:~
+set clipboard+=unnamed
+set whichwrap=b,s,h,l,<,>,[,],~
+
+nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
+noremap "+y "*y
+noremap "+Y "*Y
+noremap "+p "*p
+noremap "+P "*P
+noremap <C-S-c> "*y
+noremap <C-S-v> "*P
+
+inoremap <silent> jj <Esc>
