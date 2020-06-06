@@ -1,6 +1,7 @@
 [user]
     name = tdrk18
     email = s18.todoroki@gmail.com
+    signingkey = F523E6EE561EA54B
 
 [alias]
     st = status
@@ -32,6 +33,7 @@
 
 [commit]
     template = ~/.gitmessage
+    gpgsign = true
 
 [ghq]
     root = ~/ghq
