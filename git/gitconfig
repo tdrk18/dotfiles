@@ -35,5 +35,8 @@
     template = ~/.gitmessage
     gpgsign = true
 
+[tag]
+    gpgSign = true
+
 [ghq]
     root = ~/ghq
