@@ -38,5 +38,8 @@
 [tag]
     gpgSign = true
 
+[pull]
+    ff = only
+
 [ghq]
     root = ~/ghq
