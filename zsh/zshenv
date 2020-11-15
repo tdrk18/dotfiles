@@ -93,17 +93,6 @@ export PATH=$GOPATH/bin:$PATH
 # export PATH=$HOME/.plenv/bin:$HOME/.plenv/shims:$PATH
 # eval "$(plenv init -)"
 
-# for anyenv
-if [ -d $HOME/.anyenv ] ; then
-    export PATH=$HOME/.anyenv/bin:$PATH
-    eval "$(anyenv init -)"
-    # tmux対応
-    for dir in `\ls $HOME/.anyenv/envs`
-    do
-        export PATH="$HOME/.anyenv/envs/$dir/shims:$PATH"
-    done
-fi
-
 # for direnv
 eval "$(direnv hook zsh)"
 
