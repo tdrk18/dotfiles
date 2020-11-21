@@ -9,6 +9,21 @@ if [ -e $HOME/.gitconfig ]; then
 fi
 ln -s $DIR/gitconfig $HOME/.gitconfig
 
+# gitconfig_tdrk18を設置
+if [ -e $HOME/.gitconfig_tdrk18 ]; then
+    mv $HOME/.gitconfig_tdrk18 $HOME/.gitconfig_tdrk18_old
+fi
+ln -s $DIR/gitconfig_tdrk18 $HOME/.gitconfig_tdrk18
+
+# gitconfig_mixiを設置
+if [ -e $HOME/.gitconfig_mixi ]; then
+    mv $HOME/.gitconfig_mixi $HOME/.gitconfig_mixi_old
+fi
+read -p "company email address for git:" company_email
+sed -i "" "s|-----|${company_email}|g" $DIR/gitconfig_mixi
+git update-index --skip-worktree $DIR/gitconfig_mixi
+ln -s $DIR/gitconfig_mixi $HOME/.gitconfig_mixi
+
 # gitignore_globalを設置
 if [ -e $HOME/.gitignore_global ]; then
     mv $HOME/.gitignore_global $HOME/.gitignore_global_old
