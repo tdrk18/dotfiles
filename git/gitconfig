@@ -49,3 +49,6 @@
     path = ~/.gitconfig_mixi
 [includeIf "gitdir:~/ghq/github.com/tdrk18/"]
     path = ~/.gitconfig_tdrk18
+
+[init]
+    defaultBranch = main
