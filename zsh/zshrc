@@ -177,3 +177,8 @@ if [ -d $HOME/.anyenv ] ; then
         export PATH="$HOME/.anyenv/envs/$dir/shims:$PATH"
     done
 fi
+
+# asdf
+if which asdf > /dev/null 2>&1; then
+    $(brew --prefix asdf)/asdf.sh
+fi
