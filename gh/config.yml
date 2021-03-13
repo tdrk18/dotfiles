@@ -8,4 +8,8 @@ prompt: enabled
 pager: !!null delta -s
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
+    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+    prv: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view "$id"'
+    prw: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view --web "$id"'
+    issuev: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
+    issuew: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view --web "$id"'
