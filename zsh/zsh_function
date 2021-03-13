@@ -292,6 +292,9 @@ function fzf-select-gh-subcommand(){
   local alias="$(gh alias list | awk -F ':' '{printf "%s",$1 " "}' )"
   command_list=("${command_list[@]}" "${alias[@]}")
   local sub_command="$(echo $command_list | sed -e 's/\ /\n/g' | fzf)"
+  if [ $sub_command -eq "" ]; then
+    return
+  fi
   LBUFFER="gh $sub_command"
   zle reset-prompt
 }
