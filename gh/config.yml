@@ -13,3 +13,5 @@ aliases:
     prw: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr view --web "$id"'
     issuev: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view "$id"'
     issuew: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view --web "$id"'
+    open: '!gh repo view'
+    openw: '!gh repo view -w'
