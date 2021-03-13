@@ -286,6 +286,17 @@ function fzf-select-docker-image-run(){
 }
 zle -N fzf-select-docker-image-run
 
+# gh サブコマンドを一覧から選択する
+function fzf-select-gh-subcommand(){
+  local command_list=("alias" "api" "auth" "completion" "config" "gist" "help" "issue" "pr" "release" "repo" "secret" "ssh-key")
+  local alias="$(gh alias list | awk -F ':' '{printf "%s",$1 " "}' )"
+  command_list=("${command_list[@]}" "${alias[@]}")
+  local sub_command="$(echo $command_list | sed -e 's/\ /\n/g' | fzf)"
+  LBUFFER="gh $sub_command"
+  zle reset-prompt
+}
+zle -N fzf-select-gh-subcommand
+
 # 最近使ったファイル一覧をfzfで見る
 function mru() {
     local -a f
