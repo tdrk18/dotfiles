@@ -6,7 +6,7 @@
 # Date Created  : 2016-03-07
 #---------------------------------#
 
-for folder in emacs latexmk tmux vim neovim zsh fonts git svn xcode homebrew anyenv ideavim asdf gh alacritty
+for folder in emacs latexmk tmux vim neovim zsh fonts git svn xcode homebrew anyenv ideavim asdf gh alacritty starship
 do
     cd $folder
     sh clean.sh
