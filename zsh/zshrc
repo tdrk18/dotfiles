@@ -182,3 +182,8 @@ fi
 if which asdf > /dev/null 2>&1; then
     . $(brew --prefix asdf)/asdf.sh
 fi
+
+# Starship https://starship.rs
+if which starship > /dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
