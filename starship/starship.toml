@@ -16,6 +16,10 @@ style = "bold red"
 threshold = 50
 style = "bold yellow"
 
+# Command Duration https://starship.rs/config/#command-duration
+[cmd_duration]
+min_time = 10_000
+
 # Directory https://starship.rs/config/#directory
 [directory]
 truncation_length = 3
