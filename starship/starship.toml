@@ -1,0 +1,52 @@
+# Prompt https://starship.rs/config/#prompt
+format = "$all$character"
+right_format = "$time"
+scan_timeout = 100
+
+# AWS https://starship.rs/config/#aws
+[aws]
+disabled = true
+
+# Battery https://starship.rs/config/#battery
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+[[battery.display]]
+threshold = 50
+style = "bold yellow"
+
+# Command Duration https://starship.rs/config/#command-duration
+[cmd_duration]
+min_time = 10_000
+
+# Directory https://starship.rs/config/#directory
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Google Cloud https://starship.rs/config/#google-cloud-gcloud
+[gcloud]
+disabled = true
+
+# Git https://starship.rs/config/#git-status
+[git_status]
+conflicted = "💥"
+ahead = "⏩"
+behind = "⏪"
+diverged = "🔥"
+up_to_date = "✨"
+untracked = "🆕"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "♻️"
+deleted = "🗑"
+
+# Time https://starship.rs/config/#git-status
+[time]
+disabled = false
+format = '[\[$time\]]($style) '
+time_format = "%T"
+style = "white"
+utc_time_offset = "+9"

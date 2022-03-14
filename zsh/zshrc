@@ -124,15 +124,6 @@ function mkcd() {
   fi
 }
 
-# プロンプトを2行で表示、時刻を表示
-PROMPT="%(?.%{${fg[green]}%}.%{${fg[red]}%})%(?!╭(๑˃̵ᴗ˂̵%)و!(｡>﹏<｡%))%{${reset_color}%}%{${bg[blue]}%}%{${fg[white]}%} %(6~,%-2~/.../%3~,%~) %{${reset_color}%}%{${fg[blue]}%}⮀%{${reset_color}%}
-[%h]-%(?.%{${fg[green]}%}.%{${fg[red]}%})$%{${reset_color}%} "
-
-# git設定
-if [ -e $HOME/.zsh_vcs ]; then
-    source $HOME/.zsh_vcs
-fi
-
 if [ -e $HOME/.zsh_function ]; then
     source $HOME/.zsh_function
 fi
@@ -181,4 +172,9 @@ fi
 # asdf
 if which asdf > /dev/null 2>&1; then
     . $(brew --prefix asdf)/asdf.sh
+fi
+
+# Starship https://starship.rs
+if which starship > /dev/null 2>&1; then
+    eval "$(starship init zsh)"
 fi
