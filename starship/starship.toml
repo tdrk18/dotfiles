@@ -1,7 +1,8 @@
 # Prompt https://starship.rs/config/#prompt
 format = "$all$character"
 right_format = "$time"
-scan_timeout = 100
+scan_timeout = 500
+command_timeout = 1_000
 
 # AWS https://starship.rs/config/#aws
 [aws]
