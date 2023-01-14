@@ -12,4 +12,5 @@ fi
 if [ -e $HOME/.config/gh/config.yml ]; then
     mv $HOME/.config/gh/config.yml $HOME/.config/gh/config.yml
 fi
+mkdir -p $HOME/.config/gh
 ln -s $DIR/config.yml $HOME/.config/gh/config.yml
