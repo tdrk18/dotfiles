@@ -171,10 +171,18 @@ fi
 
 # asdf
 if which asdf > /dev/null 2>&1; then
-    . $(brew --prefix asdf)/asdf.sh
+    . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 
 # Starship https://starship.rs
 if which starship > /dev/null 2>&1; then
     eval "$(starship init zsh)"
+fi
+
+# 1password
+eval "$(op completion zsh)"; compdef _op op
+
+# gh
+if which gh > /dev/null 2>&1; then
+    eval "$(gh completion -s zsh)"
 fi
