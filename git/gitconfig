@@ -47,6 +47,8 @@
 
 [includeIf "gitdir:~/ghq/github.com/mixi-minimo/"]
     path = ~/.gitconfig_mixi
+[includeIf "gitdir:~/ghq/github.com/maychannel-dev/"]
+    path = ~/.gitconfig_mixi
 [includeIf "gitdir:~/ghq/github.com/tdrk18/"]
     path = ~/.gitconfig_tdrk18
 
@@ -64,3 +66,11 @@
 [interactive]
     diffFilter = delta --color-only
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[gpg]
+	program = /usr/local/bin/gpg

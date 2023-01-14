@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 # 日本語を使用
 export LANG=ja_JP.UTF-8
 
@@ -171,10 +173,21 @@ fi
 
 # asdf
 if which asdf > /dev/null 2>&1; then
-    . $(brew --prefix asdf)/asdf.sh
+    . $(brew --prefix asdf)/libexec/asdf.sh
 fi
 
 # Starship https://starship.rs
 if which starship > /dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
+
+# 1password
+eval "$(op completion zsh)"; compdef _op op
+
+# gh
+if which gh > /dev/null 2>&1; then
+    eval "$(gh completion -s zsh)"
+fi
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
