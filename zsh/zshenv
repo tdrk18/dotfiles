@@ -6,8 +6,14 @@ fi
 case "${OSTYPE}" in
 darwin*)
     export LC_ALL='ja_JP.UTF-8'
-    # /usr/bin より /usr/local/bin を優先する
-    export PATH=/usr/local/bin:$PATH
+    # /usr/bin より homebrew を優先する
+    if [ "$(uname -m)" = "arm64" ]; then
+        export PATH=/opt/homebrew/bin:$PATH
+        eval $(/opt/homebrew/bin/brew shellenv)
+    else
+        export PATH=/usr/local/bin:$PATH
+        eval $(/usr/local/bin/brew shellenv)
+    fi
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
     ;;
 esac
