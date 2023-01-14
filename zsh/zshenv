@@ -24,47 +24,6 @@ else
     export EDITOR=vim
 fi
 
-# PATH
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/lib/sublime:$PATH"
-
-# PATHs for texLive
-export MANPATH=/usr/local/texlive/2014/texmf-dist/doc:$MANPATH
-export INFOPATH=/usr/local/texlive/2014/texmf-dist/doc/info:$INFOPATH
-export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
-
-# PATHs for gmp
-export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/gmp:$CPLUS_INCLUDE_PATH
-export CPATH=$HOME/lib/simpath/gmp:$CPATH
-export PATH=/usr/local/gmp/lib:$PATH
-export PATH=$HOME/lib/simpath/gmp:$PATH
-
-# PATHs for sgb
-export CPLUS_INCLUDE_PATH=$HOME/lib/simpath/sgb:$CPLUS_INCLUDE_PATH
-export CPATH=$HOME/lib/simpath/sgb:$CPATH
-
-# PATHs for cweb
-export PATH=$HOME/lib/simpath/cweb:$PATH
-
-# PATHs for learnlib
-export PYTHONPATH=$HOME/lib/learnlib:$PYTHONPATH
-
-# PATHs for CUDD
-export CPATH=$HOME/lib/pycudd/cudd-2.4.2/include:$CPATH
-export PYTHONPATH=$HOME/lib/pycudd/pycudd:$PYTHONPATH
-export PYTHONPATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$PYTHONPATH
-export LD_LIBRARY_PATH=$HOME/lib/pycudd/cudd-2.4.2/lib:$LD_LIBRARY_PATH
-
-# PATHs for nysol
-case "${OSTYPE}" in
-darwin*)
-    export RUBYLIB=/Library/Ruby/Gems/2.0.0/gems/nysol-2.0.1-universal-darwin/lib/nysol:$RUBYLIB
-    ;;
-linux*)
-    export RUBYLIB=$HOME/lib/nysol/nysol-2.0.0/gem/lib/nysol:$RUBYLIB
-    ;;
-esac
-
 # PATHs for go
 case "${OSTYPE}" in
 darwin*)
@@ -81,9 +40,6 @@ export PATH=$GOPATH/bin:$PATH
 # for direnv
 eval "$(direnv hook zsh)"
 
-# for thefuck
-eval $(thefuck --alias)
-
 # PATHs for git-icdiff
 export PATH=$HOME/lib/icdiff:$PATH
 
@@ -94,9 +50,6 @@ export PATH=$HOME/lib/git-ignore:$PATH
 export PATH=$PATH:~/Library/Android/sdk/platform-tools
 export PATH=$PATH:~/Library/Android/sdk/tools
 export ANDROID_HOME=~/Library/Android/sdk
-
-# for julia
-export PATH=$PATH:/Applications/Julia-0.4.6.app/Contents/Resources/julia/bin
 
 # for zsh-per-directory-history
 export PER_DIRECTORY_HISTORY_TOGGLE=^G^R
