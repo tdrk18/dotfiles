@@ -108,3 +108,4 @@ export PATH=$HOME/lib/flutter/bin:$PATH
 if [ -e $HOME/.zshenv_local ]; then
     source $HOME/.zshenv_local
 fi
+. "$HOME/.cargo/env"
