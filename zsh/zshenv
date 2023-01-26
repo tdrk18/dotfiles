@@ -58,7 +58,7 @@ export PER_DIRECTORY_HISTORY_TOGGLE=^G^R
 export PATH=$HOME/lib/flutter/bin:$PATH
 
 # for asdf
-export ASDF_DIR=$(brew --prefix asdf)/libexec/
+export ASDF_DIR=$(brew --prefix asdf)/libexec
 
 # for cargo
 . "$HOME/.cargo/env"
