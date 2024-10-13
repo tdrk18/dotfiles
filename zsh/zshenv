@@ -61,7 +61,9 @@ export PATH=$HOME/lib/flutter/bin:$PATH
 export ASDF_DIR=$(brew --prefix asdf)/libexec
 
 # for cargo
-. "$HOME/.cargo/env"
+if [ -e $HOME/.cargo/env ]; then
+    . "$HOME/.cargo/env"
+fi
 
 # for local envs
 if [ -e $HOME/.zshenv_local ]; then

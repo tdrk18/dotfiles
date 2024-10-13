@@ -1,117 +1,69 @@
-
-# tap repositories and their packages
-
-tap homebrew/core
-brew cairo
-brew direnv
-brew emojify
-brew fontconfig
-brew fontforge
-brew freetype
-brew fribidi
-brew fswatch
-brew fzf
-brew gdbm
-brew gettext
-brew ghq
-brew git
-brew glib
-brew go
-brew gradle
-brew graphite2
-brew harfbuzz
-brew htop
-brew hub
-brew icu4c
-brew jemalloc
-brew jpeg
-brew jq
-brew libevent
-brew libffi
-brew libidn2
-brew libpng
-brew libtermkey
-brew libtiff
-brew libtool
-brew libunistring
-brew libuv
-brew libvterm
-brew libyaml
-brew lua
-brew luajit
-brew mas
-brew maven
-brew msgpack
-brew neovim
-brew oniguruma
-brew openssl
-brew pango
-brew pcre
-brew peco
-brew perl
-brew pixman
-brew python
-brew python@2
-brew readline
-brew reattach-to-user-namespace
-brew rsync
-brew ruby
-brew sqlite
-brew swiftlint
-brew the_silver_searcher
-brew thefuck
-brew tig
-brew tmux
-brew unibilium
-brew vim --with-lua
-brew wget
-brew xz
-brew zsh-autosuggestions
-brew zsh-completions
-brew zsh-syntax-highlighting
-
-tap homebrew/cask-versions
-cask java8
-
-tap homebrew/cask
-cask alfred
-cask appcleaner
-cask docker
-cask firefox
-cask google-chrome
-cask iterm2
-cask vivaldi
-
-tap rcmdnk/file
-brew brew-file
-
-tap sanemat/font
-brew ricty --with-powerline
-
-tap shyiko/ktlint
-brew ktlint
-
-# Other Cask applications
-cask android-sdk
-cask discord
-cask dropbox
-cask gimp
-cask hyper
-cask slack
-cask zeplin
-
-# App Store applications
-appstore 905155357 Cybozu Desktop (2.1.1)
-appstore 682658836 GarageBand (10.3.1)
-appstore 668208984 GIPHY CAPTURE (4.0)
-appstore 408981434 iMovie (10.1.9)
-appstore 409183694 Keynote (8.1)
-appstore 539883307 LINE (5.9.3)
-appstore 409203825 Numbers (5.1)
-appstore 409201541 Pages (7.1)
-appstore 568494494 Pocket (1.7.9)
-appstore 931571202 QuickShade (1.2.2)
-appstore 425955336 Skitch (2.8.2)
-appstore 1278508951 Trello (2.10.7)
-appstore 557168941 Tweetbot (2.5.8)
-appstore 497799835 Xcode (9.4.1)
+tap "homebrew/bundle"
+brew "asdf"
+brew "direnv"
+brew "fzf"
+brew "gh"
+brew "ghq"
+brew "git"
+brew "jq"
+brew "mint"
+brew "neovim"
+brew "starship"
+brew "tig"
+brew "tmux"
+cask "1password"
+cask "1password-cli"
+cask "arc"
+cask "bettertouchtool"
+cask "brave-browser"
+cask "chatgpt"
+cask "discord"
+cask "font-jetbrains-mono"
+cask "google-chrome"
+cask "gpg-suite-no-mail"
+cask "httpie"
+cask "iterm2"
+cask "jetbrains-toolbox"
+cask "karabiner-elements"
+cask "notion"
+cask "notion-calendar"
+cask "raycast"
+cask "readdle-spark"
+cask "slack"
+cask "visual-studio-code"
+cask "xcodes"
+vscode "andrewleedham.vscode-css-modules"
+vscode "circleci.circleci"
+vscode "clinyong.vscode-css-modules"
+vscode "cocopon.iceberg-theme"
+vscode "dart-code.dart-code"
+vscode "dart-code.flutter"
+vscode "eamodio.gitlens"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.remotehub"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "golang.go"
+vscode "hridoy.rails-snippets"
+vscode "kaiwood.endwise"
+vscode "misogi.ruby-rubocop"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.vscode-remote-extensionpack"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vscode.remote-repositories"
+vscode "ms-vscode.remote-server"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "negokaz.zenn-editor"
+vscode "rebornix.ruby"
+vscode "rust-lang.rust-analyzer"
+vscode "shopify.ruby-extensions-pack"
+vscode "shopify.ruby-lsp"
+vscode "sianglim.slim"
+vscode "sporto.rails-go-to-spec"
+vscode "syler.sass-indented"
+vscode "vscode-icons-team.vscode-icons"
+vscode "vscodevim.vim"
+vscode "wingrunr21.vscode-ruby"
