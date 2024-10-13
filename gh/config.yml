@@ -15,3 +15,4 @@ aliases:
     issuew: '!id="$(gh issue list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh issue view --web "$id"'
     open: '!gh repo view'
     openw: '!gh repo view -w'
+version: "1"
