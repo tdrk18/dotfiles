@@ -11,8 +11,8 @@ fi
 
 # Brewfileを設置
 if [ -e $HOME/.config/brewfile/Brewfile ]; then
-    mv $HOME/.config/brewfile/Brewfile $HOME/.config/brewfile/Brewfile_old
+    mv $HOME/.Brewfile $HOME/.Brewfile_old
 fi
 mkdir -p $HOME/.config/brewfile
-ln -s $DIR/Brewfile $HOME/.config/brewfile/Brewfile
+ln -s $DIR/Brewfile $HOME/.Brewfile
 
