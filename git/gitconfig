@@ -62,6 +62,8 @@
     plus-style = syntax "#012800"
     minus-style = normal "#340001"
     syntax-theme = Monokai Extended
+    side-by-side = true
+    line-numbers = true
 
 [interactive]
     diffFilter = delta --color-only
