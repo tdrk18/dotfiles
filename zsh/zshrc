@@ -175,6 +175,8 @@ fi
 if which asdf > /dev/null 2>&1; then
     . $(brew --prefix asdf)/libexec/asdf.sh
 fi
+# mise
+eval "$(mise activate zsh)"
 
 # Starship https://starship.rs
 if which starship > /dev/null 2>&1; then
