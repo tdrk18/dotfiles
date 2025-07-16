@@ -24,19 +24,6 @@ else
     export EDITOR=vim
 fi
 
-# PATHs for go
-case "${OSTYPE}" in
-darwin*)
-    export GOROOT=/usr/local/go
-    export GOPATH=$HOME/workspace/go
-    ;;
-linux*)
-    export GOROOT=$HOME/lib/go
-    ;;
-esac
-export PATH=$GOROOT/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-
 # for direnv
 eval "$(direnv hook zsh)"
 
@@ -66,3 +53,5 @@ fi
 if [ -e $HOME/.zshenv_local ]; then
     source $HOME/.zshenv_local
 fi
+
+export PATH=$(mise where go)/bin:$PATH
