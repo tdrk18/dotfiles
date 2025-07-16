@@ -55,8 +55,6 @@ scriptencoding utf-8
 set encoding=utf-8
 "フォント
 set guifont=Ricty:h16
-"F12を押すとペーストモードに
-set pastetoggle=<F12>
 " 256色ターミナルに対応
 set t_Co=256
 "タブやインデントの設定
@@ -241,7 +239,6 @@ au BufNewFile,BufRead * match ZenkakuSpace /　/
 if &term =~ "xterm"
     let &t_ti .= "\e[?2004h"
     let &t_te .= "\e[?2004l"
-    let &pastetoggle = "\e[201~"
 
     function XTermPasteBegin(ret)
         set paste
