@@ -7,7 +7,6 @@ DIR=`cd $(dirname $0); pwd`
 if [ ! -e $HOME/.config/nvim ]; then
     mkdir -p $HOME/.config/nvim
 fi
-
 if [ -e $HOME/.config/nvim/init.lua ]; then
     mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua_old
 fi
