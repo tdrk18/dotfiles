@@ -17,6 +17,7 @@ return {
       wk.add({
         { "<leader>f", group = "Find" },
         { "<leader>l", group = "LSP" },
+        { "<leader>g", group = "Git" },
       })
     end
   },

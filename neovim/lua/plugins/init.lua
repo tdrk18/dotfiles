@@ -26,4 +26,6 @@ require("lazy").setup({
   require("plugins.lualine"),
   -- which-key
   require("plugins.which-key"),
+  -- gitsigns
+  require("plugins.gitsigns"),
 })
