@@ -40,3 +40,9 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" 
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", { desc = "References" })
 vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { desc = "Hover documentation" })
+
+vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<CR>",  { desc = "Git commits" })
+vim.keymap.set("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", { desc = "Buffer commits" })
+vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Git branches" })
+vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>",   { desc = "Git status" })
+vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<CR>",    { desc = "Git stash" })

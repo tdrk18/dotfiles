@@ -22,14 +22,11 @@ return {
         map("n", "[c", gs.prev_hunk, "Prev hunk")
 
         -- actions
-        map("n", "<leader>gs", gs.stage_hunk, "Stage hunk")
-        map("n", "<leader>gr", gs.reset_hunk, "Reset hunk")
-        map("n", "<leader>gS", gs.stage_buffer, "Stage buffer")
-        map("n", "<leader>gR", gs.reset_buffer, "Reset buffer")
-
-        map("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
-        map("n", "<leader>gn", gs.next_hunk, "Next hunk")
-        map("n", "<leader>gb", gs.blame_line, "Blame line")
+        map("n", "<leader>ghs", gs.stage_hunk, "Stage hunk")
+        map("n", "<leader>ghr", gs.reset_hunk, "Reset hunk")
+        map("n", "<leader>ghp", gs.preview_hunk, "Preview hunk")
+        map("n", "<leader>ghn", gs.next_hunk, "Next hunk")
+        map("n", "<leader>ghb", gs.blame_line, "Blame line")
       end,
     },
   },
