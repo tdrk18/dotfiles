@@ -22,4 +22,6 @@ require("lazy").setup({
   require("plugins.cmp"),
   -- telescope
   require("plugins.telescope"),
+  -- lualine
+  require("plugins.lualine"),
 })
