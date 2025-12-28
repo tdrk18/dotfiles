@@ -2,8 +2,8 @@ require("lazy").setup({
   -- colorscheme
   {
     "shaunsingh/nord.nvim",
-    priority = 1000,     -- 最初にロード
-    lazy = false,        -- 起動時に必ず有効
+    priority = 1000, -- 最初にロード
+    lazy = false,    -- 起動時に必ず有効
     config = function()
       vim.g.nord_contrast = true
       vim.g.nord_borders = true
@@ -18,4 +18,6 @@ require("lazy").setup({
   require("plugins.treesitter"),
   -- LSP
   require("plugins.lsp"),
+  -- Completion
+  require("plugins.cmp"),
 })

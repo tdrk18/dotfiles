@@ -61,10 +61,6 @@ return {
               { buffer = buf, desc = "Show hover documentation" })
           end
 
-          if client:supports_method("textDocument/completion") then
-            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-          end
-
           -- Auto-format ("lint") on save.
           -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
           if not client:supports_method("textDocument/willSaveWaitUntil")
@@ -77,25 +73,11 @@ return {
               end,
             })
           end
-
-          if client:supports_method("textDocument/inlineCompletion") then
-            vim.lsp.inline_completion.enable(true, { bufnr = buf })
-            vim.keymap.set("i", "<Tab>", function()
-              if not vim.lsp.inline_completion.get() then
-                return "<Tab>"
-              end
-              -- close the completion popup if it's open
-              if vim.fn.pumvisible() == 1 then
-                return "<C-e>"
-              end
-            end, {
-              expr = true,
-              buffer = buf,
-              desc = "Accept the current inline completion",
-            })
-          end
         end,
       })
+
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
       ---- Go
       vim.lsp.config("gopls", {
         settings = {
@@ -107,16 +89,23 @@ return {
             staticcheck = true,
           },
         },
+        capabilities = capabilities,
       })
 
       ---- Swift
-      vim.lsp.config("sourcekit", {})
+      vim.lsp.config("sourcekit", {
+        capabilities = capabilities,
+      })
 
       ---- Kotlin
-      vim.lsp.config("kotlin_language_server", {})
+      vim.lsp.config("kotlin_language_server", {
+        capabilities = capabilities,
+      })
 
       ---- Ruby
-      vim.lsp.config("ruby_lsp", {})
+      vim.lsp.config("ruby_lsp", {
+        capabilities = capabilities,
+      })
     end,
   },
 }
