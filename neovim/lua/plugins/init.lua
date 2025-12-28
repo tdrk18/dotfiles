@@ -16,4 +16,6 @@ require("lazy").setup({
 
   -- treesitter
   require("plugins.treesitter"),
+  -- LSP
+  require("plugins.lsp"),
 })

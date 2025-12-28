@@ -23,3 +23,9 @@ if [ -e $HOME/.config/nvim/lua/plugins ]; then
     mv $HOME/.config/nvim/lua/plugins $HOME/.config/nvim/lua/plugins_old
 fi
 ln -s $DIR/lua/plugins $HOME/.config/nvim/lua/plugins
+
+# After
+if [ -e $HOME/.config/nvim/after ]; then
+    mv $HOME/.config/nvim/after $HOME/.config/nvim/after_old
+fi
+ln -s $DIR/after $HOME/.config/nvim/after
