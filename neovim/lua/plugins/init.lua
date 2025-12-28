@@ -1,4 +1,5 @@
 require("lazy").setup({
+  -- colorscheme
   {
     "shaunsingh/nord.nvim",
     priority = 1000,     -- 最初にロード
@@ -12,4 +13,7 @@ require("lazy").setup({
       vim.cmd.colorscheme("nord")
     end,
   },
+
+  -- treesitter
+  require("plugins.treesitter"),
 })
