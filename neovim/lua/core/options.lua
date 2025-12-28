@@ -2,7 +2,7 @@ local opt = vim.opt
 
 -- 表示
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 opt.cursorline = true
 opt.signcolumn = "yes"
 
