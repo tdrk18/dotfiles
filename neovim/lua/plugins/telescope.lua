@@ -13,6 +13,12 @@ return {
         },
         sorting_strategy = "ascending",
         winblend = 10,
+        mappings = {
+          i = {
+            ["<C-j>"] = "move_selection_next",
+            ["<C-k>"] = "move_selection_previous",
+          },
+        },
       },
       pickers = {
         find_files = {
