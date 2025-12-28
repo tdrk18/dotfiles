@@ -24,4 +24,6 @@ require("lazy").setup({
   require("plugins.telescope"),
   -- lualine
   require("plugins.lualine"),
+  -- which-key
+  require("plugins.which-key"),
 })
