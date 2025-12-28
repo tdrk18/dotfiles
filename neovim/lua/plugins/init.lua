@@ -20,4 +20,6 @@ require("lazy").setup({
   require("plugins.lsp"),
   -- Completion
   require("plugins.cmp"),
+  -- telescope
+  require("plugins.telescope"),
 })
