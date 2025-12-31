@@ -31,6 +31,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       vim.lsp.enable({
