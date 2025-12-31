@@ -32,8 +32,7 @@ vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action
 vim.keymap.set("n", "<leader>lf", function()
   vim.lsp.buf.format({ async = true })
 end, { desc = "Format buffer" })
-vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-vim.keymap.set("n", "<leader>lD", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Buffer diagnostics" })
+vim.keymap.set("n", "<leader>lD", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
