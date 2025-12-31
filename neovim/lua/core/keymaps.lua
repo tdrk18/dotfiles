@@ -8,6 +8,11 @@ vim.g.maplocalleader = " "
 -- ノーマルモード
 keymap("n", "<leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Write" })
 keymap("n", "<leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })
+keymap("n", "<Esc><Esc>", ":nohlsearch<CR>", opts)
+keymap("n", "tc", ":tablast <bar> tabnew<CR>", opts)
+keymap("n", "tx", ":tabclose<CR>", opts)
+keymap("n", "tn", ":tabnext<CR>", opts)
+keymap("n", "tp", ":tabprevious<CR>", opts)
 
 -- 行移動
 keymap("n", "j", "gj", opts)

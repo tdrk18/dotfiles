@@ -30,4 +30,4 @@ opt.clipboard = "unnamedplus"
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
-
+opt.autoread = true
