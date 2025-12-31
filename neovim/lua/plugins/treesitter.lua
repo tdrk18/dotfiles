@@ -1,4 +1,4 @@
-local treesitter_path = vim.fs.joinpath(vim.fn.stdpath("data"), "/treesitter")
+local treesitter_path = vim.fs.joinpath(vim.fn.stdpath("data"), "treesitter")
 
 return {
   "nvim-treesitter/nvim-treesitter",
