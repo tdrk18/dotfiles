@@ -7,7 +7,6 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- LSP 補完
       "hrsh7th/cmp-buffer",   -- buffer 補完
       "hrsh7th/cmp-path",     -- path 補完
-      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local cmp = require("cmp")
