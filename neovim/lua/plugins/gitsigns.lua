@@ -25,7 +25,6 @@ return {
         map("n", "<leader>ghs", gs.stage_hunk, "Stage hunk")
         map("n", "<leader>ghr", gs.reset_hunk, "Reset hunk")
         map("n", "<leader>ghp", gs.preview_hunk, "Preview hunk")
-        map("n", "<leader>ghn", gs.next_hunk, "Next hunk")
         map("n", "<leader>ghb", gs.blame_line, "Blame line")
       end,
     },
