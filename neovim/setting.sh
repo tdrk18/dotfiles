@@ -4,37 +4,28 @@
 DIR=`cd $(dirname $0); pwd`
 
 # neovimの設定ファイルを置く場所を作成
-if [ ! -e $HOME/.config/nvim ]; then
-    mkdir -p $HOME/.config/nvim
+if [ ! -e $HOME/.config/nvim/lua ]; then
+    mkdir -p $HOME/.config/nvim/lua
 fi
+if [ -e $HOME/.config/nvim/init.lua ]; then
+    rm -rf $HOME/.config/nvim/init.lua
+fi
+ln -s $DIR/init.lua $HOME/.config/nvim/init.lua
 
-# init.vim, dein.toml, dein_lazy.tomlのシンボリックリンクを作成
-if [ -e $HOME/.config/nvim/init.vim ]; then
-    mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim_old
+# Core
+if [ -e $HOME/.config/nvim/lua/core ]; then
+    rm -rf $HOME/.config/nvim/lua/core
 fi
-if [ -e $HOME/.config/nvim/dein.toml ]; then
-    mv $HOME/.config/nvim/dein.toml $HOME/.config/nvim/dein.toml_old
-fi
-if [ -e $HOME/.config/nvim/dein_lazy.toml ]; then
-    mv $HOME/.config/nvim/dein_lazy.toml $HOME/.config/nvim/dein_lazy.toml_old
-fi
-ln -s $DIR/init.vim $HOME/.config/nvim/init.vim
-ln -s $DIR/dein.toml $HOME/.config/nvim/dein.toml
-ln -s $DIR/dein_lazy.toml $HOME/.config/nvim/dein_lazy.toml
+ln -s $DIR/lua/core $HOME/.config/nvim/lua/core
 
-# インデント設定のシンボリックリンクを作成
-if [ -e $DIR/../vim/indent ]; then
-    if [ -e $HOME/.config/nvim/indent ]; then
-        mv $HOME/.config/nvim/indent $HOME/.config/nvim/indent_old
-    fi
-    ln -s $DIR/../vim/indent $HOME/.config/nvim/indent
+# Plugins
+if [ -e $HOME/.config/nvim/lua/plugins ]; then
+    rm -rf $HOME/.config/nvim/lua/plugins
 fi
+ln -s $DIR/lua/plugins $HOME/.config/nvim/lua/plugins
 
-# テンプレート設定のシンボリックリンクを作成
-if [ -e $DIR/../vim/template ]; then
-    if [ -e $HOME/.config/nvim/template ]; then
-        mv $HOME/.config/nvim/template $HOME/.config/nvim/template_old
-    fi
-    ln -s $DIR/../vim/template $HOME/.config/nvim/template
+# After
+if [ -e $HOME/.config/nvim/after ]; then
+    rm -rf $HOME/.config/nvim/after
 fi
-
+ln -s $DIR/after $HOME/.config/nvim/after
