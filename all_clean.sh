@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for folder in emacs latexmk tmux vim neovim zsh fonts git svn xcode homebrew anyenv ideavim asdf gh alacritty starship rust mise
+for folder in tmux vim neovim zsh fonts git xcode homebrew ideavim gh starship rust mise
 do
     cd $folder
     sh clean.sh
