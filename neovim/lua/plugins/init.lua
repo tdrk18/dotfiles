@@ -28,4 +28,6 @@ require("lazy").setup({
   require("plugins.which-key"),
   -- gitsigns
   require("plugins.gitsigns"),
+  -- nvim-tree
+  require("plugins.nvim-tree"),
 })
