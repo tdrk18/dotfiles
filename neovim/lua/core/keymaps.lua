@@ -50,3 +50,6 @@ vim.keymap.set("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", { desc = "B
 vim.keymap.set("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Git branches" })
 vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>",   { desc = "Git status" })
 vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<CR>",    { desc = "Git stash" })
+
+-- nvim-tree
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
