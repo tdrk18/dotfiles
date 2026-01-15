@@ -1,7 +1,7 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    event = "VeryLazy",
+
     version = "*",
     lazy = false,
     dependencies = {
@@ -9,7 +9,7 @@ return {
     },
     config = function()
       require("nvim-tree").setup({
-        sort_by = 'case_sensitive',
+        sort_by = "case_sensitive",
         view = {
           adaptive_size = true,
         },

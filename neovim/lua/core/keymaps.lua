@@ -52,4 +52,4 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<CR>",   { desc = "G
 vim.keymap.set("n", "<leader>gS", "<cmd>Telescope git_stash<CR>",    { desc = "Git stash" })
 
 -- nvim-tree
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true, desc = "Toggle file tree" })
