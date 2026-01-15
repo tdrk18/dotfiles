@@ -32,4 +32,6 @@ require("lazy").setup({
   require("plugins.nvim-tree"),
   -- nvim-autopairs
   require("plugins.autopairs"),
+  -- hlchunk
+  require("plugins.hlchunk"),
 })
