@@ -30,4 +30,6 @@ require("lazy").setup({
   require("plugins.gitsigns"),
   -- nvim-tree
   require("plugins.nvim-tree"),
+  -- nvim-autopairs
+  require("plugins.autopairs"),
 })
