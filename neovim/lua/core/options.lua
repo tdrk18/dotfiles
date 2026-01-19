@@ -5,6 +5,7 @@ opt.number = true
 opt.relativenumber = false
 opt.cursorline = true
 opt.signcolumn = "yes"
+opt.wrap = true
 
 -- インデント
 opt.tabstop = 2
