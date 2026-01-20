@@ -187,5 +187,10 @@ if which gh > /dev/null 2>&1; then
     eval "$(gh completion -s zsh)"
 fi
 
+# gwq
+if which gwq > /dev/null 2>&1; then
+    source <(gwq completion zsh)
+fi
+
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
