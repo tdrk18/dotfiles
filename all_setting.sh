@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for folder in tmux vim neovim zsh fonts git homebrew ideavim gh starship rust mise
+for folder in tmux vim neovim zsh fonts git homebrew ideavim gh starship rust mise ghostty
 do
     cd $folder
     sh setting.sh
