@@ -2,6 +2,7 @@
 
 quit-after-last-window-closed = true
 window-new-tab-position = end
+background-opacity = 1.0
 theme = Nord
 background = #2e3440
 foreground = #d8dee9
