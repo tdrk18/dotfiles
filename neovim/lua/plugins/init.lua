@@ -1,6 +1,6 @@
 require("lazy").setup({
   -- colorscheme
-  require("plugins.nord"),
+  require("plugins.catppuccin"),
   -- treesitter
   require("plugins.treesitter"),
   -- LSP

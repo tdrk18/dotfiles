@@ -7,7 +7,7 @@ return {
     },
     opts = {
       options = {
-        theme = "nord",
+        theme = "auto",
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
         globalstatus = true, -- 画面下に一本だけ表示
