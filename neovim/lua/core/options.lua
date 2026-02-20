@@ -19,7 +19,6 @@ opt.smartcase = true
 opt.incsearch = true
 
 -- 編集体験
-opt.wrap = false
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.mouse = "a"
