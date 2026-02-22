@@ -9,3 +9,8 @@ fi
 if [ -e $HOME/.claude/scripts ]; then
     rm -rf $HOME/.claude/scripts
 fi
+
+# settings.jsonを削除
+if [ -e $HOME/.claude/settings.json ]; then
+    rm -rf $HOME/.claude/settings.json
+fi

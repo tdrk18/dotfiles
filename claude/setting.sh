@@ -9,3 +9,7 @@ ln -s $DIR/CLAUDE.md $HOME/.claude/CLAUDE.md
 # scriptsを設置
 rm -rf $HOME/.claude/scripts
 ln -s $DIR/scripts $HOME/.claude/scripts
+
+# settings.jsonを設置
+rm -rf $HOME/.claude/settings.json
+ln -s $DIR/settings.json $HOME/.claude/settings.json
