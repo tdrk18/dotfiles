@@ -32,5 +32,27 @@
     "ask": [
       "Bash(git commit:*)"
     ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-stop.sh"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify-permission-request.sh"
+          }
+        ]
+      }
+    ]
   }
 }
