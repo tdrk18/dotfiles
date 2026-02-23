@@ -53,6 +53,17 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/logger-command.sh"
+          }
+        ]
+      }
     ]
   }
 }
