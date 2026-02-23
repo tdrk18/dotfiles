@@ -9,6 +9,8 @@ ln -s $DIR/CLAUDE.md $HOME/.claude/CLAUDE.md
 # scriptsを設置
 rm -rf $HOME/.claude/scripts
 ln -s $DIR/scripts $HOME/.claude/scripts
+# logging用にディレクトリを作成
+mkdir -p ~/.claude/log
 
 # settings.jsonを設置
 rm -rf $HOME/.claude/settings.json
