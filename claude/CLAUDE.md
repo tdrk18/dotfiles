@@ -18,6 +18,8 @@ Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 
 **IMPORTANT**: Always check your system information to determine the actual model you are running on, and use that exact model name (e.g., "Claude Sonnet 4.6", "Claude Opus 4.6", etc.).
 
+Commit messages must include a description of what was done and why — not just a short title.
+
 ## Clarify Before Implementing
 
 When there are unknowns or ambiguities, do not proceed with implementation unilaterally. Always ask the user for clarification first, especially in these cases:
