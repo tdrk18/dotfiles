@@ -15,3 +15,7 @@ mkdir -p ~/.claude/log
 # settings.jsonを設置
 rm -rf $HOME/.claude/settings.json
 ln -s $DIR/settings.json $HOME/.claude/settings.json
+
+# skillsを設置
+rm -rf $HOME/.claude/skills
+ln -s $DIR/skills $HOME/.claude/skills

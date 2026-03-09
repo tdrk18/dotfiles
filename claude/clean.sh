@@ -14,3 +14,8 @@ fi
 if [ -e $HOME/.claude/settings.json ]; then
     rm -rf $HOME/.claude/settings.json
 fi
+
+# skillsを削除
+if [ -e $HOME/.claude/skills ]; then
+    rm -rf $HOME/.claude/skills
+fi
