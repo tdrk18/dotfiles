@@ -16,6 +16,7 @@
       "Bash(git add:*)",
       "Bash(git branch:*)",
       "Bash(git diff:*)",
+      "Bash(git status:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr diff:*)",
       "Bash(gh pr checks:*)",
