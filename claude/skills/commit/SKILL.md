@@ -24,18 +24,16 @@ description: Creates a git commit. Use this skill when the user asks to commit, 
    - Body explaining what was done and why
    - Co-Authored-By trailer with the current model name
 
-3. **Show the proposed commit message to the user and ask for confirmation before proceeding.**
-
-4. After confirmation, stage the relevant files and run:
+3. After confirmation, stage the relevant files and run:
    ```
    git commit -m "$(cat <<'EOF'
    <title>
 
    <body>
 
-   Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+   Co-Authored-By: <current model name, e.g. "Claude Sonnet 4.6"> <noreply@anthropic.com>
    EOF
    )"
    ```
 
-5. Run `git status` to confirm the commit succeeded.
+4. Run `git status` to confirm the commit succeeded.
