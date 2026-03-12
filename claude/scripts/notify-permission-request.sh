@@ -1,5 +1,7 @@
 #!/bin/bash
 
+command -v terminal-notifier &>/dev/null || exit 0
+
 INPUT=$(cat)
 
 TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name')
