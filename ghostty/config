@@ -26,6 +26,6 @@ palette = 12=#81a1c1
 palette = 13=#b48ead
 palette = 14=#8fbcbb
 palette = 15=#eceff4
-font-family = JetBranin Mono
+font-family = JetBrains Mono
 click-repeat-interval = 1
 copy-on-select = true
