@@ -43,8 +43,7 @@ description: Creates a GitHub Pull Request. Use this skill when the user asks to
 4. Analyze the changes across all commits and draft:
    - **Title**: Short, imperative mood. If `<task-id>` is provided, prefix it: `[<task-id>] <title>`. The entire title including the prefix must be under 70 characters.
    - **Body**:
-     - If a PR template was found: use it as the skeleton and fill in each section based on the changes.
-       After filling in what can be inferred from the code, identify any sections that cannot be filled automatically (e.g., motivation/background, related issues, migration steps, manual choices). Do NOT ask about screenshot sections — leave them blank for the user to fill in later. Use the AskUserQuestion tool to ask the user for those missing pieces before finalizing the body.
+     - If a PR template was found: use the template content as-is as the base. Fill in sections where content can be inferred from the code changes. Leave all other sections (e.g., screenshots, empty checkboxes) exactly as they appear in the template — do not remove or skip any section. Preserve all comments (`<!-- ... -->`) in the template verbatim. After filling in what can be inferred from the code, identify any sections that require user input (e.g., motivation/background, related issues, migration steps, manual choices) and use the AskUserQuestion tool to ask the user for those missing pieces before finalizing the body.
      - If no template was found: use this default format:
        ```
        ## Summary
