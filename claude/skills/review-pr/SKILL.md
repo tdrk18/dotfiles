@@ -10,6 +10,7 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 - Never post comments to the PR unless explicitly requested by the user.
 - Always display results in the terminal.
 - Focus on code quality, potential bugs, and test coverage.
+- Always restore the original branch after checking out a PR.
 
 ## Steps
 
@@ -23,9 +24,25 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 
    - `gh pr view <pr-number> --json title,body,baseRefName,headRefName,author,additions,deletions,changedFiles`
    - `gh pr diff <pr-number>` to get the full diff
-   - `gh pr view <pr-number> --json files -q '.files[].path'` to list changed files
+   - `git branch --show-current` to record the current branch so it can be restored later
+   - `which codex` to check if Codex CLI is available (exit code 0 = available)
 
-3. **Analyze the PR** across three dimensions:
+3. **Run Codex review** _(only if `codex` is available)_
+
+   Check out the PR locally and run `codex review`, then restore the original branch:
+
+   ```
+   gh pr checkout <pr-number>
+   codex review --base <baseRefName> "Review this PR focusing on: (1) code quality — readability, naming, unnecessary complexity, duplication; (2) potential bugs — unhandled edge cases, error handling, incorrect assumptions; (3) test coverage — missing tests, untested edge cases, meaningless assertions. Be specific with file and line references."
+   git checkout <original-branch>
+   ```
+
+   Capture the full output of `codex review` as **Codex findings**.
+   If `codex` is not available, skip this step entirely and proceed with Claude-only review.
+
+4. **Run Claude review**
+
+   Independently analyze the diff obtained in step 2 across the same three dimensions:
 
    ### Code Quality
    - Readability: are names, structure, and logic clear?
@@ -46,7 +63,13 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
    - Do existing tests still make sense after the change?
    - Are tests meaningful (not just asserting trivially true things)?
 
-4. **Output the review** in this format:
+5. **Consolidate and output**
+
+   **If Codex was run**: merge both sets of findings. Group by review dimension, noting which reviewer raised each point. If both reviewers flag the same issue, merge it into one item and note that both agree.
+
+   **If Codex was not run**: output Claude findings only, without reviewer labels.
+
+   Output format when both reviewers are available:
 
    ```
    # PR Review: #<pr-number> — <title>
@@ -56,22 +79,81 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 
    ---
 
-   ## Critical Issues (must fix)
-   - <file>:<line> — <description>
+   ## Code Quality
 
-   ## Important Issues (should fix)
-   - <file>:<line> — <description>
+   ### Critical
+   - [Both] <file>:<line> — <description>
+   - [Claude] <file>:<line> — <description>
+   - [Codex] <file>:<line> — <description>
 
-   ## Suggestions (nice to have)
+   ### Suggestions
+   - [Claude] <description>
+   - [Codex] <description>
+
+   ---
+
+   ## Potential Bugs
+
+   ### Critical
+   - ...
+
+   ### Suggestions
+   - ...
+
+   ---
+
+   ## Test Coverage
+
+   ### Critical
+   - ...
+
+   ### Suggestions
+   - ...
+
+   ---
+
+   ## Strengths
+   - <what is done well, from either reviewer>
+
+   ---
+   **Overall**: <one-sentence summary of PR quality and readiness, based on both reviews>
+   ```
+
+   Output format when only Claude reviewed:
+
+   ```
+   # PR Review: #<pr-number> — <title>
+
+   **Author**: <author>
+   **Changes**: +<additions> / -<deletions> across <changedFiles> files
+
+   ---
+
+   ## Code Quality
+   ### Critical
    - <file>:<line> — <description>
+   ### Suggestions
+   - <description>
+
+   ## Potential Bugs
+   ### Critical
+   - ...
+   ### Suggestions
+   - ...
+
+   ## Test Coverage
+   ### Critical
+   - ...
+   ### Suggestions
+   - ...
 
    ## Strengths
    - <what is done well>
 
    ---
-   **Overall**: <one-sentence summary of the PR quality and readiness>
+   **Overall**: <one-sentence summary>
    ```
 
-   - If there are no items in a section, omit that section entirely.
+   - Omit any sub-section that has no items.
    - Always include at least one item in "Strengths" if the code has any positive aspects.
    - Reference specific file paths and line numbers wherever possible.
