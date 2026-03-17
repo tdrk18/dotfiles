@@ -27,22 +27,23 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
    - `git branch --show-current` to record the current branch so it can be restored later
    - `which codex` to check if Codex CLI is available (exit code 0 = available)
 
-3. **Run Codex review** _(only if `codex` is available)_
+3. **Run reviews in parallel**
 
-   Check out the PR locally and run `codex review`, then restore the original branch:
+   Launch both reviewers at the same time using the Task tool:
 
+   **Claude review task**: Analyze the diff obtained in step 2 across the three dimensions below. Store results as **Claude findings**.
+
+   **Codex review task** _(only if `codex` is available)_: Run the following as a background Bash task, then capture the output as **Codex findings**:
    ```
-   gh pr checkout <pr-number>
-   codex review --base <baseRefName> "Review this PR focusing on: (1) code quality — readability, naming, unnecessary complexity, duplication; (2) potential bugs — unhandled edge cases, error handling, incorrect assumptions; (3) test coverage — missing tests, untested edge cases, meaningless assertions. Be specific with file and line references."
+   gh pr checkout <pr-number> && \
+   codex review "Review the changes in this branch against <baseRefName>. Focus on: (1) code quality — readability, naming, unnecessary complexity, duplication; (2) potential bugs — unhandled edge cases, error handling, incorrect assumptions; (3) test coverage — missing tests, untested edge cases, meaningless assertions. Be specific with file and line references." && \
    git checkout <original-branch>
    ```
+   Note: `codex review` does not support `--base <branch>` and `[PROMPT]` simultaneously, so the base branch is specified in the prompt text instead.
 
-   Capture the full output of `codex review` as **Codex findings**.
-   If `codex` is not available, skip this step entirely and proceed with Claude-only review.
+   If `codex` is not available, only run the Claude review task.
 
-4. **Run Claude review**
-
-   Independently analyze the diff obtained in step 2 across the same three dimensions:
+   Claude review dimensions:
 
    ### Code Quality
    - Readability: are names, structure, and logic clear?
