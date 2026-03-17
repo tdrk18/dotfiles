@@ -51,8 +51,6 @@ description: Creates a GitHub Pull Request. Use this skill when the user asks to
 
        ## Test plan
        - <checklist of how to verify the changes>
-
-       🤖 Generated with [Claude Code](https://claude.com/claude-code)
        ```
 
 5. If the branch has no upstream, push it:
