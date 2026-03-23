@@ -108,20 +108,39 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
   fi
 fi
 
+pct_color() {
+  local pct_int=${1%.*}
+  if [ "$pct_int" -gt 70 ]; then
+    echo "\033[38;5;196m"
+  elif [ "$pct_int" -gt 40 ]; then
+    echo "\033[38;5;220m"
+  else
+    echo ""
+  fi
+}
+
 PERCENT=$(echo "$input" | jq -r '.context_window.used_percentage // 0')
-# Convert to integer for comparison (remove decimal point)
 PERCENT_INT=${PERCENT%.*}
-if [ -z "$PERCENT_INT" ]; then
-  PERCENT_INT=0
-fi
+[ -z "$PERCENT_INT" ] && PERCENT_INT=0
+CTX_COLOR=$(pct_color "$PERCENT_INT")
 
-if [ "$PERCENT_INT" -gt 70 ]; then
-  COLOR="\033[38;5;196m"
-elif [ "$PERCENT_INT" -gt 40 ]; then
-  COLOR="\033[38;5;220m"
-else
-   COLOR=""
-fi
+FIVE_HOUR=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+SEVEN_DAY=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
-printf '[%s] 📁 %s%b | Context: %b%.1f%%\033[0m\n' "$MODEL" "$REL_DIR" "$GIT_BRANCH" "$COLOR" "$PERCENT"
+printf '[%s] 📁 %s%b | Context: %b%.1f%%\033[0m' "$MODEL" "$REL_DIR" "$GIT_BRANCH" "$CTX_COLOR" "$PERCENT"
+
+if [ -n "$FIVE_HOUR" ] || [ -n "$SEVEN_DAY" ]; then
+  RATE_LIMIT_STR=""
+  if [ -n "$FIVE_HOUR" ]; then
+    FH_COLOR=$(pct_color "${FIVE_HOUR%.*}")
+    RATE_LIMIT_STR=$(printf '5h: %b%.1f%%\033[0m' "$FH_COLOR" "$FIVE_HOUR")
+  fi
+  if [ -n "$SEVEN_DAY" ]; then
+    SD_COLOR=$(pct_color "${SEVEN_DAY%.*}")
+    [ -n "$RATE_LIMIT_STR" ] && RATE_LIMIT_STR="${RATE_LIMIT_STR} | "
+    RATE_LIMIT_STR="${RATE_LIMIT_STR}$(printf '7d: %b%.1f%%\033[0m' "$SD_COLOR" "$SEVEN_DAY")"
+  fi
+  printf '\n%s' "$RATE_LIMIT_STR"
+fi
+printf '\n'
 
