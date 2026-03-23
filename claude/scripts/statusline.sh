@@ -115,7 +115,7 @@ pct_color() {
     echo "\033[38;5;196m"
   elif [ "$pct_int" -gt 40 ]; then
     echo "\033[38;5;220m"
-  elif [ "$low" = "green" ]; then
+  elif [ "$low" = "green" ] && [ "$pct_int" -ge 25 ]; then
     echo "\033[38;5;82m"
   else
     echo "\033[38;5;244m"
