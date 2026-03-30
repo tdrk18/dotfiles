@@ -21,7 +21,7 @@ description: Creates a GitHub Pull Request. Use this skill when the user asks to
    - **Base branch**: use value from conversation, or ask "どのブランチをベースにしますか？（指定がなければデフォルトブランチを使います）". If not specified, run `gh repo view --json defaultBranchRef -q .defaultBranchRef.name`.
    - **Task ID**: use value from conversation, or ask "タスク ID はありますか？（なければスキップ）". Store as `<task-id>`, or leave empty.
    - **Draft**: use value from conversation, or ask "Draft PR として作成しますか？（yes/no）". Add `--draft` if yes.
-   - **Assignee**: use value from conversation, or ask "Assignee を指定しますか？（GitHub username、なければスキップ）". Add `--assignee <assignee>` if provided.
+   - **Assignee**: use value from conversation, or ask "Assignee を指定しますか？（自分にする場合は「自分」、GitHub username、なければスキップ）". If the user says "自分" or equivalent (e.g., "me", "myself", "自分"), run `gh api user --jq .login` to get the authenticated GitHub username and use that. Add `--assignee <assignee>` if provided.
 
 2. Run the following in parallel, then check for uncommitted changes:
    - `git status` to check for uncommitted changes
