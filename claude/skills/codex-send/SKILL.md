@@ -9,8 +9,8 @@ description: Send an instruction to Codex running in a tmux pane. Use this skill
 - Always auto-detect the Codex pane from tmux. Never ask the user for the pane ID.
 - Use `-l` flag with `tmux send-keys` to send text as literal characters.
 - Always insert `sleep 0.5` between sending the text and sending Enter.
-- Send one message at a time. If multiple messages are requested, send them sequentially and wait for the user to confirm completion before sending the next one.
-- Never assume Codex has completed its work — just send the message and inform the user it was sent.
+- Send one message at a time. If multiple messages are requested, send them sequentially — wait for completion detection before sending the next one.
+- Always append the completion notification instruction to the message before sending.
 
 ## Steps
 
@@ -49,15 +49,43 @@ description: Send an instruction to Codex running in a tmux pane. Use this skill
 
    Inform the user: "Codex が起動していなかったため、新しい pane で起動しました。"
 
-3. **Send the message**
+3. **Generate a unique marker ID**
 
-   Run the following two commands:
+   Generate a unique ID using the current timestamp:
    ```
-   tmux send-keys -t <pane-id> -l "<message>"
+   MARKER_ID=$(date +%s)
+   MARKER_FILE="/tmp/codex_done_${MARKER_ID}"
+   ```
+
+4. **Send the message**
+
+   Append the following to the user's message before sending:
+   > 「作業が完了したら `touch /tmp/codex_done_<MARKER_ID>` を実行してください。」
+
+   Then send:
+   ```
+   tmux send-keys -t <pane-id> -l "<message>\n作業が完了したら `touch /tmp/codex_done_<MARKER_ID>` を実行してください。"
    sleep 0.5
    tmux send-keys -t <pane-id> Enter
    ```
 
-4. **Confirm to the user**
+5. **Wait for completion**
 
-   Tell the user the message was sent, and wait for them to confirm that Codex has finished before sending the next message (if multiple were requested).
+   Poll for the specific marker file every 3 seconds, with a timeout of 5 minutes:
+   ```bash
+   for i in $(seq 1 100); do
+     if [ -f "$MARKER_FILE" ]; then
+       rm -f "$MARKER_FILE"
+       echo "done"
+       break
+     fi
+     sleep 3
+   done
+   ```
+
+   - If the file appears: inform the user "✅ Codex が完了しました。" and proceed to the next message if any.
+   - If the timeout is reached (100 × 3s = 5 minutes): inform the user "⏱️ タイムアウトしました。Codex がまだ作業中の可能性があります。" and stop polling.
+
+6. **Confirm to the user**
+
+   Tell the user the result and, if multiple messages were queued, send the next one.
