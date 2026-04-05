@@ -21,11 +21,35 @@ description: Send an instruction to Codex running in a tmux pane. Use this skill
    tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}"
    ```
 
-   Find the pane whose `pane_current_command` contains `codex`. Use that pane ID (e.g., `0:3.2`).
+   - If the command fails (non-zero exit code), inform the user: "tmux が起動していないようです。" and stop.
+   - If the command succeeds but no pane's `pane_current_command` contains `codex`, proceed to step 2 to launch Codex in a new pane.
+   - Otherwise, use the matched pane ID (e.g., `0:3.2`) and skip to step 3.
 
-   If no Codex pane is found, inform the user: "Codex が動いている tmux pane が見つかりませんでした。"
+2. **Launch Codex in a new pane** _(only if no Codex pane was found)_
 
-2. **Send the message**
+   Run the following to split the current window and start Codex:
+   ```
+   tmux split-window -h -t {current}
+   ```
+
+   Then get the new pane's ID:
+   ```
+   tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}" | tail -1
+   ```
+
+   Start Codex in that pane:
+   ```
+   tmux send-keys -t <new-pane-id> "codex" Enter
+   ```
+
+   Wait for Codex to start up:
+   ```
+   sleep 3
+   ```
+
+   Inform the user: "Codex が起動していなかったため、新しい pane で起動しました。"
+
+3. **Send the message**
 
    Run the following two commands:
    ```
@@ -34,6 +58,6 @@ description: Send an instruction to Codex running in a tmux pane. Use this skill
    tmux send-keys -t <pane-id> Enter
    ```
 
-3. **Confirm to the user**
+4. **Confirm to the user**
 
    Tell the user the message was sent, and wait for them to confirm that Codex has finished before sending the next message (if multiple were requested).
