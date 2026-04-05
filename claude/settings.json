@@ -2,12 +2,6 @@
   "env": {
     "CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD": "1"
   },
-  "model": "sonnet",
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/scripts/statusline.sh"
-  },
-  "effortLevel": "medium",
   "permissions": {
     "allow": [
       "Bash(ls:*)",
@@ -25,7 +19,14 @@
       "Bash(xcrun simctl io:*)",
       "Bash(xcrun simctl boot:*)",
       "Bash(xcodebuild test:*)",
-      "Bash(./gradlew ktlintFormat:*)"
+      "Bash(./gradlew ktlintFormat:*)",
+      "Bash(tmux list-panes:*)",
+      "Bash(tmux send-keys:*)",
+      "Bash(tmux split-window:*)",
+      "Bash(rm -f /tmp/codex_done_*:*)",
+      "Bash(date:*)",
+      "Bash(sleep:*)",
+      "Bash(seq:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)"
@@ -34,6 +35,7 @@
       "Bash(git commit:*)"
     ]
   },
+  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -66,5 +68,21 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/statusline.sh"
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "codex@openai-codex": true
   }
 }
