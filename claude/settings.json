@@ -20,16 +20,8 @@
       "Bash(xcrun simctl boot:*)",
       "Bash(xcodebuild test:*)",
       "Bash(./gradlew ktlintFormat:*)",
-      "Bash(tmux list-panes:*)",
-      "Bash(tmux send-keys:*)",
-      "Bash(tmux split-window:*)",
-      "Bash(rm -f /tmp/codex_done_*:*)",
-      "Bash(rm -f /tmp/codex_review_*:*)",
-      "Bash(cat:*)",
-      "Bash(date:*)",
-      "Bash(sleep:*)",
-      "Bash(seq:*)",
-      "Bash(~/.claude/scripts/codex-send.sh:*)"
+      "Bash(~/.claude/scripts/codex-send.sh:*)",
+      "Bash(~/.claude/scripts/codex-review.sh:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)"
