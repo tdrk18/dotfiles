@@ -25,7 +25,6 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
    - `gh pr view <pr-number> --json title,body,baseRefName,headRefName,author,additions,deletions,changedFiles`
    - `gh pr diff <pr-number>` to get the full diff
    - `git branch --show-current` to record the current branch so it can be restored later
-   - `which codex` to check if Codex CLI is available (exit code 0 = available)
 
 3. **Run reviews in parallel**
 
@@ -33,15 +32,55 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 
    **Claude review task**: Analyze the diff obtained in step 2 across the three dimensions below. Store results as **Claude findings**.
 
-   **Codex review task** _(only if `codex` is available)_: Run the following as a background Bash task, then capture the output as **Codex findings**:
-   ```
-   gh pr checkout <pr-number> && \
-   codex review "Review the changes in this branch against <baseRefName>. Focus on: (1) code quality — readability, naming, unnecessary complexity, duplication; (2) potential bugs — unhandled edge cases, error handling, incorrect assumptions; (3) test coverage — missing tests, untested edge cases, meaningless assertions. Be specific with file and line references." && \
-   git checkout <original-branch>
-   ```
-   Note: `codex review` does not support `--base <branch>` and `[PROMPT]` simultaneously, so the base branch is specified in the prompt text instead.
+   **Codex review task** _(skip only if tmux is not running)_:
 
-   If `codex` is not available, only run the Claude review task.
+   1. Detect the Codex pane:
+      ```
+      tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}"
+      ```
+      Use the pane whose `pane_current_command` contains `codex`. If none found, launch Codex in a new pane:
+      ```
+      tmux split-window -h -t {current}
+      tmux send-keys -t <new-pane-id> "codex" Enter
+      sleep 3
+      ```
+      Then use that new pane ID.
+
+   2. Generate unique IDs for the marker and output files:
+      ```
+      MARKER_ID=$(date +%s)
+      MARKER_FILE="/tmp/codex_done_${MARKER_ID}"
+      REVIEW_FILE="/tmp/codex_review_${MARKER_ID}.md"
+      rm -f "$MARKER_FILE" "$REVIEW_FILE"
+      ```
+
+   3. Send the review instruction to the Codex pane:
+      ```
+      tmux send-keys -t <pane-id> -l "このブランチ（<headRefName>）の <baseRefName> に対する変更をレビューしてください。以下の観点で確認してください：(1) コード品質 — 可読性、命名、不要な複雑さ、重複；(2) 潜在的なバグ — 未処理のエッジケース、エラーハンドリング、誤った前提；(3) テストカバレッジ — テスト漏れ、未テストのエッジケース、意味のないアサーション。ファイル名と行番号を具体的に示してください。レビュー結果を /tmp/codex_review_<MARKER_ID>.md に書き出し、完了したら touch /tmp/codex_done_<MARKER_ID> を実行してください。"
+      sleep 0.5
+      tmux send-keys -t <pane-id> Enter
+      ```
+
+   4. Poll for completion (timeout: 10 minutes):
+      ```bash
+      for i in $(seq 1 200); do
+        if [ -f "$MARKER_FILE" ]; then
+          rm -f "$MARKER_FILE"
+          break
+        fi
+        sleep 3
+      done
+      ```
+
+   5. Read Codex findings from the output file:
+      ```
+      cat "$REVIEW_FILE"
+      ```
+      Store the content as **Codex findings**. Then remove the file:
+      ```
+      rm -f "$REVIEW_FILE"
+      ```
+
 
    Claude review dimensions:
 
@@ -64,7 +103,7 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
    - Do existing tests still make sense after the change?
    - Are tests meaningful (not just asserting trivially true things)?
 
-5. **Consolidate and output**
+4. **Consolidate and output**
 
    **If Codex was run**: merge both sets of findings. Group by review dimension, noting which reviewer raised each point. If both reviewers flag the same issue, merge it into one item and note that both agree.
 
