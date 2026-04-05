@@ -22,5 +22,5 @@ description: Send an instruction to Codex running in a tmux pane. Use this skill
 2. **Confirm to the user**
 
    - If the script outputs `✅ Codex が完了しました。`: inform the user and proceed to the next message if any.
-   - If the script outputs `⏱️ タイムアウト...`: inform the user that Codex may still be working.
+   - If the script outputs `⏱️ タイムアウトしました。Codex がまだ作業中の可能性があります。`: inform the user that Codex may still be working.
    - If the script outputs `❌ tmux が起動していないようです。`: inform the user and stop.

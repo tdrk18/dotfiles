@@ -10,7 +10,6 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 - Never post comments to the PR unless explicitly requested by the user.
 - Always display results in the terminal.
 - Focus on code quality, potential bugs, and test coverage.
-- Always restore the original branch after checking out a PR.
 
 ## Steps
 
@@ -23,24 +22,13 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
 2. **Fetch PR information** — run the following in parallel:
 
    - `gh pr view <pr-number> --json title,body,baseRefName,headRefName,author,additions,deletions,changedFiles`
-   - `gh pr diff <pr-number>` to get the full diff
-   - `git branch --show-current` to record the current branch so it can be restored later
+   - `gh pr diff <pr-number>` to get the full diff, and write it to `/tmp/pr_diff_<pr-number>.diff`
 
 3. **Run reviews in parallel**
 
    Launch both reviewers at the same time using the Task tool:
 
    **Claude review task**: Analyze the diff obtained in step 2 across the three dimensions below. Store results as **Claude findings**.
-
-   **Codex review task** _(skip only if tmux is not running)_:
-
-   Run:
-   ```
-   ~/.claude/scripts/codex-review.sh <headRefName> <baseRefName>
-   ```
-
-   The script handles pane detection, Codex launch if needed, instruction sending, polling, and file cleanup automatically. Store the stdout as **Codex findings**.
-
 
    Claude review dimensions:
 
@@ -62,6 +50,15 @@ description: Reviews a GitHub Pull Request. Use this skill when the user asks to
    - Are edge cases and error paths tested?
    - Do existing tests still make sense after the change?
    - Are tests meaningful (not just asserting trivially true things)?
+
+   **Codex review task** _(skip only if tmux is not running)_:
+
+   Run:
+   ```
+   ~/.claude/scripts/codex-review.sh <headRefName> <baseRefName> /tmp/pr_diff_<pr-number>.diff
+   ```
+
+   The script handles pane detection, Codex launch if needed, instruction sending, polling, and file cleanup automatically. Store the stdout as **Codex findings**.
 
 4. **Consolidate and output**
 
