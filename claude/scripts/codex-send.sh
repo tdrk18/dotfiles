@@ -20,9 +20,9 @@ if [ -z "$PANE_ID" ]; then
   PANE_ID=$(tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" | tail -1)
   tmux send-keys -t "$PANE_ID" "codex" Enter
   sleep 3
-  echo "✅ Codex を起動しました（pane: $PANE_ID）"
+  echo "✅ Codex を起動しました(pane: $PANE_ID)"
 else
-  echo "✅ Codex pane を検出しました（pane: $PANE_ID）"
+  echo "✅ Codex pane を検出しました(pane: $PANE_ID)"
 fi
 
 # 4. ユニークなマーカーファイルを生成
@@ -37,7 +37,7 @@ sleep 0.5
 tmux send-keys -t "$PANE_ID" Enter
 echo "⏳ Codex の完了を待機中..."
 
-# 6. 完了を polling（3秒おき、最大5分）
+# 6. 完了を polling(3秒おき、最大5分)
 for i in $(seq 1 100); do
   if [ -f "$MARKER_FILE" ]; then
     rm -f "$MARKER_FILE"

@@ -32,9 +32,9 @@ if [ -z "$PANE_ID" ]; then
   PANE_ID=$(tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" | tail -1)
   tmux send-keys -t "$PANE_ID" "codex" Enter
   sleep 3
-  echo "✅ Codex を起動しました（pane: $PANE_ID）"
+  echo "✅ Codex を起動しました(pane: $PANE_ID)"
 else
-  echo "✅ Codex pane を検出しました（pane: $PANE_ID）"
+  echo "✅ Codex pane を検出しました(pane: $PANE_ID)"
 fi
 
 # 4. ユニークなファイルを生成
@@ -46,12 +46,12 @@ echo "📝 レビュー結果ファイル: $REVIEW_FILE"
 
 # 5. レビュー指示を送信
 echo "📤 レビュー指示を送信中..."
-tmux send-keys -t "$PANE_ID" -l "${DIFF_FILE} に PR（${HEAD_REF} → ${BASE_REF}）の diff があります。このファイルを読んで以下の観点でレビューしてください：(1) コード品質 — 可読性、命名、不要な複雑さ、重複；(2) 潜在的なバグ — 未処理のエッジケース、エラーハンドリング、誤った前提；(3) テストカバレッジ — テスト漏れ、未テストのエッジケース、意味のないアサーション。ファイル名と行番号を具体的に示してください。レビュー結果を ${REVIEW_FILE} に書き出し、完了したら touch ${MARKER_FILE} を実行してください。"
+tmux send-keys -t "$PANE_ID" -l "${DIFF_FILE} に PR(${HEAD_REF} → ${BASE_REF})の diff があります。このファイルを読んで以下の観点でレビューしてください：(1) コード品質 — 可読性、命名、不要な複雑さ、重複；(2) 潜在的なバグ — 未処理のエッジケース、エラーハンドリング、誤った前提；(3) テストカバレッジ — テスト漏れ、未テストのエッジケース、意味のないアサーション。ファイル名と行番号を具体的に示してください。レビュー結果を ${REVIEW_FILE} に書き出し、完了したら touch ${MARKER_FILE} を実行してください。"
 sleep 0.5
 tmux send-keys -t "$PANE_ID" Enter
-echo "⏳ Codex のレビュー完了を待機中（最大10分）..."
+echo "⏳ Codex のレビュー完了を待機中(最大10分)..."
 
-# 6. 完了を polling（3秒おき、最大10分）
+# 6. 完了を polling(3秒おき、最大10分)
 for i in $(seq 1 200); do
   if [ -f "$MARKER_FILE" ]; then
     rm -f "$MARKER_FILE"
