@@ -22,16 +22,15 @@ fi
 
 # 2. Codex pane を検出
 echo "🔍 Codex pane を検索中..."
-PANE_ID=$(tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}" \
+PANE_ID=$(tmux list-panes -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}" \
   | grep codex | head -1 | awk '{print $1}')
 
 # 3. なければ新しい pane で起動
 if [ -z "$PANE_ID" ]; then
   echo "🚀 Codex pane が見つかりませんでした。新しい pane で起動します..."
-  tmux split-window -h
-  PANE_ID=$(tmux list-panes -a -F "#{session_name}:#{window_index}.#{pane_index}" | tail -1)
+  PANE_ID=$(tmux split-window -h -P -F "#{session_name}:#{window_index}.#{pane_index}")
   tmux send-keys -t "$PANE_ID" "codex" Enter
-  sleep 3
+  sleep 10
   echo "✅ Codex を起動しました(pane: $PANE_ID)"
 else
   echo "✅ Codex pane を検出しました(pane: $PANE_ID)"
