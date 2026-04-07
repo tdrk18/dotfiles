@@ -53,10 +53,8 @@ echo "⏳ Codex のレビュー完了を待機中(最大10分)..."
 # 6. 完了を polling(3秒おき、最大10分)
 for i in $(seq 1 200); do
   if [ -f "$MARKER_FILE" ]; then
-    rm -f "$MARKER_FILE"
     echo "✅ Codex がレビューを完了しました。"
     cat "$REVIEW_FILE"
-    rm -f "$REVIEW_FILE"
     exit 0
   fi
   sleep 3
