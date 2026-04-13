@@ -68,6 +68,9 @@
     "type": "command",
     "command": "~/.claude/scripts/statusline.sh"
   },
+  "enabledPlugins": {
+    "codex@openai-codex": true
+  },
   "extraKnownMarketplaces": {
     "openai-codex": {
       "source": {
@@ -76,8 +79,5 @@
       }
     }
   },
-  "effortLevel": "medium",
-  "enabledPlugins": {
-    "codex@openai-codex": true
-  }
+  "effortLevel": "high"
 }
