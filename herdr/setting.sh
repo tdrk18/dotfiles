@@ -12,3 +12,8 @@ if [ ! -e $HOME/.config/herdr ]; then
 fi
 
 ln -s $DIR/config.toml $HOME/.config/herdr/config.toml
+
+# install integrations
+herdr integration install claude
+herdr integration install codex
+herdr integration install copilot
