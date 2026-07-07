@@ -30,7 +30,6 @@
       "Bash(git commit:*)"
     ]
   },
-  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -69,7 +68,9 @@
     "command": "~/.claude/scripts/statusline.sh"
   },
   "enabledPlugins": {
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "swift-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -79,5 +80,9 @@
       }
     }
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "preferredNotifChannel": "ghostty",
+  "skipAutoPermissionPrompt": true,
+  "model": "Opus"
 }
