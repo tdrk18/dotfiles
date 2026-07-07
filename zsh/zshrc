@@ -76,7 +76,7 @@ setopt no_flow_control
 REPORTTIME=30
 
 # cdの後にlsを実行
-chpwd() { ls }
+# chpwd() { ls }
 
 # どこからでも参照できるディレクトリパス
 # cdpath=(~)
