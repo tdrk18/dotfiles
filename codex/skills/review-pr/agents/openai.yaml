@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Pull Request"
+  short_description: "Review a GitHub pull request for defects"
+  default_prompt: "Review the relevant GitHub pull request and report actionable findings."
