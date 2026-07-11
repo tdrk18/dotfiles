@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Pull Request"
+  short_description: "Prepare and open a GitHub pull request"
+  default_prompt: "Review the current branch and create a GitHub pull request."
