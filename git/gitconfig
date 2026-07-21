@@ -1,6 +1,6 @@
 [user]
     name = tdrk18
-    email = s18.todoroki@gmail.com
+    email = tdrk18@gmail.com
     signingkey = F523E6EE561EA54B
 
 [alias]
@@ -47,7 +47,7 @@
 
 [includeIf "gitdir:~/ghq/github.com/mixi-minimo/"]
     path = ~/.gitconfig_mixi
-[includeIf "gitdir:~/ghq/github.com/maychannel-dev/"]
+[includeIf "gitdir:~/ghq/github.com/mitene/"]
     path = ~/.gitconfig_mixi
 [includeIf "gitdir:~/ghq/github.com/tdrk18/"]
     path = ~/.gitconfig_tdrk18
