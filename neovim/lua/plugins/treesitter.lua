@@ -10,6 +10,15 @@ return {
     -- パーサーのインストール先を指定
     require("nvim-treesitter").setup({ install_dir = treesitter_path })
 
+    -- 使用言語のパーサーをインストール
+    require("nvim-treesitter").install({
+      "lua",
+      "go",
+      "ruby",
+      "swift",
+      "kotlin",
+    })
+
     -- 自動ハイライトの有効化
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("vim-treesitter-start", {}),

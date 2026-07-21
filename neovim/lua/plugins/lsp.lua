@@ -77,6 +77,21 @@ return {
       vim.lsp.config("ruby_lsp", {
         capabilities = capabilities,
       })
+
+      ---- Rubocop
+      -- Gemfile がある場合はプロジェクトの bundle 経由で起動し、
+      -- .rubocop.yml が要求する plugin gem (rubocop-rails 等) を解決できるようにする
+      vim.lsp.config("rubocop", {
+        cmd = function(dispatchers, config)
+          local root_dir = config.root_dir or vim.uv.cwd()
+          local cmd = { "rubocop", "--lsp" }
+          if vim.fn.filereadable(root_dir .. "/Gemfile") == 1 then
+            cmd = { "bundle", "exec", "rubocop", "--lsp" }
+          end
+          return vim.lsp.rpc.start(cmd, dispatchers, { cwd = root_dir })
+        end,
+        capabilities = capabilities,
+      })
     end,
   },
 }
