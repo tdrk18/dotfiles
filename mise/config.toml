@@ -8,6 +8,7 @@ compile = false
 go = "latest"
 node = "latest"
 ruby = "latest"
+terraform = "latest"
 
 [bootstrap.brew]
 # 既存のアプリを置き換えずに取り込む（macOS の権限設定を失わないため）
@@ -48,7 +49,6 @@ adopt = true
 "brew:ripgrep" = "latest"
 "brew:scrcpy" = "latest"
 "brew:starship" = "latest"
-"brew:terraform" = "latest"
 "brew:the_silver_searcher" = "latest"
 "brew:tig" = "latest"
 "brew:tmux" = "latest"
