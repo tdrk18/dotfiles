@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Brewfileを削除
-if [ -e $HOME/.config/brewfile/Brewfile ]; then
-    rm -f $HOME/.config/brewfile/Brewfile
+# 以前の Brewfile のリンクを削除
+if [ -L $HOME/.Brewfile ]; then
+    rm -f $HOME/.Brewfile
 fi
-
