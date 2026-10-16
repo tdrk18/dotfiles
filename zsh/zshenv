@@ -53,5 +53,3 @@ fi
 if [ -e $HOME/.zshenv_local ]; then
     source $HOME/.zshenv_local
 fi
-
-export PATH=$(mise where go)/bin:$PATH
