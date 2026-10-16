@@ -68,7 +68,6 @@ adopt = true
 "brew-cask:claude" = "latest"
 "brew-cask:cloudflare-warp" = "latest"
 "brew-cask:codex" = "latest"
-"brew-cask:codex-app" = "latest"
 "brew-cask:copilot-cli" = "latest"
 "brew-cask:discord" = "latest"
 "brew-cask:figma" = "latest"
