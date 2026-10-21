@@ -2,10 +2,6 @@
 case "${OSTYPE}" in
 # MacOS用エイリアス
 darwin*)
-    alias inst='brew install'
-    alias uninst='brew rm'
-    alias update='brew update'
-    alias upgrade='brew upgrade'
     alias ls='ls -G'
     alias ll='ls -lG'
     alias la='ls -aG'
