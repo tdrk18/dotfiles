@@ -256,3 +256,28 @@ echo
 echo "==> mise up"
 mise up $dry_run
 '''
+
+[tasks."packages:install"]
+description = "Homebrew のパッケージを設定に追加してインストールする"
+usage = '''
+arg "<package>" var=#true help="インストールする formula の名前（--cask なら cask の名前）"
+flag "--cask" help="cask としてインストールする"
+flag "-n --dry-run" help="設定に書く内容とインストールするものを表示するだけにする"
+flag "-y --yes" help="確認を省略する"
+'''
+run = '''
+manager=brew
+[ "${usage_cask:-}" = "true" ] && manager=brew-cask
+
+packages=""
+for package in $usage_package; do
+    packages="$packages $manager:$package"
+done
+
+flags=""
+[ "${usage_dry_run:-}" = "true" ] && flags="$flags --dry-run"
+[ "${usage_yes:-}" = "true" ] && flags="$flags --yes"
+
+# グローバル設定（dotfiles の mise/config.toml へのリンク）に書く
+mise bootstrap packages use --global $flags $packages
+'''
