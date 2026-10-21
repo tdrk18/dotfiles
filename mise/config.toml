@@ -229,3 +229,30 @@ done
 echo
 echo "完了しました。アプリの場合は、macOS の権限（アクセシビリティなど）を許可し直す必要がないか確認してください。"
 '''
+
+[tasks."packages:upgrade"]
+description = "Homebrew のパッケージと mise のツールをまとめて更新する"
+usage = '''
+flag "-n --dry-run" help="更新されるものを表示するだけにする"
+flag "-y --yes" help="mise bootstrap packages upgrade の確認を省略する"
+'''
+run = '''
+dry_run=""
+[ "${usage_dry_run:-}" = "true" ] && dry_run="--dry-run"
+yes=""
+[ "${usage_yes:-}" = "true" ] && yes="--yes"
+
+echo "==> mise bootstrap packages upgrade"
+mise bootstrap packages upgrade $dry_run $yes
+
+# Homebrew で入れた cask は mise が更新しないので brew で更新する（自動更新するアプリは対象外）
+if command -v brew > /dev/null 2>&1; then
+    echo
+    echo "==> brew upgrade --cask"
+    brew upgrade --cask $dry_run
+fi
+
+echo
+echo "==> mise up"
+mise up $dry_run
+'''
