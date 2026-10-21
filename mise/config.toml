@@ -105,7 +105,7 @@ adopt = true
 "brew-cask:abue-ammar/tinycast/tinycast" = "latest"
 "brew-cask:grishka/grishka/neardrop" = "latest"
 
-[tasks.cask-migration]
+[tasks."cask-migration:status"]
 description = "Homebrew で入れた cask の mise への移行状況を表示する"
 run = '''
 config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
@@ -166,5 +166,66 @@ missing_count=$(list missing | grep -c . || true)
 echo "移行済み: $done_count / $((total - missing_count))"
 rm -f "${TMPDIR:-/tmp}/cask-migration.$$"
 echo
-echo "移し方: brew uninstall --cask <名前> && mise bootstrap packages apply brew-cask:<名前>"
+echo "移し方: mise run cask-migration:migrate <名前>"
+'''
+
+[tasks."cask-migration:migrate"]
+description = "Homebrew で入れた cask を入れ直して mise の管理に移す"
+usage = '''
+arg "<cask>" var=#true help="移す cask の名前（tap の cask は短い名前でもよい）"
+flag "-y --yes" help="確認せずに実行する"
+flag "-n --dry-run" help="実行するコマンドを表示するだけにする"
+'''
+run = '''
+config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
+caskroom=/opt/homebrew/Caskroom
+configured=$(sed -nE 's/^"brew-cask:([^"]+)".*/\1/p' "$config")
+
+# 設定にあって、まだ Homebrew 管理のものだけを対象にする
+targets=""
+for cask in $usage_cask; do
+    token=$(printf '%s\n' "$configured" | awk -v c="$cask" '$0 == c || substr($0, length($0) - length(c)) == "/" c' | head -1)
+    name=${token##*/}
+    if [ -z "$token" ]; then
+        echo "skip: $cask は $config の [bootstrap.packages] にありません" >&2
+    elif [ -f "$caskroom/$name/.metadata/INSTALL_RECEIPT.json" ]; then
+        case " $targets " in
+            *" $token "*) ;;
+            *) targets="$targets $token" ;;
+        esac
+    elif [ -d "$caskroom/$name" ]; then
+        echo "skip: $token はすでに mise 管理です" >&2
+    else
+        echo "skip: $token はインストールされていません（mise bootstrap packages apply brew-cask:$token で入ります）" >&2
+    fi
+done
+[ -z "$targets" ] && exit 1
+
+echo "次のコマンドを実行します:"
+for token in $targets; do
+    echo "  brew uninstall --cask $token"
+    echo "  mise bootstrap packages apply -y brew-cask:$token"
+done
+[ "${usage_dry_run:-}" = "true" ] && exit 0
+
+if [ "${usage_yes:-}" != "true" ]; then
+    printf "続けますか？ [y/N] "
+    read -r answer < /dev/tty
+    case "$answer" in
+        y|Y|yes) ;;
+        *) echo "中止しました"; exit 1 ;;
+    esac
+fi
+
+for token in $targets; do
+    echo
+    echo "==> $token"
+    brew uninstall --cask "$token"
+    if ! mise bootstrap packages apply -y "brew-cask:$token"; then
+        echo "mise でのインストールに失敗しました。元に戻すには: brew install --cask $token" >&2
+        exit 1
+    fi
+done
+echo
+echo "完了しました。アプリの場合は、macOS の権限（アクセシビリティなど）を許可し直す必要がないか確認してください。"
 '''
