@@ -104,3 +104,67 @@ adopt = true
 "brew-cask:zoom" = "latest"
 "brew-cask:abue-ammar/tinycast/tinycast" = "latest"
 "brew-cask:grishka/grishka/neardrop" = "latest"
+
+[tasks.cask-migration]
+description = "Homebrew で入れた cask の mise への移行状況を表示する"
+run = '''
+config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
+caskroom=/opt/homebrew/Caskroom
+
+# Homebrew の記録（INSTALL_RECEIPT.json）があるものはまだ Homebrew 管理
+brew_tokens=""
+for token in $(sed -nE 's/^"brew-cask:([^"]+)".*/\1/p' "$config"); do
+    name=${token##*/}
+    if [ -f "$caskroom/$name/.metadata/INSTALL_RECEIPT.json" ]; then
+        brew_tokens="$brew_tokens $token"
+    elif [ -d "$caskroom/$name" ]; then
+        echo "done	$token"
+    else
+        echo "missing	$token"
+    fi
+done > "${TMPDIR:-/tmp}/cask-migration.$$"
+
+# 自動更新するかは Homebrew の cask 情報から取る
+auto_updates=""
+if [ -n "$brew_tokens" ] && command -v brew > /dev/null 2>&1; then
+    auto_updates=$(HOMEBREW_NO_AUTO_UPDATE=1 brew info --json=v2 --cask $brew_tokens 2>/dev/null \
+        | jq -r '.casks[] | select(.auto_updates) | .full_token')
+fi
+
+for token in $brew_tokens; do
+    name=${token##*/}
+    kind=$(jq -r '[.uninstall_artifacts[] | keys[0]] as $a
+        | if ($a | index("app")) then "app"
+          elif ($a | index("binary")) or ($a | index("font")) then "cli"
+          else "other" end' "$caskroom/$name/.metadata/INSTALL_RECEIPT.json")
+    if printf '%s\n' "$auto_updates" | grep -qx "$token"; then
+        kind="$kind-auto"
+    fi
+    echo "$kind	$token"
+done >> "${TMPDIR:-/tmp}/cask-migration.$$"
+
+list() {
+    awk -F '\t' -v k="$1" '$1 == k { print $2 }' "${TMPDIR:-/tmp}/cask-migration.$$" | sort
+}
+section() {
+    items=$(for k in $2; do list "$k"; done | sort)
+    [ -z "$items" ] && return
+    echo "$1"
+    printf '%s\n' "$items" | sed "s/^/  $3 /"
+    echo
+}
+
+section "まだ Homebrew 管理: CLI・フォント（権限が関係ないので、すぐ移せる）" "cli" "☐"
+section "まだ Homebrew 管理: アプリ（入れ直すと権限の許可し直しが必要なことがある）" "app other" "☐"
+section "まだ Homebrew 管理: 自動更新するアプリ（アプリ自身が更新するので、移す優先度は低い）" "app-auto cli-auto other-auto" "☐"
+section "mise 管理（移行済み）" "done" "☑"
+section "未インストール（mise bootstrap packages apply で入る）" "missing" "-"
+
+total=$(wc -l < "${TMPDIR:-/tmp}/cask-migration.$$" | tr -d ' ')
+done_count=$(list done | grep -c . || true)
+missing_count=$(list missing | grep -c . || true)
+echo "移行済み: $done_count / $((total - missing_count))"
+rm -f "${TMPDIR:-/tmp}/cask-migration.$$"
+echo
+echo "移し方: brew uninstall --cask <名前> && mise bootstrap packages apply brew-cask:<名前>"
+'''
