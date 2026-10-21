@@ -281,3 +281,22 @@ flags=""
 # グローバル設定（dotfiles の mise/config.toml へのリンク）に書く
 mise bootstrap packages use --global $flags $packages
 '''
+
+[tasks."packages:bootstrap"]
+description = "設定にあるパッケージとツールのうち、未インストールのものをすべて入れる"
+usage = '''
+flag "-n --dry-run" help="インストールされるものを表示するだけにする"
+flag "-y --yes" help="確認を省略する"
+'''
+run = '''
+flags=""
+[ "${usage_dry_run:-}" = "true" ] && flags="$flags --dry-run"
+[ "${usage_yes:-}" = "true" ] && flags="$flags --yes"
+
+echo "==> mise bootstrap packages apply"
+mise bootstrap packages apply $flags
+
+echo
+echo "==> mise install"
+mise install $flags
+'''
