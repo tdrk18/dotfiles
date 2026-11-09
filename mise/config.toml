@@ -354,7 +354,7 @@ for token in $brew_targets; do
     echo "  brew uninstall $brew_flag$token"
 done
 [ -n "$mise_targets" ] && echo "  mise bootstrap packages prune --manager brew-cask$prune_flags  (対象:$mise_targets)"
-[ -n "$config_only" ] && echo "  （インストールされていないので設定から削除するだけ:$config_only）"
+[ -n "$config_only" ] && echo "  （インストールされていないので設定から削除するだけ:${config_only}）"
 [ "${usage_dry_run:-}" = "true" ] && exit 0
 
 if [ "${usage_yes:-}" != "true" ]; then
