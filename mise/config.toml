@@ -388,3 +388,49 @@ if [ -n "$mise_targets" ]; then
     mise bootstrap packages prune --manager brew-cask $prune_flags
 fi
 '''
+
+[tasks."packages:cleanup"]
+description = "Homebrew の古いバージョンと、mise がダウンロードした cask・bottle を削除する"
+usage = '''
+flag "-n --dry-run" help="削除されるものを表示するだけにする"
+flag "-y --yes" help="確認を省略する"
+'''
+run = '''
+# mise はインストール後もダウンロードしたファイルを残し、cache prune は 30 日使われていないものしか消さない
+cache="$(mise cache path)/system-brew"
+downloads=""
+for dir in casks bottles; do
+    [ -d "$cache/$dir" ] && downloads="$downloads $cache/$dir"
+done
+
+echo "次の処理を実行します:"
+echo "  brew cleanup（古いバージョンの formula と Homebrew のダウンロードキャッシュ）"
+for dir in $downloads; do
+    echo "  rm -rf ${dir}（$(du -sh "$dir" | cut -f1 | tr -d " ")）"
+done
+
+if [ "${usage_dry_run:-}" = "true" ]; then
+    echo
+    echo "==> brew cleanup --dry-run"
+    brew cleanup --dry-run
+    exit 0
+fi
+
+if [ "${usage_yes:-}" != "true" ]; then
+    printf "続けますか？ [y/N] "
+    read -r answer < /dev/tty
+    case "$answer" in
+        y|Y|yes) ;;
+        *) echo "中止しました"; exit 1 ;;
+    esac
+fi
+
+echo
+echo "==> brew cleanup"
+brew cleanup
+for dir in $downloads; do
+    rm -rf "$dir"
+done
+echo
+echo "mise のダウンロードを削除しました"
+'''
