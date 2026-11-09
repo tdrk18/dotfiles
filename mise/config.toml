@@ -300,3 +300,91 @@ echo
 echo "==> mise install"
 mise install $flags
 '''
+
+[tasks."packages:uninstall"]
+description = "Homebrew のパッケージをアンインストールして設定から削除する"
+usage = '''
+arg "<package>" var=#true help="アンインストールする formula の名前（--cask なら cask の名前）"
+flag "--cask" help="cask としてアンインストールする"
+flag "--force" help="mise が変更なしと確認できない cask（自動更新するアプリなど）も削除する"
+flag "-n --dry-run" help="実行するコマンドを表示するだけにする"
+flag "-y --yes" help="確認を省略する"
+'''
+run = '''
+config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
+manager=brew
+[ "${usage_cask:-}" = "true" ] && manager=brew-cask
+configured=$(sed -nE "s/^\"$manager:([^\"]+)\".*/\1/p" "$config")
+
+# mise で入れた cask は brew では消せないので、設定から外してから prune で消す
+brew_targets=""
+mise_targets=""
+config_only=""
+for package in $usage_package; do
+    token=$(printf '%s\n' "$configured" | awk -v p="$package" '$0 == p || substr($0, length($0) - length(p)) == "/" p' | head -1)
+    declared=true
+    [ -z "$token" ] && token=$package && declared=false
+    name=${token##*/}
+    if [ "$manager" = brew ] && [ -d "/opt/homebrew/Cellar/$name" ]; then
+        brew_targets="$brew_targets $token"
+    elif [ "$manager" = brew-cask ] && [ -f "/opt/homebrew/Caskroom/$name/.metadata/INSTALL_RECEIPT.json" ]; then
+        brew_targets="$brew_targets $token"
+    elif [ "$manager" = brew-cask ] && [ -d "/opt/homebrew/Caskroom/$name" ]; then
+        if [ "$declared" = true ]; then
+            mise_targets="$mise_targets $token"
+        else
+            echo "skip: $token は設定にないので、mise bootstrap packages prune --manager brew-cask で消してください" >&2
+        fi
+    elif [ "$declared" = true ]; then
+        config_only="$config_only $token"
+    else
+        echo "skip: $manager:$token は設定になく、インストールもされていません" >&2
+    fi
+done
+[ -z "$brew_targets$mise_targets$config_only" ] && exit 1
+
+brew_flag=""
+[ "$manager" = brew-cask ] && brew_flag="--cask "
+prune_flags=""
+[ "${usage_force:-}" = "true" ] && prune_flags="$prune_flags --force"
+[ "${usage_yes:-}" = "true" ] && prune_flags="$prune_flags --yes"
+
+echo "次のコマンドを実行し、$config から削除します:"
+for token in $brew_targets; do
+    echo "  brew uninstall $brew_flag$token"
+done
+[ -n "$mise_targets" ] && echo "  mise bootstrap packages prune --manager brew-cask$prune_flags  (対象:$mise_targets)"
+[ -n "$config_only" ] && echo "  （インストールされていないので設定から削除するだけ:$config_only）"
+[ "${usage_dry_run:-}" = "true" ] && exit 0
+
+if [ "${usage_yes:-}" != "true" ]; then
+    printf "続けますか？ [y/N] "
+    read -r answer < /dev/tty
+    case "$answer" in
+        y|Y|yes) ;;
+        *) echo "中止しました"; exit 1 ;;
+    esac
+fi
+
+# リンクを壊さないように、書き換えた内容をリンク先にそのまま書き戻す
+remove_entry() {
+    awk -v key="\"$manager:$1\"" '$1 != key' "$config" > "${TMPDIR:-/tmp}/packages-uninstall.$$"
+    cat "${TMPDIR:-/tmp}/packages-uninstall.$$" > "$config"
+    rm -f "${TMPDIR:-/tmp}/packages-uninstall.$$"
+}
+
+for token in $brew_targets; do
+    echo
+    echo "==> $token"
+    brew uninstall $brew_flag"$token"
+    remove_entry "$token"
+done
+for token in $config_only $mise_targets; do
+    remove_entry "$token"
+done
+if [ -n "$mise_targets" ]; then
+    echo
+    echo "==> mise bootstrap packages prune --manager brew-cask"
+    mise bootstrap packages prune --manager brew-cask $prune_flags
+fi
+'''
