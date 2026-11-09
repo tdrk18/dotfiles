@@ -95,6 +95,7 @@ adopt = true
 "brew-cask:slack" = "latest"
 "brew-cask:spotify" = "latest"
 "brew-cask:thaw" = "latest"
+"brew-cask:tinycast" = "latest"
 "brew-cask:vivaldi" = "latest"
 "brew-cask:visual-studio-code" = "latest"
 "brew-cask:vysor" = "latest"
@@ -102,7 +103,6 @@ adopt = true
 "brew-cask:xcodes-app" = "latest"
 "brew-cask:zed" = "latest"
 "brew-cask:zoom" = "latest"
-"brew-cask:abue-ammar/tinycast/tinycast" = "latest"
 "brew-cask:grishka/grishka/neardrop" = "latest"
 
 [tasks."cask-migration:status"]
