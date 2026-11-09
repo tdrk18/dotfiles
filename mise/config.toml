@@ -434,3 +434,14 @@ done
 echo
 echo "mise のダウンロードを削除しました"
 '''
+
+[tasks."packages:status"]
+description = "設定にあるパッケージとツールの、インストール状況とバージョンを表示する"
+run = '''
+echo "==> Homebrew パッケージ（mise bootstrap packages status）"
+mise bootstrap packages status
+
+echo
+echo "==> mise のツール（mise ls --current）"
+mise ls --current
+'''
