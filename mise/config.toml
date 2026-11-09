@@ -445,3 +445,33 @@ echo
 echo "==> mise のツール（mise ls --current）"
 mise ls --current
 '''
+
+[tasks."packages:outdated"]
+description = "packages:upgrade で更新されるものだけを表示する"
+run = '''
+# upgrade の dry-run から「更新なし」の行を除いて、実際に更新されるものだけを残す
+echo "==> Homebrew パッケージ（mise bootstrap packages upgrade --dry-run）"
+packages=$(mise bootstrap packages upgrade --dry-run 2>&1 \
+    | grep -v -E '^mise WARN|already up to date|already poured|skipped:|leaving unchanged|^link |^install pkg ' || true)
+if [ -n "$packages" ]; then
+    printf '%s\n' "$packages"
+else
+    echo "すべて最新です"
+fi
+
+# Homebrew で入れた cask は mise が更新しないので、brew で確認する
+if command -v brew > /dev/null 2>&1; then
+    echo
+    echo "==> Homebrew で入れた cask（brew outdated --cask）"
+    casks=$(brew outdated --cask --verbose)
+    if [ -n "$casks" ]; then
+        printf '%s\n' "$casks"
+    else
+        echo "すべて最新です"
+    fi
+fi
+
+echo
+echo "==> mise のツール（mise outdated）"
+mise outdated
+'''
