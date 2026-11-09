@@ -516,3 +516,47 @@ fi
 
 brew autoremove
 '''
+
+[tasks."packages:sort"]
+description = "[bootstrap.packages] を formula、cask の順に名前で並べ替える"
+usage = '''
+flag "-n --dry-run" help="並べ替えた結果の差分を表示するだけにする"
+'''
+run = '''
+config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
+work="${TMPDIR:-/tmp}/packages-sort.$$"
+mkdir -p "$work"
+
+# [bootstrap.packages] の直後に続くエントリの行だけを取り出して、前後と分ける
+awk -v dir="$work" '
+part == 1 && !/^"/ { part = 2 }
+part == 1 { print > (dir "/body"); next }
+part == 2 { print > (dir "/tail"); next }
+{ print > (dir "/head") }
+/^\[bootstrap\.packages\]$/ { part = 1 }
+' "$config"
+touch "$work/body" "$work/tail"
+
+# formula、cask の順に並べ、tap のパッケージも tap 名ではなくパッケージ名で並べる
+awk '{
+    entry = $1
+    gsub(/"/, "", entry)
+    manager = entry
+    sub(/:.*/, "", manager)
+    name = entry
+    sub(/.*[:\/]/, "", name)
+    print manager "\t" name "\t" $0
+}' "$work/body" | sort -t "$(printf '\t')" -k1,1 -k2,2 | cut -f3- > "$work/sorted"
+cat "$work/head" "$work/sorted" "$work/tail" > "$work/config.toml"
+
+if cmp -s "$config" "$work/config.toml"; then
+    echo "すでに並んでいます"
+elif [ "${usage_dry_run:-}" = "true" ]; then
+    diff -u "$config" "$work/config.toml" || true
+else
+    # リンクを壊さないように、リンク先にそのまま書き戻す
+    cat "$work/config.toml" > "$config"
+    echo "並べ替えました: $config"
+fi
+rm -rf "$work"
+'''
