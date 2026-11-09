@@ -475,3 +475,44 @@ echo
 echo "==> mise のツール（mise outdated）"
 mise outdated
 '''
+
+[tasks."packages:autoremove"]
+description = "どのパッケージにも必要とされなくなった依存パッケージを削除する"
+usage = '''
+flag "-n --dry-run" help="削除されるものを表示するだけにする"
+flag "-y --yes" help="確認を省略する"
+'''
+run = '''
+config="${MISE_GLOBAL_CONFIG_FILE:-$HOME/.config/mise/config.toml}"
+
+# brew autoremove は依存として入ったものだけを消す（mise も依存かどうかを記録している）
+targets=$(brew autoremove --dry-run 2>/dev/null | grep -v '^==>' || true)
+if [ -z "$targets" ]; then
+    echo "削除できる依存パッケージはありません"
+    exit 0
+fi
+
+# 念のため、設定にある formula が含まれていたら止める
+declared=$(sed -nE 's/^"brew:([^"]+)".*/\1/p' "$config" | awk -F/ '{ print $NF }')
+conflicts=$(printf '%s\n' "$targets" | grep -x -F "$declared" || true)
+if [ -n "$conflicts" ]; then
+    echo "設定にある formula が削除対象に含まれているので中止します:" >&2
+    printf '  %s\n' $conflicts >&2
+    exit 1
+fi
+
+echo "次の依存パッケージを削除します:"
+printf '  %s\n' $targets
+[ "${usage_dry_run:-}" = "true" ] && exit 0
+
+if [ "${usage_yes:-}" != "true" ]; then
+    printf "続けますか？ [y/N] "
+    read -r answer < /dev/tty
+    case "$answer" in
+        y|Y|yes) ;;
+        *) echo "中止しました"; exit 1 ;;
+    esac
+fi
+
+brew autoremove
+'''
