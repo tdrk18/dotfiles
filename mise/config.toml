@@ -104,6 +104,8 @@ adopt = true
 "brew-cask:xcodes-app" = "latest"
 "brew-cask:zed" = "latest"
 "brew-cask:zoom" = "latest"
+"brew-cask:firefox" = "latest"
+"brew-cask:zen" = "latest"
 
 [tasks."cask-migration:status"]
 description = "Homebrew で入れた cask の mise への移行状況を表示する"
@@ -247,6 +249,9 @@ mise bootstrap packages upgrade $dry_run $yes
 
 # Homebrew で入れた cask は mise が更新しないので brew で更新する（自動更新するアプリは対象外）
 if command -v brew > /dev/null 2>&1; then
+    echo
+    echo "==> brew upgrade"
+    brew upgrade $dry_run
     echo
     echo "==> brew upgrade --cask"
     brew upgrade --cask $dry_run

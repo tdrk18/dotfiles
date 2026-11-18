@@ -169,7 +169,10 @@ if which starship > /dev/null 2>&1; then
 fi
 
 # 1password
-eval "$(op completion zsh)"; compdef _op op
+# Claude Code から起動されたシェルでは op を実行しない（毎回 macOS のアプリデータアクセス確認が出るため）
+if [[ -z "$CLAUDECODE" ]]; then
+    eval "$(op completion zsh)"; compdef _op op
+fi
 
 # gh
 if which gh > /dev/null 2>&1; then
