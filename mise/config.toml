@@ -250,6 +250,9 @@ mise bootstrap packages upgrade $dry_run $yes
 # Homebrew で入れた cask は mise が更新しないので brew で更新する（自動更新するアプリは対象外）
 if command -v brew > /dev/null 2>&1; then
     echo
+    echo "==> brew update"
+    brew update
+    echo
     echo "==> brew upgrade"
     brew upgrade $dry_run
     echo
