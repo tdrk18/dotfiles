@@ -9,6 +9,7 @@ go = "latest"
 node = "latest"
 ruby = "latest"
 terraform = "latest"
+"gem:ruby-lsp" = "latest"
 
 [bootstrap.brew]
 # 既存のアプリを置き換えずに取り込む（macOS の権限設定を失わないため）
